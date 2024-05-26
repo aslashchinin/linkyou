@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/api_service.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class UserDetailScreen extends StatefulWidget {
   final int userId;
@@ -81,7 +82,8 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                     '${userDetails!['name']}, ${userDetails!['birthday']['age']}',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  Text('${userDetails!['job']['profession']}, ${userDetails!['job']['occupation']}'),
+                  Text(
+                      '${userDetails!['job']['profession']}, ${userDetails!['job']['occupation']}'),
                   SizedBox(height: 10),
                   Row(
                     children: [
@@ -95,15 +97,47 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      Chip(label: Text('${userDetails!['birthday']['zodiac']['name']}')),
+                      Chip(
+                          label: Text(
+                              '${userDetails!['birthday']['zodiac']['name']}')),
                       SizedBox(width: 10),
-                      Chip(label: Text('${userDetails!['language']}')),
-                      SizedBox(width: 10),
-                      Chip(label: Text('Ищу партнера от ${userDetails!['age']['from']} до ${userDetails!['age']['to']} лет')),
+                      Chip(
+                          label:
+                              Text('${userDetails!['nationality']['name']}')),
                     ],
                   ),
+                  SizedBox(width: 10),
+                  Chip(
+                      label: Text(
+                          'Ищу партнера от ${userDetails!['age']['from']} до ${userDetails!['age']['to']} лет')),
                   SizedBox(height: 10),
-                  Chip(label: Text('Цель: ${userDetails!['goal']}')),
+                  Chip(label: Text('Цель: ${userDetails!['goal']['name']}')),
+                  SizedBox(width: 20, height: 20),
+                  Row(
+                    children: [                      
+                      CircularPercentIndicator(
+                        radius: 60.0,
+                        lineWidth: 5.0,
+                        percent: userDetails!['rating']['score'] / 10.0,
+                        center: Text(
+                          '${userDetails!['rating']['score']}',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        progressColor: Colors.blue,
+                      ),
+                      SizedBox(width: 20),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Рейтинг анкеты',
+                              style: TextStyle(fontSize: 16)),
+                          Text(
+                              'Понравилась ${userDetails!['rating']['likes']} из ${userDetails!['rating']['views']}',
+                              style: TextStyle(fontSize: 16)),
+                        ],
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
