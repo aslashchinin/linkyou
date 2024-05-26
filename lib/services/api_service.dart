@@ -21,8 +21,7 @@ class ApiService {
     }
   }
 
-  Future<List<dynamic>> getDailyUsers(int limit, int page,
-      {int? cityId}) async {
+  Future<List<dynamic>> getDailyUsers(int limit, int page, {int? cityId}) async {
     String url = '$baseUrl/users/daily?limit=$limit&page=$page';
     if (cityId != null) {
       url += '&city_id=$cityId';
@@ -63,6 +62,16 @@ class ApiService {
       return jsonDecode(response.body);
     } else {
       throw Exception('Failed to load top users');
+    }
+  }
+
+  Future<Map<String, dynamic>> getUserDetails(int userId) async {
+    final response = await http.get(Uri.parse('$baseUrl/user/$userId'));
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to load user details');
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/welcome_screen.dart';
 import '../screens/auth/auth_screen.dart';
 import '../screens/main_screen.dart';
+import '../screens/user_detail_screen.dart';
 
 class AppRoutes {
   static const String welcome = '/';
@@ -9,13 +10,15 @@ class AppRoutes {
   static const String login = '/login';
   static const String recentUsers = '/recent_users';
   static const String main = '/main';
+  static const String user = '/user';
 
   static Map<String, WidgetBuilder> get routes {
     return {
       welcome: (context) => WelcomeScreen(),
       registration: (context) => AuthScreen(initialTab: 1),
       login: (context) => AuthScreen(initialTab: 0),      
-      main: (context) => MainScreen(),
+      main: (context) => MainScreen(),      
+      user: (context) => UserDetailScreen(userId: ModalRoute.of(context)!.settings.arguments as int),
     };
   }
 }

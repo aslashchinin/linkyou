@@ -28,9 +28,12 @@ class UserCard extends StatelessWidget {
       child: Card(
         child: Row(
           children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(avatarUrl),
-              radius: 40,
+            GestureDetector(
+              onTap: onTap,
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(avatarUrl),
+                radius: 40,
+              ),
             ),
             SizedBox(width: 10),
             Expanded(

@@ -62,7 +62,7 @@ class _TopUsersSliderState extends State<TopUsersSlider> {
           ),
         ),
         SizedBox(
-          height: 300,
+          height: 350,
           child: PageView.builder(
             controller: _pageController,
             itemCount: (widget.users.length / 3).ceil(),
