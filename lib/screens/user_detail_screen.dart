@@ -102,8 +102,9 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                               '${userDetails!['birthday']['zodiac']['name']}')),
                       SizedBox(width: 10),
                       Chip(
-                          label:
-                              Text('${userDetails!['nationality']?['name'] ?? 'Unknown'}',)),
+                          label: Text(
+                        '${userDetails!['nationality']?['name'] ?? 'Unknown'}',
+                      )),
                     ],
                   ),
                   SizedBox(width: 10),
@@ -114,7 +115,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   Chip(label: Text('Цель: ${userDetails!['goal']['name']}')),
                   SizedBox(width: 20, height: 20),
                   Row(
-                    children: [                      
+                    children: [
                       CircularPercentIndicator(
                         radius: 60.0,
                         lineWidth: 5.0,

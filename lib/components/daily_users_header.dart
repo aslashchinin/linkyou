@@ -20,11 +20,11 @@ class DailyUsersHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Люди дня',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             children: [
               ElevatedButton.icon(
@@ -32,7 +32,7 @@ class DailyUsersHeader extends StatelessWidget {
                 icon: Icon(Icons.star),
                 label: Text('Попасть сюда'),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               DropdownButton<int>(
                 items: cities.map<DropdownMenuItem<int>>((city) {
                   return DropdownMenuItem<int>(

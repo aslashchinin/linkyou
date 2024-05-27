@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
+import '../widgets/custom_button.dart';
+import '../routes/app_routes.dart';
 
 class DrawerMenu extends StatelessWidget {
   @override
@@ -29,10 +31,16 @@ class DrawerMenu extends StatelessWidget {
           ),
           if (authProvider.token != null && authProvider.user != null) ...[
             ListTile(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/user',
+                  arguments: authProvider.user!['id'],
+                );
+              },
               leading: GestureDetector(
-                onTap: () {},
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage('https:${avatarUrl}'),
+                  backgroundImage: NetworkImage('https:$avatarUrl'),
                   radius: 40,
                 ),
               ),
@@ -96,26 +104,30 @@ class DrawerMenu extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.visibility_off),
+              leading: Switch(
+                value: authProvider.user!['is_invisible'],
+                onChanged: (context) {},
+              ),
               title: Text('Режим невидимости'),
               onTap: () {
                 // Handle navigation
               },
             ),
-            ListTile(
-              leading: Icon(Icons.star_border),
-              title: Text('Стать Premium'),
-              onTap: () {
-                // Handle navigation
-              },
-            ),
+            if (authProvider.user!['is_premium'] == false) ...[
+              CustomButton(
+                text: 'Стать Premium',
+                onPressed: () {},
+                isOutlined: false,
+                isBlue: true,
+              )
+            ],
             Divider(),
           ],
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Знакомства'),
             onTap: () {
-              // Navigate to the Znakomstva screen
+              Navigator.pushNamed(context, AppRoutes.main);
             },
           ),
           ListTile(

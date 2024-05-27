@@ -45,7 +45,7 @@ class _NewUsersSliderState extends State<NewUsersSlider> {
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              Text(
+              const Text(
                 'Новые анкеты',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),

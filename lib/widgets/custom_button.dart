@@ -5,12 +5,14 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final bool isOutlined;
   final bool isGreen;
+  final bool isBlue;
 
   CustomButton({
     required this.text,
     required this.onPressed,
     this.isOutlined = false,
     this.isGreen = false,
+    this.isBlue = false,
   });
 
   @override
@@ -35,7 +37,7 @@ class CustomButton extends StatelessWidget {
                 child: Text(text),
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      isGreen ? Colors.green : Theme.of(context).primaryColor,
+                      isGreen ? Colors.green : isBlue ? Colors.blue : Theme.of(context).primaryColor,
                   foregroundColor: Colors.white,
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   textStyle: TextStyle(fontSize: 18),
