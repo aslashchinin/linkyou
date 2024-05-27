@@ -52,7 +52,7 @@ class _PasswordRecoveryDialogState extends State<PasswordRecoveryDialog> {
         key: _formKey,
         child: TextFormField(
           controller: _emailController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'E-mail',
           ),
           validator: (value) {

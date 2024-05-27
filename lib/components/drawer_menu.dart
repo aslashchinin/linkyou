@@ -58,7 +58,7 @@ class _DrawerMenuState extends State<DrawerMenu>
           if (authProvider.token == null || authProvider.user == null) ...[
             TabBar(
               controller: _tabController,
-              tabs: [
+              tabs: const [
                 Tab(text: 'Вход'),
                 Tab(text: 'Регистрация'),
               ],
