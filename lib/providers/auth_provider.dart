@@ -32,6 +32,16 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setUser(Map<String, dynamic> user) {
+    _user = user;
+    notifyListeners();
+  }
+
+  void setToken(String token) {
+     _token = token;
+     notifyListeners();
+  }
+
   void signOut() async {
     _token = null;
     _user = null;

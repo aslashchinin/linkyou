@@ -21,7 +21,8 @@ class ApiService {
     }
   }
 
-  Future<List<dynamic>> getDailyUsers(int limit, int page, {int? cityId}) async {
+  Future<List<dynamic>> getDailyUsers(int limit, int page,
+      {int? cityId}) async {
     String url = '$baseUrl/users/daily?limit=$limit&page=$page';
     if (cityId != null) {
       url += '&city_id=$cityId';
@@ -80,7 +81,8 @@ class ApiService {
       'POST',
       Uri.parse('$baseUrl/auth/signin'),
     );
-    request.fields['email'] = login;
+
+    request.fields['login'] = login;
     request.fields['password'] = password;
 
     var response = await request.send();
