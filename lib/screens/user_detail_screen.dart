@@ -103,7 +103,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                       SizedBox(width: 10),
                       Chip(
                           label:
-                              Text('${userDetails!['nationality']['name']}')),
+                              Text('${userDetails!['nationality']?['name'] ?? 'Unknown'}',)),
                     ],
                   ),
                   SizedBox(width: 10),

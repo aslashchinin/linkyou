@@ -5,6 +5,7 @@ import '../components/daily_users_header.dart';
 import '../components/daily_users_list.dart';
 import '../components/new_users_slider.dart';
 import '../components/top_users_slider.dart';
+import 'package:linkyou/components/drawer_menu.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -113,9 +114,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      drawer: Drawer(
-          // Add drawer items
-          ),
+      drawer: DrawerMenu(), // Подключение меню
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
