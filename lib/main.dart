@@ -21,8 +21,8 @@ class LinkYouApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'LinkYou Mobile',
-        theme: ThemeData(
+        title: 'LinkYou Mobile',        
+        theme: ThemeData(          
           primarySwatch: Colors.blue,
         ),
         initialRoute: '/',

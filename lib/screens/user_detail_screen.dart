@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/api_service.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class UserDetailScreen extends StatefulWidget {
   final int userId;
@@ -67,9 +68,15 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
               onTap: () {
                 _showFullScreenImage(userDetails!['avatar']['src']['origin']);
               },
-              child: Image.network(
-                'https:${userDetails!['avatar']['src']['origin']}',
-                width: double.infinity,
+              child: CachedNetworkImage(
+                progressIndicatorBuilder: (context, url, progress) => Center(
+                  child: CircularProgressIndicator(
+                    value: progress.progress,
+                  ),
+                ),
+                imageUrl: 'https:${userDetails!['avatar']['src']['origin']}',
+                height: 450,
+                width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
               ),
             ),
@@ -84,7 +91,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   ),
                   Text(
                       '${userDetails!['job']['profession']}, ${userDetails!['job']['occupation']}'),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Text('${userDetails!['avatar']['likes_count']} лайков'),
@@ -94,26 +101,26 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                       Text('${userDetails!['location']['city_name']}'),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Chip(
                           label: Text(
                               '${userDetails!['birthday']['zodiac']['name']}')),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Chip(
                           label: Text(
                         '${userDetails!['nationality']?['name'] ?? 'Unknown'}',
                       )),
                     ],
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Chip(
                       label: Text(
                           'Ищу партнера от ${userDetails!['age']['from']} до ${userDetails!['age']['to']} лет')),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Chip(label: Text('Цель: ${userDetails!['goal']['name']}')),
-                  SizedBox(width: 20, height: 20),
+                  const SizedBox(width: 20, height: 20),
                   Row(
                     children: [
                       CircularPercentIndicator(
@@ -126,11 +133,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                         ),
                         progressColor: Colors.blue,
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Рейтинг анкеты',
+                          const Text('Рейтинг анкеты',
                               style: TextStyle(fontSize: 16)),
                           Text(
                               'Понравилась ${userDetails!['rating']['likes']} из ${userDetails!['rating']['views']}',
@@ -206,7 +213,12 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         builder: (context) => Scaffold(
           appBar: AppBar(),
           body: Center(
-            child: Image.network('https:$imageUrl'),
+            child: InteractiveViewer(
+              boundaryMargin: const EdgeInsets.all(0),              
+              minScale: 0.1,
+              maxScale: 5.0,              
+              child: Image.network('https:$imageUrl'),
+            ),
           ),
         ),
       ),
