@@ -16,7 +16,7 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
+              const Text(
                 'LINKYOU',
                 style: TextStyle(
                   fontSize: 32,
@@ -24,15 +24,15 @@ class WelcomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
+              const Text(
                 'ЗНАКОМЬТЕСЬ ПО ПРОФЕССИИ',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'LinkYou – это закрытый клуб знакомств, где Вы можете найти равного себе партнера для жизни',
                 style: TextStyle(
                   fontSize: 16,
