@@ -74,4 +74,23 @@ class ApiService {
       throw Exception('Failed to load user details');
     }
   }
+
+  Future<Map<String, dynamic>> signIn(String login, String password) async {
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('$baseUrl/auth/signin'),
+    );
+    request.fields['email'] = login;
+    request.fields['password'] = password;
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      final responseBody = await response.stream.bytesToString();
+      return jsonDecode(responseBody);
+    } else {
+      final responseBody = await response.stream.bytesToString();
+      throw Exception(jsonDecode(responseBody)['message']);
+    }
+  }
 }

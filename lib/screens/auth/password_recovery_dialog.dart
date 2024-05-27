@@ -22,13 +22,15 @@ class _PasswordRecoveryDialogState extends State<PasswordRecoveryDialog> {
   Future<void> _recoverPassword() async {
     final apiService = Provider.of<ApiService>(context, listen: false);
     try {
-      final response = await apiService.postForgotPassword(_emailController.text);
+      final response =
+          await apiService.postForgotPassword(_emailController.text);
       if (response['done']) {
-        _message = 'На вашу почту было отправлено сообщение с инструкцией по восстановлению пароля';
+        _message =
+            'На вашу почту было отправлено сообщение с инструкцией по восстановлению пароля';
         _messageColor = Colors.green;
       }
     } catch (e) {
-      _message = 'Ошибка: ${e.toString()}';
+      _message = 'Ошибка: Логин не найден в базе данных!';
       _messageColor = Colors.red;
     } finally {
       Navigator.of(context).pop(); // Закрываем диалог восстановления пароля
