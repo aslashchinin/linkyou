@@ -49,7 +49,7 @@ class _NewUsersSliderState extends State<NewUsersSlider> {
                 'Новые анкеты',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              Spacer(),
+              const Spacer(),
               IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: _previousPage,

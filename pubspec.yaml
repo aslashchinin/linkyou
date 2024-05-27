@@ -26,3 +26,4 @@ flutter:
   assets:
     - assets/welcome_people.svg
     - assets/welcome_people.png
+    - assets/no_avatar.png

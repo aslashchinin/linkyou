@@ -35,7 +35,7 @@ class UserCard extends StatelessWidget {
                 radius: 40,
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

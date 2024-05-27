@@ -1,18 +1,44 @@
 import 'package:flutter/material.dart';
+import '../screens/auth/login_tab.dart';
+import '../screens/auth/registration_tab.dart';
 import '../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
-import '../widgets/custom_button.dart';
 import '../routes/app_routes.dart';
+import '../widgets/custom_button.dart';
 
-class DrawerMenu extends StatelessWidget {
+class DrawerMenu extends StatefulWidget {
+  @override
+  _DrawerMenuState createState() => _DrawerMenuState();
+}
+
+class _DrawerMenuState extends State<DrawerMenu>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    String avatarUrl = authProvider.user!['avatar']['src']['square'];
-    if (avatarUrl.isEmpty) {
-      avatarUrl = authProvider.user!['avatar']['src']['default'];
-    }
+    String avatarUrl = 'assets/no_avatar.png';
 
+    if (authProvider.user != null) {
+      avatarUrl = authProvider.user!['avatar']['src']['square'] ?? '';
+
+      if (avatarUrl.isEmpty) {
+        avatarUrl = authProvider.user!['avatar']['src']['default'];
+      }
+    }
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -29,6 +55,25 @@ class DrawerMenu extends StatelessWidget {
               ),
             ),
           ),
+          if (authProvider.token == null || authProvider.user == null) ...[
+            TabBar(
+              controller: _tabController,
+              tabs: [
+                Tab(text: 'Вход'),
+                Tab(text: 'Регистрация'),
+              ],
+            ),
+            Container(
+              height: 280.0,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  LoginTab(),
+                  RegistrationTab(),
+                ],
+              ),
+            )
+          ],
           if (authProvider.token != null && authProvider.user != null) ...[
             ListTile(
               onTap: () {
@@ -48,8 +93,8 @@ class DrawerMenu extends StatelessWidget {
                   '${authProvider.user!['name']}, ${authProvider.user!['birthday']['age']}'),
             ),
             ListTile(
-              leading: Icon(Icons.edit),
-              title: Text('Редактировать анкету'),
+              leading: const Icon(Icons.edit),
+              title: const Text('Редактировать анкету'),
               onTap: () {
                 // Handle navigation
               },

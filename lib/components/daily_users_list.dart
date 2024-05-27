@@ -16,13 +16,13 @@ class DailyUsersList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: users.length + 1,
       itemBuilder: (context, index) {
         if (index == users.length) {
           return Center(
             child: isLoading
-                ? CircularProgressIndicator()
+                ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: onLoadMore,
                     child: Text('Показать еще'),
