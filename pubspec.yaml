@@ -26,6 +26,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/welcome_people.svg
-    - assets/welcome_people.png
-    - assets/no_avatar.png
+    - assets/wellcomeTizer/welcome.png
+    - assets/logo/logo.png
+    - assets/logo-blue/logo.png
+    - assets/crown/crown.png
