@@ -31,21 +31,24 @@ class DailyUsersList extends StatelessWidget {
           );
         }
         final user = users[index];
-        return UserCardShort(
-          avatarUrl: 'https:${user['avatar']['src']['square']}',
-          name: user['name'],
-          age: user['birthday']['age'],
-          profession: user['job']['profession'],
-          occupation: user['job']['occupation'],
-          photosCount: user['photos_count'],
-          city: user['location']['city_name'],
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              AppRoutes.user,
-              arguments: user['id'],
-            );
-          },
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: UserCardShort(
+            avatarUrl: 'https:${user['avatar']['src']['square']}',
+            name: user['name'],
+            age: user['birthday']['age'],
+            profession: user['job']['profession'],
+            occupation: user['job']['occupation'],
+            photosCount: user['photos_count'],
+            city: user['location']['city_name'],
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                AppRoutes.user,
+                arguments: user['id'],
+              );
+            },
+          ),
         );
       },
     );

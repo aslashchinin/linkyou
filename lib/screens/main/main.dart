@@ -130,36 +130,39 @@ class _MainScreenState extends State<MainScreen> {
       ),
       drawer: DrawerMenu(), // Подключение меню
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DailyUsersHeader(
-              cities: cities,
-              selectedCityId: selectedCityId,
-              onCityChanged: (cityId) {
-                setState(() {
-                  selectedCityId = cityId;
-                });
-                _fetchDailyUsers(cityId: selectedCityId, clear: true);
-              },
-              onPromoteMe: () {
-                // Action for "Попасть сюда"
-              },
-            ),
-            DailyUsersList(
-              users: dailyUsers,
-              isLoading: isLoading,
-              onLoadMore: () => _fetchDailyUsers(cityId: selectedCityId),
-            ),
-            const SizedBox(height: 16),
-            NewUsersSlider(
-              users: newUsers,
-            ),
-            const SizedBox(height: 16),
-            TopUsersSlider(
-              users: topUsers,
-            ),
-          ],
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DailyUsersHeader(
+                cities: cities,
+                selectedCityId: selectedCityId,
+                onCityChanged: (cityId) {
+                  setState(() {
+                    selectedCityId = cityId;
+                  });
+                  _fetchDailyUsers(cityId: selectedCityId, clear: true);
+                },
+                onPromoteMe: () {
+                  // Action for "Попасть сюда"
+                },
+              ),
+              DailyUsersList(
+                users: dailyUsers,
+                isLoading: isLoading,
+                onLoadMore: () => _fetchDailyUsers(cityId: selectedCityId),
+              ),
+              const SizedBox(height: 16),
+              NewUsersSlider(
+                users: newUsers,
+              ),
+              const SizedBox(height: 16),
+              TopUsersSlider(
+                users: topUsers,
+              ),
+            ],
+          ),
         ),
       ),
     );
