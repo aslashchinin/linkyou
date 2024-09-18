@@ -61,7 +61,7 @@ class _DrawerMenuState extends State<DrawerMenu>
               ],
             ),
             Container(
-              height: 280.0,
+              height: 290.0,
               child: TabBarView(
                 controller: _tabController,
                 children: [
@@ -189,6 +189,7 @@ class _DrawerMenuState extends State<DrawerMenu>
             title: const Text('Лучшие-100'),
             onTap: () {
               // Navigate to the Luchshie-100 screen
+              Navigator.pushNamed(context, AppRoutes.topUsers);
             },
           ),
           ListTile(

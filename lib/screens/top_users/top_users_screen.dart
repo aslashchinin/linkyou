@@ -39,12 +39,14 @@ class _TopUsersScreenState extends State<TopUsersScreen> {
     if (isLoading) {
       return Scaffold(
         appBar: AppBar(title: const Text('Лучшие 10')),
+        backgroundColor: Colors.white,
         body: const Center(child: CircularProgressIndicator()),
       );
     }
 
     return Scaffold(
       appBar: AppBar(title: const Text('Лучшие 10')),
+      backgroundColor: Colors.white,
       body: TopUsersList(users: topUsers),
     );
   }

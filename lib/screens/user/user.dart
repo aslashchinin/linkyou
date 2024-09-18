@@ -139,10 +139,10 @@ class _UserScreenState extends State<UserScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Рейтинг анкеты',
-                              style: TextStyle(fontSize: 16)),
+                              style: TextStyle(fontSize: 14)),
                           Text(
                               'Понравилась ${userDetails!['rating']['likes']} из ${userDetails!['rating']['views']}',
-                              style: const TextStyle(fontSize: 16)),
+                              style: const TextStyle(fontSize: 14)),
                         ],
                       ),
                     ],

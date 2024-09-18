@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/routes.dart';
-import '../../../common/widgets/UserCardShort.dart';
+import 'package:linkyou/common/widgets/UserCardShort.dart';
 
 class DailyUsersList extends StatelessWidget {
   final List<dynamic> users;
