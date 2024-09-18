@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../providers/api_provider.dart';
+import 'package:linkyou/common/services/api_services.dart';
 
 class PasswordRecoveryDialog extends StatefulWidget {
   @override
@@ -20,7 +19,7 @@ class _PasswordRecoveryDialogState extends State<PasswordRecoveryDialog> {
   }
 
   Future<void> _recoverPassword() async {
-    final apiService = Provider.of<ApiProvider>(context, listen: false);
+    final apiService = ApiService();
     try {
       final response =
           await apiService.postForgotPassword(_emailController.text);

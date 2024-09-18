@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/common/providers/api_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:linkyou/common/services/api_services.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:linkyou/common/widgets/RoundedButton.dart';
 
 class UserScreen extends StatefulWidget {
   final int userId;
@@ -23,7 +23,7 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   Future<void> _fetchUserDetails() async {
-    final apiService = Provider.of<ApiProvider>(context, listen: false);
+    final apiService = ApiService();
     try {
       final fetchedUserDetails = await apiService.getUserDetails(widget.userId);
       setState(() {
@@ -68,31 +68,104 @@ class _UserScreenState extends State<UserScreen> {
               onTap: () {
                 _showFullScreenImage(userDetails!['avatar']['src']['origin']);
               },
-              child: CachedNetworkImage(
-                progressIndicatorBuilder: (context, url, progress) => Center(
-                  child: CircularProgressIndicator(
-                    value: progress.progress,
+              child: Stack(
+                children: [
+                  CachedNetworkImage(
+                    progressIndicatorBuilder: (context, url, progress) =>
+                        Center(
+                      child: CircularProgressIndicator(
+                        value: progress.progress,
+                      ),
+                    ),
+                    imageUrl:
+                        'https:${userDetails!['avatar']['src']['origin']}',
+                    height: 450,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.black.withOpacity(0.0),
+                            Colors.black.withOpacity(0.1),
+                            Colors.black.withOpacity(0.2),
+                            Colors.black.withOpacity(0.3),
+                            Colors.black.withOpacity(0.4),
+                            Colors.black.withOpacity(0.5),
+                            Colors.black.withOpacity(0.6),
+                            Colors.black.withOpacity(0.7),
+                            Colors.black.withOpacity(0.8),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${userDetails!['name']}, ${userDetails!['birthday']['age']}',
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            '${userDetails!['job']['profession']}, ${userDetails!['job']['occupation']}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RoundedButton(
+                  onPressed: () {
+                    // Message action
+                  },
+                  text: 'Сообщение',
+                ),
+                OutlinedButton(
+                  onPressed: () {
+                    // Like action
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                          userDetails!['likes']['is_liked']
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: userDetails!['likes']['is_liked']
+                              ? Colors.red
+                              : Colors.blue),
+                      const SizedBox(width: 5),
+                      const Text('Лайкнуть'),
+                    ],
                   ),
                 ),
-                imageUrl: 'https:${userDetails!['avatar']['src']['origin']}',
-                height: 450,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
-              ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${userDetails!['name']}, ${userDetails!['birthday']['age']}',
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                      '${userDetails!['job']['profession']}, ${userDetails!['job']['occupation']}'),
-                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Text('${userDetails!['avatar']['likes_count']} лайков'),
@@ -149,23 +222,6 @@ class _UserScreenState extends State<UserScreen> {
                   )
                 ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Message action
-                  },
-                  child: const Text('Сообщение'),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    // Like action
-                  },
-                  child: const Text('Лайкнуть'),
-                ),
-              ],
             ),
           ],
         ),

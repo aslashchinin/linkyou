@@ -196,7 +196,7 @@ class _DrawerMenuState extends State<DrawerMenu>
             leading: const Icon(Icons.info),
             title: const Text('О нас'),
             onTap: () {
-              // Navigate to the O nas screen
+              Navigator.pushNamed(context, AppRoutes.about);
             },
           ),
           ListTile(

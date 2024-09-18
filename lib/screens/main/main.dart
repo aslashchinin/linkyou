@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/common/providers/api_provider.dart';
+import 'package:linkyou/common/services/api_services.dart';
 import 'package:provider/provider.dart';
 import 'package:linkyou/common/components/drawer_menu.dart';
 import 'components/daily_users_header.dart';
@@ -43,10 +43,13 @@ class _MainScreenState extends State<MainScreen> {
       isLoading = true;
     });
 
-    final apiService = Provider.of<ApiProvider>(context, listen: false);
+    final apiService = ApiService();
     try {
-      final fetchedUsers =
-          await apiService.getDailyUsers(12, page, cityId: cityId);
+      final fetchedUsers = await apiService.getDailyUsers(
+        limit: 10,
+        page: page,
+        cityId: cityId,
+      );
       setState(() {
         dailyUsers.addAll(fetchedUsers);
         page++;
@@ -62,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Future<void> _fetchCities() async {
-    final apiService = Provider.of<ApiProvider>(context, listen: false);
+    final apiService = ApiService();
     try {
       final fetchedCities = await apiService.getCities();
       setState(() {
@@ -75,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Future<void> _fetchNewUsers() async {
-    final apiService = Provider.of<ApiProvider>(context, listen: false);
+    final apiService = ApiService();
     try {
       final fetchedUsers = await apiService.getNewUsers();
       setState(() {
@@ -87,15 +90,15 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  Future<void> _fetchTopUsers() async {
-    final apiService = Provider.of<ApiProvider>(context, listen: false);
+  Future<void> _fetchTopUsers({String type = 'male', int page = 12}) async {
+    final apiService = ApiService();
     try {
-      final fetchedUsers = await apiService.getTopUsers();
+      final fetchedUsers = await apiService.getTopUsers(type: type, page: page);
       setState(() {
         topUsers = fetchedUsers;
       });
     } catch (e) {
-      // Handle error
+      // Обработка ошибки
       print(e);
     }
   }

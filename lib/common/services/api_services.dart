@@ -21,23 +21,38 @@ class ApiService {
     }
   }
 
-  Future<List<dynamic>> getDailyUsers(int limit, int page,
-      {int? cityId}) async {
-    String url = '$baseUrl/users/daily?limit=$limit&page=$page';
-    if (cityId != null) {
-      url += '&city_id=$cityId';
-    }
-    final response = await http.get(Uri.parse(url));
+  Future<List<dynamic>> getDailyUsers({
+    required int limit,
+    required int page,
+    int? cityId,
+  }) async {
+    final queryParameters = {
+      'limit': limit.toString(),
+      'page': page.toString(),
+      if (cityId != null) 'city_id': cityId.toString(),
+    };
+
+    final uri = Uri.parse('$baseUrl/users/daily')
+        .replace(queryParameters: queryParameters);
+
+    final response = await http.get(
+      uri,
+      headers: _buildHeaders(),
+    );
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to load users');
+      throw Exception(
+          'Не удалось загрузить пользователей: ${response.statusCode}');
     }
   }
 
   Future<List<dynamic>> getCities() async {
-    final response = await http.get(Uri.parse('$baseUrl/lists/cities'));
+    final response = await http.get(
+      Uri.parse('$baseUrl/lists/cities'),
+      headers: _buildHeaders(),
+    );
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
@@ -47,7 +62,10 @@ class ApiService {
   }
 
   Future<List<dynamic>> getNewUsers() async {
-    final response = await http.get(Uri.parse('$baseUrl/users/new'));
+    final response = await http.get(
+      Uri.parse('$baseUrl/users/new'),
+      headers: _buildHeaders(),
+    );
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
@@ -56,18 +74,36 @@ class ApiService {
     }
   }
 
-  Future<List<dynamic>> getTopUsers() async {
-    final response = await http.get(Uri.parse('$baseUrl/users/top'));
+  Future<List<dynamic>> getTopUsers({
+    required String type,
+    required int page,
+  }) async {
+    final queryParameters = {
+      'page': page.toString(),
+      'type': type,
+      'limit': '10',
+    };
+
+    final uri = Uri.parse('$baseUrl/users/top')
+        .replace(queryParameters: queryParameters);
+
+    final response = await http.get(
+      uri,
+      headers: _buildHeaders(),
+    );
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Failed to load top users');
+      throw Exception('Не удалось загрузить топ пользователей');
     }
   }
 
   Future<Map<String, dynamic>> getUserDetails(int userId) async {
-    final response = await http.get(Uri.parse('$baseUrl/user/$userId'));
+    final response = await http.get(
+      Uri.parse('$baseUrl/user/$userId'),
+      headers: _buildHeaders(),
+    );
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
@@ -94,5 +130,17 @@ class ApiService {
       final responseBody = await response.stream.bytesToString();
       throw Exception(jsonDecode(responseBody)['message']);
     }
+  }
+
+  Map<String, String> _buildHeaders() {
+    final headers = <String, String>{
+      'Content-Type': 'application/json',
+    };
+
+    // Получаем токен из AuthProvider
+    const token = 'LzuaDweazYN8KTbWCn9lCrYxrfW-H0AI';
+    headers['Authorization'] = 'Bearer $token';
+
+    return headers;
   }
 }

@@ -30,3 +30,9 @@ flutter:
     - assets/logo/logo.png
     - assets/logo-blue/logo.png
     - assets/crown/crown.png
+    - assets/about/nationality.png
+    - assets/about/mission.png
+    - assets/about/profession.png
+    - assets/about/misbehavior.png
+    - assets/about/robot.png
+    - assets/about/surprise.png

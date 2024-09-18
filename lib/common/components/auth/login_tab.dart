@@ -23,8 +23,11 @@ class _LoginTabState extends State<LoginTab> {
       final response = await apiService.signIn(
           _emailController.text, _passwordController.text);
       if (response['token'] != null) {
+        authProvider.signIn(response['token'], response['user']);
+
         authProvider.setToken(response['token']);
         authProvider.setUser(response['user']);
+
         Navigator.pushReplacementNamed(context, AppRoutes.main);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
