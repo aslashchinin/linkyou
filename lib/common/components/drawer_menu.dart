@@ -33,12 +33,15 @@ class _DrawerMenuState extends State<DrawerMenu>
     String avatarUrl = 'assets/no_avatar.png';
 
     if (authProvider.user != null) {
-      avatarUrl = authProvider.user!['avatar']['src']['square'] ?? '';
-
-      if (avatarUrl.isEmpty) {
-        avatarUrl = authProvider.user!['avatar']['src']['default'];
+      // Проверяем, есть ли у пользователя данные
+      var userAvatar = authProvider.user!['avatar'];
+      if (userAvatar != null) {
+        avatarUrl = userAvatar['src']?['square'] ??
+            userAvatar['src']?['default'] ??
+            avatarUrl;
       }
     }
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,

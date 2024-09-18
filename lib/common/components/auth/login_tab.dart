@@ -3,9 +3,9 @@ import 'package:linkyou/common/widgets/RoundedButton.dart';
 import 'package:linkyou/common/widgets/TextInput.dart';
 import 'password_recovery_dialog.dart';
 import 'package:provider/provider.dart';
-import '../../providers/auth_provider.dart';
-import '../../../routes.dart';
-import '../../services/api_services.dart';
+import 'package:linkyou/common/providers/auth_provider.dart';
+import 'package:linkyou/routes.dart';
+import 'package:linkyou/common/services/api_services.dart';
 
 class LoginTab extends StatefulWidget {
   @override
@@ -27,12 +27,14 @@ class _LoginTabState extends State<LoginTab> {
         authProvider.setUser(response['user']);
         Navigator.pushReplacementNamed(context, AppRoutes.main);
       } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('Sign In Failed')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Авторизация не удалась')),
+        );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('An error occurred: $e')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Произошла ошибка: $e')),
+      );
     }
   }
 

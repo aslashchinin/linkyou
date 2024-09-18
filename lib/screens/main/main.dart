@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/common/providers/api_provider.dart';
 import 'package:provider/provider.dart';
-import '../../common/services/api_services.dart';
-import '../../common/components/drawer_menu.dart';
+import 'package:linkyou/common/components/drawer_menu.dart';
 import 'components/daily_users_header.dart';
 import 'components/daily_users_list.dart';
 import 'components/new_users_slider.dart';
 import 'components/top_users_slider.dart';
+import 'package:linkyou/routes.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -126,6 +126,12 @@ class _MainScreenState extends State<MainScreen> {
               // Open search screen
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.star),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.topUsers);
+            },
+          ), // Кнопка для перехода на экран ТОП-10
         ],
       ),
       drawer: DrawerMenu(), // Подключение меню
