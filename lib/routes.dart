@@ -10,7 +10,7 @@ class AppRoutes {
   static const String welcome = '/welcome';
   static const String registration = '/registration';
   static const String login = '/login';
-  static const String main = '/welcome';
+  static const String main = '/main';
   static const String user = '/user';
   static const String topUsers = '/top-users';
   static const String about = '/about';

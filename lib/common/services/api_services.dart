@@ -112,6 +112,32 @@ class ApiService {
     }
   }
 
+  Future<Map<String, dynamic>> getUserPhotos(int userId) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/photos/$userId'),
+      headers: _buildHeaders(),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to load user details');
+    }
+  }
+
+  Future<Map<String, dynamic>> getUserUblogs(int userId) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/ublogs/$userId'),
+      headers: _buildHeaders(),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to load user details');
+    }
+  }
+
   Future<Map<String, dynamic>> signIn(String login, String password) async {
     var request = http.MultipartRequest(
       'POST',
