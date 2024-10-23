@@ -2,8 +2,8 @@ import 'zodiac.dart';
 
 class Birthday {
   final String age;
-  final String date;
-  final Zodiac zodiac;
+  final String? date;
+  final Zodiac? zodiac;
 
   Birthday({
     required this.age,
@@ -14,8 +14,8 @@ class Birthday {
   factory Birthday.fromJson(Map<String, dynamic> json) {
     return Birthday(
       age: json['age'],
-      date: json['date'],
-      zodiac: Zodiac.fromJson(json['zodiac']),
+      date: json['date'] ?? null,
+      zodiac: json['zodiac'] != null ? Zodiac.fromJson(json['zodiac']) : null,
     );
   }
 
@@ -23,7 +23,7 @@ class Birthday {
     return {
       'age': age,
       'date': date,
-      'zodiac': zodiac.toJson(),
+      'zodiac': zodiac?.toJson(),
     };
   }
 }

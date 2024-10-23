@@ -1,9 +1,9 @@
-import 'package:linkyou/core/models/user.dart';
+import 'package:linkyou/core/models/user_short.dart';
 
 enum UserStatus { initial, loading, loaded, error }
 
 class UserState {
-  final List<User> users;
+  final List<UserShort> users;
   final UserStatus status;
   final String? errorMessage;
 
@@ -14,7 +14,7 @@ class UserState {
   });
 
   UserState copyWith({
-    List<User>? users,
+    List<UserShort>? users,
     UserStatus? status,
     String? errorMessage,
   }) {

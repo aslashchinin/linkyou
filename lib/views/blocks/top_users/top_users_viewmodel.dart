@@ -19,9 +19,9 @@ class TopUsersViewModel extends ChangeNotifier {
       final users = await _repository.getTopUsers();
 
       _state = _state.copyWith(status: UserStatus.loaded, users: users);
-    } catch (e) {
-      _state =
-          _state.copyWith(status: UserStatus.error, errorMessage: e.toString());
+    } catch (e, stackTrace) {
+      _state = _state.copyWith(
+          status: UserStatus.error, errorMessage: stackTrace.toString());
     } finally {
       notifyListeners();
     }

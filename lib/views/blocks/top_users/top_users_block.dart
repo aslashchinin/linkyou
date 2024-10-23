@@ -42,7 +42,8 @@ class _TopUsersBlockState extends State<TopUsersBlock> {
                 backgroundImage: NetworkImage(user.avatar.src.small),
               ),
               title: Text(user.name),
-              subtitle: Text('${user.age} лет, ${user.location.cityName}'),
+              subtitle:
+                  Text('${user.birthday.age} лет, ${user.location.cityName}'),
               trailing: Container(
                 width: 8,
                 height: 8,
