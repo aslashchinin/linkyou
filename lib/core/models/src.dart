@@ -13,10 +13,10 @@ class Src {
 
   factory Src.fromJson(Map<String, dynamic> json) {
     return Src(
-      small: json['small'],
-      defaultSrc: json['default'],
-      origin: json['origin'],
-      square: json['square'],
+      small: _fixUrl(json['small']),
+      defaultSrc: _fixUrl(json['default']),
+      origin: _fixUrl(json['origin']),
+      square: _fixUrl(json['square']),
     );
   }
 
@@ -27,5 +27,13 @@ class Src {
       'origin': origin,
       'square': square,
     };
+  }
+
+  // Метод для исправления URL
+  static String _fixUrl(String url) {
+    if (url.startsWith('//')) {
+      return 'https:$url'; // Добавляем https: если URL начинается с //
+    }
+    return url;
   }
 }

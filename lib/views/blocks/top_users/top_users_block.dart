@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'top_users_viewmodel.dart';
 import 'package:linkyou/data/user/user_state.dart';
+import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 
 class TopUsersBlock extends StatefulWidget {
   const TopUsersBlock({super.key});
@@ -11,9 +12,9 @@ class TopUsersBlock extends StatefulWidget {
 }
 
 class _TopUsersBlockState extends State<TopUsersBlock> {
+  @override
   void initState() {
     super.initState();
-    // Загружаем данные при инициализации
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<TopUsersViewModel>().loadTopUsers();
     });
@@ -37,21 +38,9 @@ class _TopUsersBlockState extends State<TopUsersBlock> {
           itemCount: state.users.length,
           itemBuilder: (context, index) {
             final user = state.users[index];
-            return ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(user.avatar.src.small),
-              ),
-              title: Text(user.name),
-              subtitle:
-                  Text('${user.birthday.age} лет, ${user.location.cityName}'),
-              trailing: Container(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: user.isOnline ? Colors.green : Colors.grey,
-                ),
-              ),
+            return UserShortTile(
+              user: user,
+              onTap: () => viewModel.onUserTap(user),
             );
           },
         );

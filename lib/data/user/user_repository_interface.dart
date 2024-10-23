@@ -1,5 +1,6 @@
 import 'package:linkyou/core/models/user_short.dart';
+import 'package:linkyou/core/responses/repository_response.dart';
 
 abstract class UserRepositoryInterface {
-  Future<List<UserShort>> getTopUsers();
+  Future<RepositoryResponse<List<UserShort>>> getTopUsers();
 }
