@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/base/screen_base.dart';
 import 'package:linkyou/views/widgets/headers/screen_title_header.dart';
+import 'package:linkyou/views/blocks/top_users/top_users_block.dart';
 
 class TopScreen extends ScreenBase {
   const TopScreen({super.key});
@@ -24,6 +25,7 @@ class TopScreenState extends ScreenBaseState<TopScreen>
       child: Column(
         children: [
           ScreenTitleHeader(title: 'Лучшие 100'),
+          TopUsersBlock(),
         ],
       ),
     );

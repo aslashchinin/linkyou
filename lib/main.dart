@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:linkyou/views/blocks/top_users/top_users_block.dart';
+import 'package:linkyou/views/blocks/top_users/top_users_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/core/services/route_service.dart';
@@ -10,8 +12,10 @@ import 'package:linkyou/views/blocks/login/login_viewmodel.dart';
 import 'package:linkyou/views/blocks/password_recovery/password_recovery_viewmodel.dart';
 import 'package:linkyou/views/blocks/app_bar/app_bar_viewmodel.dart';
 import 'package:linkyou/views/blocks/drawer_menu/drawer_menu_viewmodel.dart';
+import 'package:linkyou/core/services/locator_service.dart';
 
 void main() {
+  setupTopUsersModule();
   runApp(const LinkYouApp());
 }
 
@@ -44,6 +48,10 @@ class LinkYouApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<DrawerMenuViewModel>(
           create: (_) => DrawerMenuViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => serviceLocator<TopUsersViewModel>(),
+          child: const TopUsersBlock(),
         ),
       ],
       child: Consumer<AuthProvider>(
