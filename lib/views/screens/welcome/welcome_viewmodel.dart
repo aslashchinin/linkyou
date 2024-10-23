@@ -13,4 +13,9 @@ class WelcomeViewModel extends ChangeNotifier {
     Navigator.pushNamed(context, RouteService.login);
     notifyListeners();
   }
+
+  void home(BuildContext context) {
+    Navigator.pushNamed(context, RouteService.home);
+    notifyListeners();
+  }
 }

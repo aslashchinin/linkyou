@@ -30,6 +30,7 @@ class RegistrationBlock extends StatelessWidget {
           const SizedBox(height: 20),
           RoundButton(
             onPressed: () => viewModel.register(context),
+            isBlue: true,
             text: 'Зарегистрироваться',
           ),
           const SizedBox(height: 10),

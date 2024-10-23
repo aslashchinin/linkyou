@@ -7,6 +7,9 @@ import 'package:linkyou/views/screens/welcome/welcome_viewmodel.dart';
 import 'package:linkyou/views/screens/auth/auth_viewmodel.dart';
 import 'package:linkyou/views/blocks/registration/registration_viewmodel.dart';
 import 'package:linkyou/views/blocks/login/login_viewmodel.dart';
+import 'package:linkyou/views/blocks/password_recovery/password_recovery_viewmodel.dart';
+import 'package:linkyou/views/blocks/app_bar/app_bar_viewmodel.dart';
+import 'package:linkyou/views/blocks/drawer_menu/drawer_menu_viewmodel.dart';
 
 void main() {
   runApp(const LinkYouApp());
@@ -32,6 +35,15 @@ class LinkYouApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<LoginViewModel>(
           create: (_) => LoginViewModel(),
+        ),
+        ChangeNotifierProvider<PasswordRecoveryViewModel>(
+          create: (_) => PasswordRecoveryViewModel(),
+        ),
+        ChangeNotifierProvider<AppBarBlockViewModel>(
+          create: (_) => AppBarBlockViewModel(),
+        ),
+        ChangeNotifierProvider<DrawerMenuViewModel>(
+          create: (_) => DrawerMenuViewModel(),
         ),
       ],
       child: Consumer<AuthProvider>(

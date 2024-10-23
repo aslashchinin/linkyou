@@ -67,7 +67,7 @@ class WelcomeScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     RoundButton(
                       text: 'Гостевой вход',
-                      onPressed: () => viewModel.register(context),
+                      onPressed: () => viewModel.home(context),
                       isGreen: true,
                     ),
                   ],

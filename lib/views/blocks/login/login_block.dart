@@ -38,6 +38,7 @@ class _LoginBlockState extends State<LoginBlock> {
           const SizedBox(height: 20),
           RoundButton(
             text: 'Войти',
+            isBlue: true,
             onPressed: () => viewModel.login(context),
           ),
           const SizedBox(height: 10),
