@@ -3,6 +3,7 @@ import 'package:linkyou/data/user/user_repository_interface.dart';
 import 'package:linkyou/core/models/user_short.dart';
 import 'package:linkyou/core/models/pagination_info.dart';
 import 'package:linkyou/core/responses/repository_response.dart';
+import 'package:linkyou/core/enums/gender_enum.dart';
 
 class UserRepository implements UserRepositoryInterface {
   final UserService _userService;
@@ -11,9 +12,10 @@ class UserRepository implements UserRepositoryInterface {
       : _userService = userService;
 
   @override
-  Future<RepositoryResponse<List<UserShort>>> getTopUsers() async {
+  Future<RepositoryResponse<List<UserShort>>> getTopUsers(
+      {Gender? gender}) async {
     try {
-      final serviceResponse = await _userService.getTopUsers();
+      final serviceResponse = await _userService.getTopUsers(gender: gender);
       final users =
           serviceResponse.data.map((json) => UserShort.fromJson(json)).toList();
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);

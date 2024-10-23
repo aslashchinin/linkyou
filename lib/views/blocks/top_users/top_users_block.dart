@@ -3,9 +3,12 @@ import 'package:provider/provider.dart';
 import 'top_users_viewmodel.dart';
 import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
+import 'package:linkyou/core/enums/gender_enum.dart';
 
 class TopUsersBlock extends StatefulWidget {
-  const TopUsersBlock({super.key});
+  const TopUsersBlock({super.key, required this.gender});
+
+  final Gender gender;
 
   @override
   _TopUsersBlockState createState() => _TopUsersBlockState();
@@ -16,7 +19,7 @@ class _TopUsersBlockState extends State<TopUsersBlock> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<TopUsersViewModel>().loadTopUsers();
+      context.read<TopUsersViewModel>().loadTopUsers(gender: widget.gender);
     });
   }
 
@@ -33,8 +36,6 @@ class _TopUsersBlockState extends State<TopUsersBlock> {
         );
       case UserStatus.loaded:
         return ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
           itemCount: state.users.length,
           itemBuilder: (context, index) {
             final user = state.users[index];

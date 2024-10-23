@@ -9,11 +9,15 @@ class ScreenTitleHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft, // Выровнять с помощью Align
-      child: Text(
-        title,
-        textAlign: TextAlign.left,
-        style: const TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+      child: Padding(
+        padding:
+            const EdgeInsets.only(top: 10.0, left: 10.0), // Добавить отступы
+        child: Text(
+          title,
+          textAlign: TextAlign.left,
+          style: const TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
       ),
     );
   }

@@ -13,6 +13,7 @@ import 'package:linkyou/views/blocks/password_recovery/password_recovery_viewmod
 import 'package:linkyou/views/blocks/app_bar/app_bar_viewmodel.dart';
 import 'package:linkyou/views/blocks/drawer_menu/drawer_menu_viewmodel.dart';
 import 'package:linkyou/core/services/locator_service.dart';
+import 'package:linkyou/core/enums/gender_enum.dart';
 
 void main() {
   setupTopUsersModule();
@@ -51,7 +52,7 @@ class LinkYouApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => serviceLocator<TopUsersViewModel>(),
-          child: const TopUsersBlock(),
+          child: const TopUsersBlock(gender: Gender.male),
         ),
       ],
       child: Consumer<AuthProvider>(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
 import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/core/models/user_short.dart';
+import 'package:linkyou/core/enums/gender_enum.dart';
 
 class TopUsersViewModel extends ChangeNotifier {
   TopUsersViewModel({required UserRepositoryInterface repository})
@@ -12,12 +13,12 @@ class TopUsersViewModel extends ChangeNotifier {
 
   UserState get state => _state;
 
-  Future<void> loadTopUsers() async {
+  Future<void> loadTopUsers({Gender? gender}) async {
     try {
       _state = _state.copyWith(status: UserStatus.loading);
       notifyListeners();
 
-      final repositoryResponse = await _repository.getTopUsers();
+      final repositoryResponse = await _repository.getTopUsers(gender: gender);
 
       _state = _state.copyWith(
           status: UserStatus.loaded, users: repositoryResponse.data);
