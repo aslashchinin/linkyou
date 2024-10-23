@@ -10,6 +10,7 @@ class DrawerMenuViewModel extends ChangeNotifier {
   }
 
   void search(BuildContext context) {
+    Navigator.pushNamed(context, RouteService.search);
     notifyListeners();
   }
 
@@ -18,6 +19,7 @@ class DrawerMenuViewModel extends ChangeNotifier {
   }
 
   void top(BuildContext context) {
+    Navigator.pushNamed(context, RouteService.top);
     notifyListeners();
   }
 

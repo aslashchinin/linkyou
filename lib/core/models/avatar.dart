@@ -1,0 +1,79 @@
+class Avatar {
+  final int id;
+  final int userId;
+  final String datetime;
+  final String description;
+  final Src src;
+  final bool isLiked;
+  final int likesCount;
+  final int commentsCount;
+
+  Avatar({
+    required this.id,
+    required this.userId,
+    required this.datetime,
+    required this.description,
+    required this.src,
+    required this.isLiked,
+    required this.likesCount,
+    required this.commentsCount,
+  });
+
+  factory Avatar.fromJson(Map<String, dynamic> json) {
+    return Avatar(
+      id: json['id'],
+      userId: json['user_id'],
+      datetime: json['datetime'],
+      description: json['description'],
+      src: Src.fromJson(json['src']),
+      isLiked: json['is_liked'],
+      likesCount: json['likes_count'],
+      commentsCount: json['comments_count'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'user_id': userId,
+      'datetime': datetime,
+      'description': description,
+      'src': src.toJson(),
+      'is_liked': isLiked,
+      'likes_count': likesCount,
+      'comments_count': commentsCount,
+    };
+  }
+}
+
+class Src {
+  final String small;
+  final String defaultSrc;
+  final String origin;
+  final String square;
+
+  Src({
+    required this.small,
+    required this.defaultSrc,
+    required this.origin,
+    required this.square,
+  });
+
+  factory Src.fromJson(Map<String, dynamic> json) {
+    return Src(
+      small: json['small'],
+      defaultSrc: json['default'],
+      origin: json['origin'],
+      square: json['square'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'small': small,
+      'default': defaultSrc,
+      'origin': origin,
+      'square': square,
+    };
+  }
+}
