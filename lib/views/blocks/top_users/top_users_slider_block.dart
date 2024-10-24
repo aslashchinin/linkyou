@@ -7,7 +7,7 @@ import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/views/widgets/headers/block_header.dart';
 
 class TopUsersSliderBlock extends StatefulWidget {
-  const TopUsersSliderBlock({super.key, required this.gender});
+  const TopUsersSliderBlock({super.key, this.gender = Gender.female});
 
   final Gender gender;
 
@@ -16,9 +16,13 @@ class TopUsersSliderBlock extends StatefulWidget {
 }
 
 class _TopUsersSliderBlockState extends State<TopUsersSliderBlock> {
+  late TopUsersViewModel viewModel;
+  late PageController _pageController;
+
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<TopUsersViewModel>().loadTopUsers(gender: widget.gender);
     });
@@ -26,9 +30,9 @@ class _TopUsersSliderBlockState extends State<TopUsersSliderBlock> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<TopUsersViewModel>();
-    final state = viewModel.state;
-
+    viewModel = context.watch<TopUsersViewModel>();
+    _pageController = PageController(initialPage: viewModel.currentSliderPage);
+    late UserState state = viewModel.state;
     switch (state.status) {
       case UserStatus.initial:
       case UserStatus.loading:
@@ -40,18 +44,18 @@ class _TopUsersSliderBlockState extends State<TopUsersSliderBlock> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
               child: Row(
                 children: [
                   const BlockHeader(title: 'Лучшие 100'),
                   const Spacer(),
                   IconButton(
                     icon: const Icon(Icons.arrow_back),
-                    onPressed: () {},
+                    onPressed: () => viewModel.onPreviousPage(_pageController),
                   ),
                   IconButton(
                     icon: const Icon(Icons.arrow_forward),
-                    onPressed: () {},
+                    onPressed: () => viewModel.onNextPage(_pageController),
                   ),
                 ],
               ),
@@ -59,6 +63,7 @@ class _TopUsersSliderBlockState extends State<TopUsersSliderBlock> {
             SizedBox(
               height: 350,
               child: PageView.builder(
+                controller: _pageController,
                 itemCount: (state.users.length / 3).ceil(),
                 itemBuilder: (context, pageIndex) {
                   final startIndex = pageIndex * 3;

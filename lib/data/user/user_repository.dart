@@ -13,9 +13,10 @@ class UserRepository implements UserRepositoryInterface {
 
   @override
   Future<RepositoryResponse<List<UserShort>>> getTopUsers(
-      {Gender? gender}) async {
+      {Gender? gender, int page = 0}) async {
     try {
-      final serviceResponse = await _userService.getTopUsers(gender: gender);
+      final serviceResponse =
+          await _userService.getTopUsers(gender: gender, page: page);
       final users =
           serviceResponse.data.map((json) => UserShort.fromJson(json)).toList();
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);

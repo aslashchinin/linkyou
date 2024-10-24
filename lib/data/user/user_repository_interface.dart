@@ -3,5 +3,8 @@ import 'package:linkyou/core/responses/repository_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 
 abstract class UserRepositoryInterface {
-  Future<RepositoryResponse<List<UserShort>>> getTopUsers({Gender? gender});
+  Future<RepositoryResponse<List<UserShort>>> getTopUsers({
+    Gender? gender,
+    int page = 0,
+  });
 }

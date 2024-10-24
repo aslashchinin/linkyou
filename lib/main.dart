@@ -50,7 +50,7 @@ class LinkYouApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => serviceLocator<TopUsersViewModel>(),
-        ),
+        )
       ],
       child: Consumer<AuthProvider>(
         builder: (context, authProvider, child) {

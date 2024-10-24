@@ -6,7 +6,7 @@ import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 
 class TopUsersListBlock extends StatefulWidget {
-  const TopUsersListBlock({super.key, required this.gender});
+  const TopUsersListBlock({super.key, this.gender = Gender.female});
 
   final Gender gender;
 
@@ -19,6 +19,7 @@ class _TopUsersListBlockState extends State<TopUsersListBlock> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<TopUsersViewModel>().clearState();
       context.read<TopUsersViewModel>().loadTopUsers(gender: widget.gender);
     });
   }
@@ -36,8 +37,14 @@ class _TopUsersListBlockState extends State<TopUsersListBlock> {
         );
       case UserStatus.loaded:
         return ListView.builder(
-          itemCount: state.users.length,
+          itemCount: state.users.length + 1,
           itemBuilder: (context, index) {
+            if (index == state.users.length) {
+              return ElevatedButton(
+                onPressed: () => viewModel.loadMoreUsers(gender: widget.gender),
+                child: const Text('Загрузить еще'),
+              );
+            }
             final user = state.users[index];
             return UserShortTile(
               user: user,
@@ -55,7 +62,7 @@ class _TopUsersListBlockState extends State<TopUsersListBlock> {
                 style: const TextStyle(color: Colors.red),
               ),
               ElevatedButton(
-                onPressed: () => viewModel.loadTopUsers(),
+                onPressed: () => viewModel.loadTopUsers(gender: widget.gender),
                 child: const Text('Обновить'),
               ),
             ],
