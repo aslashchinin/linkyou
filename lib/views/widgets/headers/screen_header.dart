@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ScreenTitleHeader extends StatelessWidget {
-  const ScreenTitleHeader({super.key, required this.title});
+class ScreenHeader extends StatelessWidget {
+  const ScreenHeader({super.key, required this.title});
 
   final String title;
 

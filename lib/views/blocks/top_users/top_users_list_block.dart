@@ -5,16 +5,16 @@ import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 
-class TopUsersBlock extends StatefulWidget {
-  const TopUsersBlock({super.key, required this.gender});
+class TopUsersListBlock extends StatefulWidget {
+  const TopUsersListBlock({super.key, required this.gender});
 
   final Gender gender;
 
   @override
-  _TopUsersBlockState createState() => _TopUsersBlockState();
+  _TopUsersListBlockState createState() => _TopUsersListBlockState();
 }
 
-class _TopUsersBlockState extends State<TopUsersBlock> {
+class _TopUsersListBlockState extends State<TopUsersListBlock> {
   @override
   void initState() {
     super.initState();
@@ -56,7 +56,7 @@ class _TopUsersBlockState extends State<TopUsersBlock> {
               ),
               ElevatedButton(
                 onPressed: () => viewModel.loadTopUsers(),
-                child: const Text('Retry'),
+                child: const Text('Обновить'),
               ),
             ],
           ),
