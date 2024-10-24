@@ -7,4 +7,13 @@ abstract class UserRepositoryInterface {
     Gender? gender,
     int page = 0,
   });
+
+  Future<RepositoryResponse<List<UserShort>>> getDailyUsers({
+    int cityId = 0,
+    int page = 0,
+  });
+
+  Future<RepositoryResponse<List<UserShort>>> getNewUsers({
+    int page = 0,
+  });
 }

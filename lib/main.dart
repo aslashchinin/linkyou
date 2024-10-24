@@ -12,6 +12,7 @@ import 'package:linkyou/views/blocks/password_recovery/password_recovery_viewmod
 import 'package:linkyou/views/blocks/app_bar/app_bar_viewmodel.dart';
 import 'package:linkyou/views/blocks/drawer_menu/drawer_menu_viewmodel.dart';
 import 'package:linkyou/core/services/locator_service.dart';
+import 'package:linkyou/views/blocks/new_users/new_users_viewmodel.dart';
 
 void main() {
   setupTopUsersModule();
@@ -24,6 +25,9 @@ class LinkYouApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (_) => serviceLocator<TopUsersViewModel>(),
+        ),
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(),
         ),
@@ -49,7 +53,7 @@ class LinkYouApp extends StatelessWidget {
           create: (_) => DrawerMenuViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (_) => serviceLocator<TopUsersViewModel>(),
+          create: (_) => serviceLocator<NewUsersViewModel>(),
         )
       ],
       child: Consumer<AuthProvider>(

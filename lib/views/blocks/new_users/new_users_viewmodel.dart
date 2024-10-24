@@ -2,30 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
 import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/core/models/user_short.dart';
-import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/enums/user_status_enum.dart';
 
-class TopUsersViewModel extends ChangeNotifier {
-  TopUsersViewModel({required UserRepositoryInterface repository})
+class NewUsersViewModel extends ChangeNotifier {
+  NewUsersViewModel({required UserRepositoryInterface repository})
       : _repository = repository;
+
+  final UserRepositoryInterface _repository;
 
   UserState _state = UserState();
   UserState get state => _state;
 
-  int _currentSliderPage = 0;
-  int get currentSliderPage => _currentSliderPage;
-
   int _currentListPage = 0;
   int get currentListPage => _currentListPage;
 
-  final UserRepositoryInterface _repository;
-
-  Future<void> loadTopUsers({Gender? gender}) async {
+  Future<void> loadNewUsers() async {
     try {
       _state = _state.copyWith(status: UserStatus.loading);
       notifyListeners();
 
-      final repositoryResponse = await _repository.getTopUsers(gender: gender);
+      final repositoryResponse = await _repository.getNewUsers();
       _currentListPage = repositoryResponse.pagination.currentPage;
       _state = _state.copyWith(
           status: UserStatus.loaded, users: repositoryResponse.data);
@@ -40,13 +36,12 @@ class TopUsersViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> loadMoreUsers({Gender? gender}) async {
+  Future<void> loadMoreUsers() async {
     try {
       _state = _state.copyWith(status: UserStatus.loadingMore);
       notifyListeners();
 
-      final repositoryResponse = await _repository.getTopUsers(
-        gender: gender,
+      final repositoryResponse = await _repository.getNewUsers(
         page: _currentListPage + 1,
       );
       _currentListPage = repositoryResponse.pagination.currentPage;
@@ -54,7 +49,6 @@ class TopUsersViewModel extends ChangeNotifier {
         status: UserStatus.loaded,
         users: [..._state.users, ...repositoryResponse.data],
       );
-
       if (repositoryResponse.pagination.isEnd) {
         _state = _state.copyWith(status: UserStatus.end);
       }
@@ -66,36 +60,7 @@ class TopUsersViewModel extends ChangeNotifier {
     }
   }
 
-  void onNextPage(PageController controller) {
-    if (_currentSliderPage < (state.users.length / 3).ceil() - 1) {
-      _currentSliderPage++;
-      controller.animateToPage(
-        _currentSliderPage,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-      notifyListeners();
-    }
-  }
-
-  void onPreviousPage(PageController controller) {
-    if (_currentSliderPage > 0) {
-      _currentSliderPage--;
-      controller.animateToPage(
-        _currentSliderPage,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-      notifyListeners();
-    }
-  }
-
-  void clearState() {
-    _state = UserState();
-    notifyListeners();
-  }
-
   void onUserTap(UserShort user) {
-    print(user.name);
+    print('User tapped: ${user.name}');
   }
 }

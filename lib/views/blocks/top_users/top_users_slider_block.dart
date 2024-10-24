@@ -5,6 +5,7 @@ import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/views/widgets/headers/block_header.dart';
+import 'package:linkyou/core/enums/user_status_enum.dart';
 
 class TopUsersSliderBlock extends StatefulWidget {
   const TopUsersSliderBlock({super.key, this.gender = Gender.female});
@@ -40,6 +41,8 @@ class _TopUsersSliderBlockState extends State<TopUsersSliderBlock> {
           child: CircularProgressIndicator(),
         );
       case UserStatus.loaded:
+      case UserStatus.loadingMore:
+      case UserStatus.end:
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

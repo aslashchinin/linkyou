@@ -3,6 +3,7 @@ import 'package:linkyou/data/user/user_service.dart';
 import 'package:linkyou/data/user/user_repository.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
 import 'package:linkyou/views/blocks/top_users/top_users_viewmodel.dart';
+import 'package:linkyou/views/blocks/new_users/new_users_viewmodel.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -20,6 +21,10 @@ void setupTopUsersModule() {
   // ViewModels
   serviceLocator.registerFactory(
     () => TopUsersViewModel(
+        repository: serviceLocator<UserRepositoryInterface>()),
+  );
+  serviceLocator.registerFactory(
+    () => NewUsersViewModel(
         repository: serviceLocator<UserRepositoryInterface>()),
   );
 }

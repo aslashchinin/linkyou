@@ -25,4 +25,36 @@ class UserRepository implements UserRepositoryInterface {
       rethrow;
     }
   }
+
+  @override
+  Future<RepositoryResponse<List<UserShort>>> getDailyUsers({
+    int cityId = 0,
+    int page = 0,
+  }) async {
+    try {
+      final serviceResponse =
+          await _userService.getDailyUsers(cityId: cityId, page: page);
+      final users =
+          serviceResponse.data.map((json) => UserShort.fromJson(json)).toList();
+      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+      return RepositoryResponse(data: users, pagination: pagination);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<RepositoryResponse<List<UserShort>>> getNewUsers({
+    int page = 0,
+  }) async {
+    try {
+      final serviceResponse = await _userService.getNewUsers(page: page);
+      final users =
+          serviceResponse.data.map((json) => UserShort.fromJson(json)).toList();
+      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+      return RepositoryResponse(data: users, pagination: pagination);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

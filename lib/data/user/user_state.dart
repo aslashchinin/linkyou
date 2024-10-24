@@ -1,6 +1,5 @@
 import 'package:linkyou/core/models/user_short.dart';
-
-enum UserStatus { initial, loading, loaded, error }
+import 'package:linkyou/core/enums/user_status_enum.dart';
 
 class UserState {
   final List<UserShort> users;

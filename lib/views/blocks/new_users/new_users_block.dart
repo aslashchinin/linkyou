@@ -1,44 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'top_users_viewmodel.dart';
-import 'package:linkyou/data/user/user_state.dart';
+import 'new_users_viewmodel.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
-import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/enums/user_status_enum.dart';
 
-class TopUsersListBlock extends StatefulWidget {
-  const TopUsersListBlock({super.key, this.gender = Gender.female});
-
-  final Gender gender;
+class NewUsersBlock extends StatefulWidget {
+  const NewUsersBlock({super.key});
 
   @override
-  _TopUsersListBlockState createState() => _TopUsersListBlockState();
+  _NewUsersBlockState createState() => _NewUsersBlockState();
 }
 
-class _TopUsersListBlockState extends State<TopUsersListBlock> {
+class _NewUsersBlockState extends State<NewUsersBlock> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<TopUsersViewModel>().clearState();
-      context.read<TopUsersViewModel>().loadTopUsers(gender: widget.gender);
+      context.read<NewUsersViewModel>().loadNewUsers();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<TopUsersViewModel>();
+    final viewModel = context.watch<NewUsersViewModel>();
     final state = viewModel.state;
 
     switch (state.status) {
       case UserStatus.initial:
       case UserStatus.loading:
+      case UserStatus.end:
         return const Center(
           child: CircularProgressIndicator(),
         );
       case UserStatus.loaded:
       case UserStatus.loadingMore:
-      case UserStatus.end:
         return ListView.builder(
           itemCount: state.users.length + 1,
           itemBuilder: (context, index) {
@@ -52,7 +47,7 @@ class _TopUsersListBlockState extends State<TopUsersListBlock> {
                 return const SizedBox.shrink();
               }
               return ElevatedButton(
-                onPressed: () => viewModel.loadMoreUsers(gender: widget.gender),
+                onPressed: () => viewModel.loadMoreUsers(),
                 child: const Text('Загрузить еще'),
               );
             }
@@ -65,19 +60,7 @@ class _TopUsersListBlockState extends State<TopUsersListBlock> {
         );
       case UserStatus.error:
         return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Error: ${state.errorMessage}',
-                style: const TextStyle(color: Colors.red),
-              ),
-              ElevatedButton(
-                onPressed: () => viewModel.loadTopUsers(gender: widget.gender),
-                child: const Text('Обновить'),
-              ),
-            ],
-          ),
+          child: Text(state.errorMessage ?? ''),
         );
     }
   }
