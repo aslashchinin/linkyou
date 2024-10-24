@@ -3,7 +3,14 @@ import 'package:provider/provider.dart';
 import 'app_bar_viewmodel.dart';
 
 class AppBarBlock extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarBlock({super.key});
+  final bool showSearchIcon;
+  final bool showStarIcon;
+
+  const AppBarBlock({
+    super.key,
+    this.showSearchIcon = true,
+    this.showStarIcon = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +32,16 @@ class AppBarBlock extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       actions: [
-        IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: () => viewModel.search(context),
-        ),
-        IconButton(
-          icon: const Icon(Icons.star),
-          onPressed: () => viewModel.top(context),
-        ),
+        if (showSearchIcon)
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () => viewModel.search(context),
+          ),
+        if (showStarIcon)
+          IconButton(
+            icon: const Icon(Icons.star),
+            onPressed: () => viewModel.top(context),
+          ),
       ],
     );
   }

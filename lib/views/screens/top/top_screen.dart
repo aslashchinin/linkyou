@@ -5,16 +5,50 @@ import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/views/blocks/app_bar/app_bar_block.dart';
 import 'package:linkyou/views/widgets/headers/screen_title_header.dart';
 
-class TopScreen extends StatefulWidget {
+class TopScreen extends ScreenBase {
   const TopScreen({super.key});
 
   @override
-  _TopScreenState createState() => _TopScreenState();
+  ScreenBaseState<TopScreen> createState() => _TopScreenState();
 }
 
-class _TopScreenState extends State<TopScreen>
+class _TopScreenState extends ScreenBaseState<TopScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
+  @override
+  Widget buildContent(BuildContext context) {
+    return Column(
+      children: [
+        const ScreenTitleHeader(title: 'Лучшие 100'),
+        TabBar(
+          controller: _tabController,
+          indicatorColor: Colors.blue,
+          tabs: const [
+            Tab(text: 'Мужчины'),
+            Tab(text: 'Женщины'),
+          ],
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: const [
+              TopUsersBlock(gender: Gender.male),
+              TopUsersBlock(gender: Gender.female),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  bool get showDrawer => false;
+
+  @override
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return const AppBarBlock(showStarIcon: false);
+  }
 
   @override
   void initState() {
@@ -26,39 +60,5 @@ class _TopScreenState extends State<TopScreen>
   void dispose() {
     _tabController.dispose();
     super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: const AppBarBlock(),
-      body: Column(
-        children: [
-          const ScreenTitleHeader(title: 'Лучшие 100'),
-          Align(
-            alignment:
-                Alignment.centerRight, // Выровнять вкладки по правому краю
-            child: TabBar(
-              controller: _tabController,
-              indicatorColor: Colors.blue,
-              tabs: const [
-                Tab(text: 'Мужчины'),
-                Tab(text: 'Женщины'),
-              ],
-            ),
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                TopUsersBlock(gender: Gender.male),
-                TopUsersBlock(gender: Gender.female),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

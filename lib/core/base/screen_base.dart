@@ -55,15 +55,7 @@ abstract class ScreenBaseState<T extends ScreenBase> extends State<T> {
       drawer: buildDrawer(context),
       bottomNavigationBar: buildBottomNavigation(context),
       floatingActionButton: buildFloatingActionButton(context),
-      body: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Container(
-          color: backgroundColor,
-          padding: contentPadding,
-          width: double.infinity,
-          child: buildContent(context),
-        ),
-      ),
+      body: buildContent(context),
     );
   }
 }
