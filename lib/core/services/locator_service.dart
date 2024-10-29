@@ -2,8 +2,10 @@ import 'package:get_it/get_it.dart';
 import 'package:linkyou/data/user/user_service.dart';
 import 'package:linkyou/data/user/user_repository.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
-import 'package:linkyou/views/blocks/top_users/top_users_viewmodel.dart';
-import 'package:linkyou/views/blocks/new_users/new_users_viewmodel.dart';
+import 'package:linkyou/views/blocks/users_top/users_top_viewmodel.dart';
+import 'package:linkyou/views/blocks/users_new/users_new_viewmodel.dart';
+import 'package:linkyou/views/blocks/users_daily/users_daily_viewmodel.dart';
+import 'package:linkyou/views/blocks/users_daily_cities/users_daily_cities_viewmodel.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -13,18 +15,23 @@ void setupTopUsersModule() {
     serviceLocator.registerLazySingleton(() => UserService());
   }
 
-  // Repositories
   serviceLocator.registerLazySingleton<UserRepositoryInterface>(
     () => UserRepository(userService: serviceLocator<UserService>()),
   );
-
-  // ViewModels
   serviceLocator.registerFactory(
-    () => TopUsersViewModel(
+    () => UsersTopViewModel(
         repository: serviceLocator<UserRepositoryInterface>()),
   );
   serviceLocator.registerFactory(
-    () => NewUsersViewModel(
+    () => UsersNewViewModel(
+        repository: serviceLocator<UserRepositoryInterface>()),
+  );
+  serviceLocator.registerFactory(
+    () => UsersDailyViewModel(
+        repository: serviceLocator<UserRepositoryInterface>()),
+  );
+  serviceLocator.registerFactory(
+    () => UsersDailyCitiesViewModel(
         repository: serviceLocator<UserRepositoryInterface>()),
   );
 }

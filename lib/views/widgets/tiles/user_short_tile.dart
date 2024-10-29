@@ -27,7 +27,7 @@ class UserShortTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(0), // Убираем закругленные углы
           ),
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 5, top: 5),
             child: Row(
               children: [
                 GestureDetector(

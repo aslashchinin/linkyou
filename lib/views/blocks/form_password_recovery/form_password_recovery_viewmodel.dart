@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PasswordRecoveryViewModel extends ChangeNotifier {
-  PasswordRecoveryViewModel();
+class FormPasswordRecoveryViewModel extends ChangeNotifier {
+  FormPasswordRecoveryViewModel();
 
   void recover(BuildContext context) {
     notifyListeners();

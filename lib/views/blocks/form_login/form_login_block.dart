@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:linkyou/views/widgets/inputs/round_input.dart';
 import 'package:linkyou/views/widgets/buttons/round_button.dart';
 import 'package:provider/provider.dart';
-import 'login_viewmodel.dart';
+import 'form_login_viewmodel.dart';
 
-class LoginBlock extends StatefulWidget {
-  const LoginBlock({super.key});
+class FormLoginBlock extends StatefulWidget {
+  const FormLoginBlock({super.key});
 
   @override
-  _LoginBlockState createState() => _LoginBlockState();
+  _FormLoginBlockState createState() => _FormLoginBlockState();
 }
 
-class _LoginBlockState extends State<LoginBlock> {
+class _FormLoginBlockState extends State<FormLoginBlock> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<LoginViewModel>(context);
+    final viewModel = Provider.of<FormLoginViewModel>(context);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(

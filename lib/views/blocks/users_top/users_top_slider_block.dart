@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'top_users_viewmodel.dart';
+import 'users_top_viewmodel.dart';
 import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/views/widgets/headers/block_header.dart';
 import 'package:linkyou/core/base/users_block_base.dart';
 
-class TopUsersSliderBlock extends BaseUsersBlock {
+class UsersTopSliderBlock extends BaseUsersBlock {
   final Gender gender;
 
-  const TopUsersSliderBlock({super.key, this.gender = Gender.female});
+  const UsersTopSliderBlock({super.key, this.gender = Gender.female});
 
   @override
-  TopUsersSliderBlockState createState() => TopUsersSliderBlockState();
+  UsersTopSliderBlockState createState() => UsersTopSliderBlockState();
 }
 
-class TopUsersSliderBlockState
-    extends BaseUsersBlockState<TopUsersSliderBlock, TopUsersViewModel> {
+class UsersTopSliderBlockState
+    extends BaseUsersBlockState<UsersTopSliderBlock, UsersTopViewModel> {
   late PageController _pageController;
 
   @override
   void initializeData() {
-    Provider.of<TopUsersViewModel>(context, listen: false)
+    Provider.of<UsersTopViewModel>(context, listen: false)
         .loadTopUsers(gender: widget.gender);
   }
 
@@ -47,13 +47,31 @@ class TopUsersSliderBlockState
             children: [
               const BlockHeader(title: 'Лучшие 100'),
               const Spacer(),
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
+              ElevatedButton(
                 onPressed: () => viewModel.onPreviousPage(_pageController),
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  shape: const CircleBorder(side: BorderSide.none),
+                  padding: const EdgeInsets.all(4), // Устанавливаем размер кнопки
+                  backgroundColor: const Color(0xFFecf4ff), // Синий цвет фона кнопки                
+                ),
+                child: const Icon(
+                  Icons.arrow_left,
+                  color: Colors.blue, // Цвет иконки
+                ),
               ),
-              IconButton(
-                icon: const Icon(Icons.arrow_forward),
+              ElevatedButton(
                 onPressed: () => viewModel.onNextPage(_pageController),
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  shape: const CircleBorder(side: BorderSide.none),
+                  padding: const EdgeInsets.all(4), // Устанавливаем размер кнопки
+                  backgroundColor: const Color(0xFFecf4ff), // Синий цвет фона кнопки                
+                ),
+                child: const Icon(
+                  Icons.arrow_right,
+                  color: Colors.blue, // Цвет иконки
+                ),
               ),
             ],
           ),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'password_recovery_viewmodel.dart';
+import 'form_password_recovery_viewmodel.dart';
 
-class PasswordRecoveryBlock extends StatefulWidget {
-  const PasswordRecoveryBlock({super.key});
+class FormPasswordRecoveryBlock extends StatefulWidget {
+  const FormPasswordRecoveryBlock({super.key});
 
   @override
-  _PasswordRecoveryBlockState createState() => _PasswordRecoveryBlockState();
+  _FormPasswordRecoveryBlockState createState() => _FormPasswordRecoveryBlockState();
 }
 
-class _PasswordRecoveryBlockState extends State<PasswordRecoveryBlock> {
+class _FormPasswordRecoveryBlockState extends State<FormPasswordRecoveryBlock> {
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -21,7 +21,7 @@ class _PasswordRecoveryBlockState extends State<PasswordRecoveryBlock> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<PasswordRecoveryViewModel>(context);
+    final viewModel = Provider.of<FormPasswordRecoveryViewModel>(context);
     return AlertDialog(
       title: const Text('Восстановить пароль'),
       content: Form(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/services/route_service.dart';
 
-class AppBarBlockViewModel extends ChangeNotifier {
-  AppBarBlockViewModel();
+class LayoutAppBarViewModel extends ChangeNotifier {
+  LayoutAppBarViewModel();
 
   void top(BuildContext context) {
     Navigator.pushNamed(context, RouteService.top);

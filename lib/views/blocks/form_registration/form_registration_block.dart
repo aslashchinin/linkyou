@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:linkyou/views/widgets/inputs/round_input.dart';
 import 'package:linkyou/views/widgets/buttons/round_button.dart';
 import 'package:provider/provider.dart';
-import 'registration_viewmodel.dart';
+import 'form_registration_viewmodel.dart';
 
-class RegistrationBlock extends StatelessWidget {
-  const RegistrationBlock({super.key});
+class FormRegistrationBlock extends StatelessWidget {
+  const FormRegistrationBlock({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<RegistrationViewModel>(context);
+    final viewModel = Provider.of<FormRegistrationViewModel>(context);
     final _emailController = TextEditingController();
     final _passwordController = TextEditingController();
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/base/screen_base.dart';
-import 'package:linkyou/views/blocks/top_users/top_users_list_block.dart';
+import 'package:linkyou/views/blocks/users_top/users_top_list_block.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
-import 'package:linkyou/views/blocks/app_bar/app_bar_block.dart';
+import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
 import 'package:linkyou/views/widgets/headers/screen_header.dart';
 
 class TopScreen extends ScreenBase {
@@ -47,7 +47,7 @@ class _TopScreenState extends ScreenBaseState<TopScreen>
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return const AppBarBlock(showStarIcon: false);
+    return const LayoutAppBarBlock(showStarIcon: false);
   }
 
   @override

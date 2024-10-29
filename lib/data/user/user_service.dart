@@ -13,7 +13,6 @@ class UserService extends ApiBase {
 
       final response = await get(url);
 
-      print(url);
       return ServiceResponse(
         data: List<Map<String, dynamic>>.from(json.decode(response.body)),
         headers: response.headers,
@@ -38,6 +37,23 @@ class UserService extends ApiBase {
       );
     } catch (e) {
       throw Exception('Error fetching daily users: $e');
+    }
+  }
+
+  Future<ServiceResponse<List<Map<String, dynamic>>>> getDailyUsersCities({
+    String query = '',
+  }) async {
+    try {
+      String url = '/lists/cities?q=$query';
+
+      final response = await get(url);
+
+      return ServiceResponse(
+        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
+        headers: response.headers,
+      );
+    } catch (e) {
+      throw Exception('Error fetching daily users cities: $e');
     }
   }
 

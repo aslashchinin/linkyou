@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'auth_viewmodel.dart';
-import 'package:linkyou/views/blocks/registration/registration_block.dart';
-import 'package:linkyou/views/blocks/login/login_block.dart';
+import 'package:linkyou/views/blocks/form_registration/form_registration_block.dart';
+import 'package:linkyou/views/blocks/form_login/form_login_block.dart';
 
 class AuthScreen extends StatefulWidget {
   final int initialTab;
@@ -55,8 +55,8 @@ class _AuthScreenState extends State<AuthScreen>
       body: TabBarView(
         controller: _tabController,
         children: const [
-          LoginBlock(),
-          RegistrationBlock(),
+          FormLoginBlock(),
+          FormRegistrationBlock(),
         ],
       ),
     );

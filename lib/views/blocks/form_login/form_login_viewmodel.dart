@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/views/blocks/password_recovery/password_recovery_block.dart';
+import 'package:linkyou/views/blocks/form_password_recovery/form_password_recovery_block.dart';
 
-class LoginViewModel extends ChangeNotifier {
-  LoginViewModel();
+class FormLoginViewModel extends ChangeNotifier {
+  FormLoginViewModel();
 
   void login(BuildContext context) {
     notifyListeners();
@@ -12,7 +12,7 @@ class LoginViewModel extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (context) {
-        return const PasswordRecoveryBlock();
+        return const FormPasswordRecoveryBlock();
       },
     );
     notifyListeners();

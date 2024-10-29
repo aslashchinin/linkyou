@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RegistrationViewModel extends ChangeNotifier {
-  RegistrationViewModel();
+class FormRegistrationViewModel extends ChangeNotifier {
+  FormRegistrationViewModel();
 
   void register(BuildContext context) {
     notifyListeners();

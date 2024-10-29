@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/services/route_service.dart';
 
-class DrawerMenuViewModel extends ChangeNotifier {
-  DrawerMenuViewModel();
+class LayoutMenuViewModel extends ChangeNotifier {
+  LayoutMenuViewModel();
 
   void home(BuildContext context) {
     Navigator.pushNamed(context, RouteService.home);

@@ -4,6 +4,7 @@ import 'package:linkyou/core/models/user_short.dart';
 import 'package:linkyou/core/models/pagination_info.dart';
 import 'package:linkyou/core/responses/repository_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
+import 'package:linkyou/core/models/city_highlighted.dart';
 
 class UserRepository implements UserRepositoryInterface {
   final UserService _userService;
@@ -38,6 +39,23 @@ class UserRepository implements UserRepositoryInterface {
           serviceResponse.data.map((json) => UserShort.fromJson(json)).toList();
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
       return RepositoryResponse(data: users, pagination: pagination);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<RepositoryResponse<List<CityHighlighted>>> getDailyUsersCities({
+    String query = '',
+  }) async {
+    try {
+      final serviceResponse =
+          await _userService.getDailyUsersCities(query: query);
+      final cities = serviceResponse.data
+          .map((json) => CityHighlighted.fromJson(json))
+          .toList();
+      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+      return RepositoryResponse(data: cities, pagination: pagination);
     } catch (e) {
       rethrow;
     }

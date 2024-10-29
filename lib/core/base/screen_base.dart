@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/views/blocks/app_bar/app_bar_block.dart';
-import 'package:linkyou/views/blocks/drawer_menu/drawer_menu_block.dart';
+import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
+import 'package:linkyou/views/blocks/layout_menu/layout_menu_block.dart';
 
 // Абстрактный базовый класс виджета
 abstract class ScreenBase extends StatefulWidget {
@@ -29,12 +29,12 @@ abstract class ScreenBaseState<T extends ScreenBase> extends State<T> {
 
   // Метод для построения AppBar, может быть переопределен
   PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return showAppBar ? const AppBarBlock() : null;
+    return showAppBar ? const LayoutAppBarBlock() : null;
   }
 
   // Метод для построения drawer, может быть переопределен
   Widget? buildDrawer(BuildContext context) {
-    return showDrawer ? const DrawerMenuBlock() : null;
+    return showDrawer ? const LayoutMenuBlock() : null;
   }
 
   // Метод для построения нижней навигации, если нужна

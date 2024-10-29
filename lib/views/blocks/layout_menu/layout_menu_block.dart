@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'drawer_menu_viewmodel.dart';
-import 'package:linkyou/views/blocks/login/login_block.dart';
-import 'package:linkyou/views/blocks/registration/registration_block.dart';
+import 'layout_menu_viewmodel.dart';
+import 'package:linkyou/views/blocks/form_login/form_login_block.dart';
+import 'package:linkyou/views/blocks/form_registration/form_registration_block.dart';
 
-class DrawerMenuBlock extends StatefulWidget {
-  const DrawerMenuBlock({super.key});
+class LayoutMenuBlock extends StatefulWidget {
+  const LayoutMenuBlock({super.key});
 
   @override
-  _DrawerMenuBlockState createState() => _DrawerMenuBlockState();
+  _LayoutMenuBlockState createState() => _LayoutMenuBlockState();
 }
 
-class _DrawerMenuBlockState extends State<DrawerMenuBlock>
+class _LayoutMenuBlockState extends State<LayoutMenuBlock>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -29,7 +29,7 @@ class _DrawerMenuBlockState extends State<DrawerMenuBlock>
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<DrawerMenuViewModel>(context);
+    final viewModel = Provider.of<LayoutMenuViewModel>(context);
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -52,8 +52,8 @@ class _DrawerMenuBlockState extends State<DrawerMenuBlock>
             child: TabBarView(
               controller: _tabController,
               children: const [
-                LoginBlock(),
-                RegistrationBlock(),
+                FormLoginBlock(),
+                FormRegistrationBlock(),
               ],
             ),
           ),

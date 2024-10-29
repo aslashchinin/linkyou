@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'app_bar_viewmodel.dart';
+import 'layout_appbar_viewmodel.dart';
 
-class AppBarBlock extends StatelessWidget implements PreferredSizeWidget {
+class LayoutAppBarBlock extends StatelessWidget implements PreferredSizeWidget {
   final bool showSearchIcon;
   final bool showStarIcon;
 
-  const AppBarBlock({
+  const LayoutAppBarBlock({
     super.key,
     this.showSearchIcon = true,
     this.showStarIcon = true,
@@ -14,14 +14,14 @@ class AppBarBlock extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<AppBarBlockViewModel>(context);
+    final viewModel = Provider.of<LayoutAppBarViewModel>(context);
     return AppBar(
       backgroundColor: Colors.white,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(4.0),
         child: Container(
           color: const Color(0xFFe9e9f5),
-          height: 2.0,
+          height: 1.0,
         ),
       ),
       title: Center(

@@ -1,6 +1,7 @@
 import 'package:linkyou/core/models/user_short.dart';
 import 'package:linkyou/core/responses/repository_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
+import 'package:linkyou/core/models/city_highlighted.dart';
 
 abstract class UserRepositoryInterface {
   Future<RepositoryResponse<List<UserShort>>> getTopUsers({
@@ -11,6 +12,10 @@ abstract class UserRepositoryInterface {
   Future<RepositoryResponse<List<UserShort>>> getDailyUsers({
     int cityId = 0,
     int page = 0,
+  });
+
+  Future<RepositoryResponse<List<CityHighlighted>>> getDailyUsersCities({
+    String query = '',
   });
 
   Future<RepositoryResponse<List<UserShort>>> getNewUsers({
