@@ -52,7 +52,7 @@ abstract class ScreenBaseState<T extends ScreenBase> extends State<T> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      drawer: buildDrawer(context),
+      drawer: buildDrawer(context),      
       backgroundColor: backgroundColor,
       bottomNavigationBar: buildBottomNavigation(context),
       floatingActionButton: buildFloatingActionButton(context),

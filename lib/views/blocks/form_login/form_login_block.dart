@@ -19,7 +19,7 @@ class _FormLoginBlockState extends State<FormLoginBlock> {
   Widget build(BuildContext context) {
     final viewModel = Provider.of<FormLoginViewModel>(context);
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +43,7 @@ class _FormLoginBlockState extends State<FormLoginBlock> {
           ),
           const SizedBox(height: 10),
           TextButton(
-            onPressed: () => viewModel.showPasswordRecoveryDialog(context),
+            onPressed: () => viewModel.showPasswordRecoveryDialog(context),            
             child: const Text(
               'Забыли пароль?',
               style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),

@@ -23,8 +23,11 @@ abstract class BaseUsersBlockState<T extends BaseUsersBlock,
   void initializeData();
 
   Widget buildLoadingState() {
-    return const Center(
-      child: CircularProgressIndicator(),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxHeight: 300),
+      child: const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 

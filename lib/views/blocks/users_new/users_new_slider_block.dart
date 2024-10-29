@@ -76,7 +76,7 @@ class UsersTopSliderBlockState
           ),
         ),
         SizedBox(
-          height: 350,
+          height: 320,
           child: PageView.builder(
             controller: _pageController,
             itemCount: (state.users.length / 3).ceil(),

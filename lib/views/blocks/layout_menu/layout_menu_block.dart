@@ -48,7 +48,7 @@ class _LayoutMenuBlockState extends State<LayoutMenuBlock>
             ],
           ),
           SizedBox(
-            height: 290.0,
+            height: 300.0,
             child: TabBarView(
               controller: _tabController,
               children: const [
@@ -56,6 +56,10 @@ class _LayoutMenuBlockState extends State<LayoutMenuBlock>
                 FormRegistrationBlock(),
               ],
             ),
+          ),
+          const Divider(
+            color: Color(0xFFe9e9f5),
+            height: 1,
           ),
           ListTile(
             leading: const Icon(Icons.home),

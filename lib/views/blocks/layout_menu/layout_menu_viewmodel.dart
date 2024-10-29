@@ -24,6 +24,7 @@ class LayoutMenuViewModel extends ChangeNotifier {
   }
 
   void about(BuildContext context) {
+    Navigator.pushNamed(context, RouteService.about);
     notifyListeners();
   }
 
