@@ -13,4 +13,9 @@ class LayoutAppBarViewModel extends ChangeNotifier {
     Navigator.pushNamed(context, RouteService.search);
     notifyListeners();
   }
+
+  void home(BuildContext context) {
+    Navigator.pushNamed(context, RouteService.home);
+    notifyListeners();
+  }
 }

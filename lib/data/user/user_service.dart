@@ -73,4 +73,17 @@ class UserService extends ApiBase {
       throw Exception('Error fetching new users: $e');
     }
   }
+
+  Future<ServiceResponse<Map<String, dynamic>>> login(
+      String email, String password) async {
+    final response = await post('/auth/signin', body: {
+      'login': email,
+      'password': password,
+    });
+
+    return ServiceResponse(
+      data: Map<String, dynamic>.from(json.decode(response.body)),
+      headers: response.headers,
+    );
+  }
 }

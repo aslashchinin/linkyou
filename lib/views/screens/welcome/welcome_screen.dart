@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'welcome_viewmodel.dart';
-import 'package:linkyou/views/widgets/buttons/round_button.dart';
+import 'package:linkyou/views/widgets/controlls/round_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

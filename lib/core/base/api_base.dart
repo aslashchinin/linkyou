@@ -18,11 +18,35 @@ class ApiBase {
 
   Future<http.Response> post(String endpoint,
       {Map<String, dynamic>? body}) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl$endpoint'),
-      headers: _setHeaders(),
-      body: jsonEncode(body),
-    );
+    // Создаем MultipartRequest
+    var request = http.MultipartRequest('POST', Uri.parse('$baseUrl$endpoint'));
+
+    // Устанавливаем заголовки, если необходимо
+    request.headers.addAll(_setHeaders());
+
+    // Добавляем поля из body в request, если body не null
+    if (body != null) {
+      body.forEach((key, value) {
+        // Проверяем тип значения, если оно строка, добавляем как текстовое поле
+        if (value is String) {
+          request.fields[key] = value;
+        } else if (value is int || value is double || value is bool) {
+          // Преобразуем примитивы в строку
+          request.fields[key] = value.toString();
+        } else {
+          // Если значение сложного типа, вы можете реализовать дополнительные проверки
+          throw Exception('Unsupported value type for form-data');
+        }
+      });
+    }
+
+    // Отправляем запрос
+    final streamedResponse = await request.send();
+
+    // Читаем ответ как обычный Response
+    final response = await http.Response.fromStream(streamedResponse);
+
+    // Обрабатываем ответ
     return _processResponse(response);
   }
 

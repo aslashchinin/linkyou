@@ -27,7 +27,10 @@ class LayoutAppBarBlock extends StatelessWidget implements PreferredSizeWidget {
       title: Center(
         child: SizedBox(
           width: 100,
-          child: Image.asset('assets/logo-blue/logo.png'),
+          child: GestureDetector(
+            onTap: () => viewModel.home(context),
+            child: Image.asset('assets/logo-blue/logo.png'),
+          ),
         ),
       ),
       centerTitle: true,

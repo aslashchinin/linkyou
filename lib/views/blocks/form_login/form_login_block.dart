@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/views/widgets/inputs/round_input.dart';
-import 'package:linkyou/views/widgets/buttons/round_button.dart';
+import 'package:linkyou/views/widgets/controlls/round_input.dart';
+import 'package:linkyou/views/widgets/controlls/round_button.dart';
 import 'package:provider/provider.dart';
 import 'form_login_viewmodel.dart';
 
@@ -39,7 +39,7 @@ class _FormLoginBlockState extends State<FormLoginBlock> {
           RoundButton(
             text: 'Войти',
             isBlue: true,
-            onPressed: () => viewModel.login(context),
+            onPressed: () => viewModel.login(context, _emailController.text, _passwordController.text),
           ),
           const SizedBox(height: 10),
           TextButton(

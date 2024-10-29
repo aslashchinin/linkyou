@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/core/enums/user_status_enum.dart';
-
+import 'package:linkyou/views/widgets/controlls/circular_progress.dart';
 abstract class BaseUsersBlock extends StatefulWidget {
   const BaseUsersBlock({super.key});
 }
@@ -23,12 +23,7 @@ abstract class BaseUsersBlockState<T extends BaseUsersBlock,
   void initializeData();
 
   Widget buildLoadingState() {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxHeight: 300),
-      child: const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    return const CircularProgress();
   }
 
   Widget buildErrorState(String? errorMessage) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/base/screen_base.dart';
 import 'package:linkyou/views/widgets/pictures/picture.dart';
-import 'package:linkyou/views/widgets/buttons/round_button.dart';
+import 'package:linkyou/views/widgets/controlls/round_button.dart';
 
 class AboutScreen extends ScreenBase {
   const AboutScreen({super.key});

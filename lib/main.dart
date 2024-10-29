@@ -41,10 +41,7 @@ class LinkYouApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<FormRegistrationViewModel>(
           create: (_) => FormRegistrationViewModel(),
-        ),
-        ChangeNotifierProvider<FormLoginViewModel>(
-          create: (_) => FormLoginViewModel(),
-        ),
+        ),        
         ChangeNotifierProvider<FormPasswordRecoveryViewModel>(
           create: (_) => FormPasswordRecoveryViewModel(),
         ),
@@ -62,6 +59,9 @@ class LinkYouApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => serviceLocator<UsersDailyCitiesViewModel>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => serviceLocator<FormLoginViewModel>(),
         ),
       ],
       child: Consumer<AuthProvider>(

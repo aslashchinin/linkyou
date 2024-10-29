@@ -6,6 +6,7 @@ import 'package:linkyou/views/blocks/users_top/users_top_viewmodel.dart';
 import 'package:linkyou/views/blocks/users_new/users_new_viewmodel.dart';
 import 'package:linkyou/views/blocks/users_daily/users_daily_viewmodel.dart';
 import 'package:linkyou/views/blocks/users_daily_cities/users_daily_cities_viewmodel.dart';
+import 'package:linkyou/views/blocks/form_login/form_login_viewmodel.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -33,5 +34,8 @@ void setupTopUsersModule() {
   serviceLocator.registerFactory(
     () => UsersDailyCitiesViewModel(
         repository: serviceLocator<UserRepositoryInterface>()),
+  );
+  serviceLocator.registerFactory(
+    () => FormLoginViewModel(repository: serviceLocator<UserRepositoryInterface>()),
   );
 }

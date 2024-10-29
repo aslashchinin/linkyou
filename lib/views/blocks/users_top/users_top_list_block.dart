@@ -6,7 +6,7 @@ import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/enums/user_status_enum.dart';
 import 'package:linkyou/core/base/users_block_base.dart';
 import 'package:linkyou/data/user/user_state.dart';
-import 'package:linkyou/views/widgets/buttons/round_button.dart';
+import 'package:linkyou/views/widgets/controlls/round_button.dart';
 class TopUsersListBlock extends BaseUsersBlock {
   final Gender gender;
 

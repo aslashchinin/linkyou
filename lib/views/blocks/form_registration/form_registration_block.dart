@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/views/widgets/inputs/round_input.dart';
-import 'package:linkyou/views/widgets/buttons/round_button.dart';
+import 'package:linkyou/views/widgets/controlls/round_input.dart';
+import 'package:linkyou/views/widgets/controlls/round_button.dart';
 import 'package:provider/provider.dart';
 import 'form_registration_viewmodel.dart';
 
