@@ -1,69 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/data/user/user_repository_interface.dart';
-import 'package:linkyou/data/user/user_state.dart';
-import 'package:linkyou/core/models/user_short.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
-import 'package:linkyou/core/enums/user_status_enum.dart';
+import 'package:linkyou/core/base/users_block_viewmodel_base.dart';
 
-class TopUsersViewModel extends ChangeNotifier {
-  TopUsersViewModel({required UserRepositoryInterface repository})
-      : _repository = repository;
-
-  UserState _state = UserState();
-  UserState get state => _state;
+class TopUsersViewModel extends BaseUsersViewModel {
+  TopUsersViewModel({required super.repository});
 
   int _currentSliderPage = 0;
   int get currentSliderPage => _currentSliderPage;
 
-  int _currentListPage = 0;
-  int get currentListPage => _currentListPage;
-
-  final UserRepositoryInterface _repository;
-
   Future<void> loadTopUsers({Gender? gender}) async {
-    try {
-      _state = _state.copyWith(status: UserStatus.loading);
-      notifyListeners();
-
-      final repositoryResponse = await _repository.getTopUsers(gender: gender);
-      _currentListPage = repositoryResponse.pagination.currentPage;
-      _state = _state.copyWith(
-          status: UserStatus.loaded, users: repositoryResponse.data);
-      if (repositoryResponse.pagination.isEnd) {
-        _state = _state.copyWith(status: UserStatus.end);
-      }
-    } catch (e, stackTrace) {
-      _state = _state.copyWith(
-          status: UserStatus.error, errorMessage: stackTrace.toString());
-    } finally {
-      notifyListeners();
-    }
+    await handleUsersLoading(
+      loadFunction: () => repository.getTopUsers(gender: gender),
+    );
   }
 
   Future<void> loadMoreUsers({Gender? gender}) async {
-    try {
-      _state = _state.copyWith(status: UserStatus.loadingMore);
-      notifyListeners();
-
-      final repositoryResponse = await _repository.getTopUsers(
+    await handleUsersLoading(
+      loadFunction: () => repository.getTopUsers(
         gender: gender,
-        page: _currentListPage + 1,
-      );
-      _currentListPage = repositoryResponse.pagination.currentPage;
-      _state = _state.copyWith(
-        status: UserStatus.loaded,
-        users: [..._state.users, ...repositoryResponse.data],
-      );
-
-      if (repositoryResponse.pagination.isEnd) {
-        _state = _state.copyWith(status: UserStatus.end);
-      }
-    } catch (e, stackTrace) {
-      _state = _state.copyWith(
-          status: UserStatus.error, errorMessage: stackTrace.toString());
-    } finally {
-      notifyListeners();
-    }
+        page: currentListPage + 1,
+      ),
+      isLoadMore: true,
+    );
   }
 
   void onNextPage(PageController controller) {
@@ -88,14 +46,5 @@ class TopUsersViewModel extends ChangeNotifier {
       );
       notifyListeners();
     }
-  }
-
-  void clearState() {
-    _state = UserState();
-    notifyListeners();
-  }
-
-  void onUserTap(UserShort user) {
-    print(user.name);
   }
 }

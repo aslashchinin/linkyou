@@ -1,84 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'top_users_viewmodel.dart';
-import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/enums/user_status_enum.dart';
+import 'package:linkyou/core/base/users_block_base.dart';
+import 'package:linkyou/data/user/user_state.dart';
 
-class TopUsersListBlock extends StatefulWidget {
-  const TopUsersListBlock({super.key, this.gender = Gender.female});
-
+class TopUsersListBlock extends BaseUsersBlock {
   final Gender gender;
 
+  const TopUsersListBlock({super.key, this.gender = Gender.female});
+
   @override
-  _TopUsersListBlockState createState() => _TopUsersListBlockState();
+  TopUsersListBlockState createState() => TopUsersListBlockState();
 }
 
-class _TopUsersListBlockState extends State<TopUsersListBlock> {
+class TopUsersListBlockState
+    extends BaseUsersBlockState<TopUsersListBlock, TopUsersViewModel> {
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<TopUsersViewModel>().clearState();
-      context.read<TopUsersViewModel>().loadTopUsers(gender: widget.gender);
-    });
+  void initializeData() {
+    final viewModel = Provider.of<TopUsersViewModel>(context, listen: false);
+    viewModel.clearState();
+    viewModel.loadTopUsers(gender: widget.gender);
   }
 
   @override
-  Widget build(BuildContext context) {
-    final viewModel = context.watch<TopUsersViewModel>();
-    final state = viewModel.state;
+  void onRefreshPressed() {
+    viewModel.loadTopUsers(gender: widget.gender);
+  }
 
-    switch (state.status) {
-      case UserStatus.initial:
-      case UserStatus.loading:
-        return const Center(
-          child: CircularProgressIndicator(),
+  @override
+  UserState getState() => viewModel.state;
+
+  @override
+  Widget buildLoadedState(UserState state) {
+    return ListView.builder(
+      itemCount: state.users.length + 1,
+      itemBuilder: (context, index) {
+        if (index == state.users.length) {
+          if (state.status == UserStatus.loadingMore) {
+            return buildLoadingState();
+          }
+          if (state.status == UserStatus.end) {
+            return const SizedBox.shrink();
+          }
+          return ElevatedButton(
+            onPressed: () => viewModel.loadMoreUsers(gender: widget.gender),
+            child: const Text('Загрузить еще'),
+          );
+        }
+        final user = state.users[index];
+        return UserShortTile(
+          user: user,
+          onTap: () => viewModel.onUserTap(user),
         );
-      case UserStatus.loaded:
-      case UserStatus.loadingMore:
-      case UserStatus.end:
-        return ListView.builder(
-          itemCount: state.users.length + 1,
-          itemBuilder: (context, index) {
-            if (index == state.users.length) {
-              if (state.status == UserStatus.loadingMore) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (state.status == UserStatus.end) {
-                return const SizedBox.shrink();
-              }
-              return ElevatedButton(
-                onPressed: () => viewModel.loadMoreUsers(gender: widget.gender),
-                child: const Text('Загрузить еще'),
-              );
-            }
-            final user = state.users[index];
-            return UserShortTile(
-              user: user,
-              onTap: () => viewModel.onUserTap(user),
-            );
-          },
-        );
-      case UserStatus.error:
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Error: ${state.errorMessage}',
-                style: const TextStyle(color: Colors.red),
-              ),
-              ElevatedButton(
-                onPressed: () => viewModel.loadTopUsers(gender: widget.gender),
-                child: const Text('Обновить'),
-              ),
-            ],
-          ),
-        );
-    }
+      },
+    );
   }
 }

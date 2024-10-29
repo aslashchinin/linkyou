@@ -53,6 +53,7 @@ abstract class ScreenBaseState<T extends ScreenBase> extends State<T> {
     return Scaffold(
       appBar: buildAppBar(context),
       drawer: buildDrawer(context),
+      backgroundColor: backgroundColor,
       bottomNavigationBar: buildBottomNavigation(context),
       floatingActionButton: buildFloatingActionButton(context),
       body: buildContent(context),
