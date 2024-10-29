@@ -4,14 +4,12 @@ import 'package:linkyou/views/blocks/users_daily_cities/users_daily_cities_block
 import 'package:linkyou/views/blocks/users_daily/users_daily_block.dart';
 import 'package:linkyou/views/widgets/headers/block_header.dart';
 import 'package:linkyou/views/blocks/users_daily/users_daily_viewmodel.dart';
-import 'package:linkyou/views/blocks/users_daily_cities/users_daily_cities_viewmodel.dart';
 
 class UsersDailyContainer extends StatelessWidget {
   const UsersDailyContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final citiesViewModel = Provider.of<UsersDailyCitiesViewModel>(context);
     final usersViewModel = Provider.of<UsersDailyViewModel>(context);
 
     return Column(
