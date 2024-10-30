@@ -63,9 +63,4 @@ abstract class BaseUsersViewModel extends ChangeNotifier {
   void clearState() {
     setState(UserState());
   }
-
-  void onUserTap(UserShort user) {
-    // Implement in child class if needed
-    print('User tapped: ${user.name}');
-  }
 }

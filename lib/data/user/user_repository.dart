@@ -6,6 +6,7 @@ import 'package:linkyou/core/responses/repository_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/models/city_highlighted.dart';
 import 'package:linkyou/core/models/login.dart';
+import 'package:linkyou/core/models/user.dart';
 
 class UserRepository implements UserRepositoryInterface {
   final UserService _userService;
@@ -78,18 +79,31 @@ class UserRepository implements UserRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<Login>> login(
-      String email, String password) async {
+  Future<RepositoryResponse<Login>> login(String email, String password) async {
     try {
       final serviceResponse = await _userService.login(email, password);
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
       final login = Login.fromJson(serviceResponse.data);
 
       return RepositoryResponse(
-      data: login,
+        data: login,
         pagination: pagination,
       );
     } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<RepositoryResponse<User>> getUser(int id) async {
+    try {
+      final serviceResponse = await _userService.getUser(id);
+      final user = User.fromJson(serviceResponse.data);
+      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+
+      return RepositoryResponse(data: user, pagination: pagination);
+    } catch (e, stackTrace) {
+      print(stackTrace.toString());
       rethrow;
     }
   }

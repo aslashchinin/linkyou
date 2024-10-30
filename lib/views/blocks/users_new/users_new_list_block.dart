@@ -50,7 +50,6 @@ class UsersNewListBlockState
         final user = state.users[index];
         return UserShortTile(
           user: user,
-          onTap: () => viewModel.onUserTap(user),
         );
       },
     );

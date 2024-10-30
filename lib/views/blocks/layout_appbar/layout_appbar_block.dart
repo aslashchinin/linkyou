@@ -5,11 +5,13 @@ import 'layout_appbar_viewmodel.dart';
 class LayoutAppBarBlock extends StatelessWidget implements PreferredSizeWidget {
   final bool showSearchIcon;
   final bool showStarIcon;
+  final List<Widget>? customActions;
 
   const LayoutAppBarBlock({
     super.key,
     this.showSearchIcon = true,
     this.showStarIcon = true,
+    this.customActions,
   });
 
   @override
@@ -45,6 +47,7 @@ class LayoutAppBarBlock extends StatelessWidget implements PreferredSizeWidget {
             icon: const Icon(Icons.star),
             onPressed: () => viewModel.top(context),
           ),
+        ...?customActions,
       ],
     );
   }

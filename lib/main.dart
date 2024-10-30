@@ -16,6 +16,7 @@ import 'package:linkyou/views/blocks/users_daily/users_daily_viewmodel.dart';
 import 'package:linkyou/views/blocks/users_daily_cities/users_daily_cities_viewmodel.dart';
 import 'package:linkyou/views/screens/splash/splash_screen.dart';
 import 'package:linkyou/views/screens/splash/splash_viewmodel.dart';
+import 'package:linkyou/views/screens/user/user_viewmodel.dart';
 
 void main() {
   setupTopUsersModule();
@@ -67,6 +68,9 @@ class LinkYouApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => SplashViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => serviceLocator<UserViewModel>(),
         ),
       ],
       child: Consumer<AuthProvider>(

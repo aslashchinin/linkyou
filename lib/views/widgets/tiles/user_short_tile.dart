@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/models/user_short.dart';
+import 'package:linkyou/core/services/route_service.dart';
 
 class UserShortTile extends StatelessWidget {
-  const UserShortTile({required this.user, required this.onTap, super.key});
+  const UserShortTile({required this.user, super.key});
 
   final UserShort user;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () =>
+          Navigator.pushNamed(context, RouteService.user, arguments: user.id),
       child: Container(
         decoration: const BoxDecoration(
           border: Border(
@@ -31,7 +32,8 @@ class UserShortTile extends StatelessWidget {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: onTap,
+                  onTap: () => Navigator.pushNamed(context, RouteService.user,
+                      arguments: user.id),
                   child: CircleAvatar(
                     backgroundImage: NetworkImage(user.avatar.src.small),
                     radius: 40,
@@ -58,7 +60,6 @@ class UserShortTile extends StatelessWidget {
 
                           const SizedBox(
                               width: 8), // Пробел между разными частями текста
-
                           // Иконка локации
                           const Icon(Icons.location_on,
                               size: 16), // Иконка локации (с размером)

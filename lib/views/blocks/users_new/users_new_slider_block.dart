@@ -88,7 +88,6 @@ class UsersTopSliderBlockState
                 children: users
                     .map((user) => UserShortTile(
                           user: user,
-                          onTap: () => viewModel.onUserTap(user),
                         ))
                     .toList(),
               );

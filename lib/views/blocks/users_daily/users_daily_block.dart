@@ -5,6 +5,7 @@ import 'package:linkyou/core/enums/user_status_enum.dart';
 import 'package:linkyou/core/base/users_block_base.dart';
 import 'package:linkyou/data/user/user_state.dart';
 import 'users_daily_viewmodel.dart';
+import 'package:linkyou/views/widgets/controlls/round_button.dart';
 
 class UsersDailyBlock extends BaseUsersBlock {
   const UsersDailyBlock({super.key});
@@ -44,20 +45,17 @@ class UsersDailyBlockState
           }
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: ElevatedButton(
+            child: RoundButton(
+              text: 'Загрузить еще',
+              isBlue: true,
+              isOutlined: false,
               onPressed: () => viewModel.loadMoreUsers(),
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: const Color(0xFFecf4ff), // Синий цвет фона кнопки                
-              ),
-              child: const Text('Загрузить еще', style: TextStyle(color: Colors.blue)),
             ),
           );
         }
         final user = state.users[index];
         return UserShortTile(
           user: user,
-          onTap: () => viewModel.onUserTap(user),
         );
       },
     );

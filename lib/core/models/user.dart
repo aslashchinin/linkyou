@@ -16,6 +16,7 @@ import 'rating.dart';
 import 'gifts.dart';
 import 'interests.dart';
 import 'likes.dart';
+import 'religion.dart';
 
 class User {
   final int id;
@@ -29,29 +30,30 @@ class User {
   final bool isTop100;
   final bool isPremium;
   final bool isVip;
-  final Nationality nationality;
+  final Nationality? nationality;
   final Goal goal;
   final LookingFor lookingFor;
-  final Children children;
-  final Relationship relationship;
-  final Smoking smoking;
-  final Alcohol alcohol;
+  final Children? children;
+  final Relationship? relationship;
+  final Smoking? smoking;
+  final Alcohol? alcohol;
   final Age age;
-  final int height;
-  final String about;
-  final Job job;
+  final int? height;
+  final String? about;
+  final Job? job;
   final Location location;
   final Birthday birthday;
   final List<Language> languages;
   final Rating rating;
-  final Gifts gifts;
-  final Interests interests;
+  final Gifts? gifts;
+  final Interests? interests;
   final Likes likes;
   final int photosCount;
   final bool isFavorited;
   final bool isBlacklisted;
   final int ubLogsCount;
   final bool isOnline;
+  final Religion? religion;
 
   User({
     required this.id,
@@ -88,6 +90,7 @@ class User {
     required this.isBlacklisted,
     required this.ubLogsCount,
     required this.isOnline,
+    required this.religion,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -103,17 +106,27 @@ class User {
       isTop100: json['is_top100'] ?? false,
       isPremium: json['is_premium'] ?? false,
       isVip: json['is_vip'] ?? false,
-      nationality: Nationality.fromJson(json['nationality']),
+      nationality: json['nationality'] != null
+          ? Nationality.fromJson(json['nationality'])
+          : null,
       goal: Goal.fromJson(json['goal']),
       lookingFor: LookingFor.fromJson(json['lookingFor']),
-      children: Children.fromJson(json['children']),
-      relationship: Relationship.fromJson(json['relationship']),
-      smoking: Smoking.fromJson(json['smoking']),
-      alcohol: Alcohol.fromJson(json['alcohol']),
+      children: json['children'] != null
+          ? Children.fromJson(json['children'])
+          : null,
+      relationship: json['relationship'] != null
+          ? Relationship.fromJson(json['relationship'])
+          : null,
+      smoking: json['smoking'] != null
+          ? Smoking.fromJson(json['smoking'])
+          : null,
+      alcohol: json['alcohol'] != null
+          ? Alcohol.fromJson(json['alcohol'])
+          : null,
       age: Age.fromJson(json['age']),
       height: json['height'],
       about: json['about'],
-      job: Job.fromJson(json['job']),
+      job: json['job'] != null ? Job.fromJson(json['job']) : null,
       location: Location.fromJson(json['location']),
       birthday: Birthday.fromJson(json['birthday']),
       languages: List<Language>.from(
@@ -127,6 +140,9 @@ class User {
       isBlacklisted: json['is_blacklisted'],
       ubLogsCount: json['ublogs_count'],
       isOnline: json['is_online'],
+      religion: json['religion'] != null
+          ? Religion.fromJson(json['religion'])
+          : null,
     );
   }
 
@@ -143,29 +159,30 @@ class User {
       'is_top100': isTop100,
       'is_premium': isPremium,
       'is_vip': isVip,
-      'nationality': nationality.toJson(),
+      'nationality': nationality?.toJson(),
       'goal': goal.toJson(),
       'lookingFor': lookingFor.toJson(),
-      'children': children.toJson(),
-      'relationship': relationship.toJson(),
-      'smoking': smoking.toJson(),
-      'alcohol': alcohol.toJson(),
+      'children': children?.toJson(),
+      'relationship': relationship?.toJson(),
+      'smoking': smoking?.toJson(),
+      'alcohol': alcohol?.toJson(),
       'age': age.toJson(),
       'height': height,
       'about': about,
-      'job': job.toJson(),
+      'job': job?.toJson(),
       'location': location.toJson(),
       'birthday': birthday.toJson(),
       'languages': List<dynamic>.from(languages.map((x) => x.toJson())),
       'rating': rating.toJson(),
-      'gifts': gifts.toJson(),
-      'interests': interests.toJson(),
+      'gifts': gifts?.toJson(),
+      'interests': interests?.toJson(),
       'likes': likes.toJson(),
       'photos_count': photosCount,
       'is_favorited': isFavorited,
       'is_blacklisted': isBlacklisted,
       'ublogs_count': ubLogsCount,
       'is_online': isOnline,
+      'religion': religion?.toJson(),
     };
   }
 }
