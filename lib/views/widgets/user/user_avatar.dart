@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:linkyou/core/models/user.dart';
 import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+
 
 class UserAvatar extends StatelessWidget {
   const UserAvatar({required this.user, super.key});
@@ -17,13 +19,28 @@ class UserAvatar extends StatelessWidget {
       child: Stack(
         children: [
           CachedNetworkImage(
+            cacheManager: CacheManager(
+              Config(
+                user.avatar.src.origin,
+                stalePeriod: const Duration(days: 30))
+            ),
             progressIndicatorBuilder: (context, url, progress) => Center(
               child: CircularProgressIndicator(
                 value: progress.progress,
               ),
             ),
             imageUrl: user.avatar.src.origin,
+            errorWidget: (context, url, error) =>
+                const Icon(Icons.error), // Ошибка загрузки
             height: 450,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
           ),
@@ -36,6 +53,13 @@ class UserAvatar extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     Colors.black.withOpacity(0.0),
+                    Colors.black.withOpacity(0.1),
+                    Colors.black.withOpacity(0.2),
+                    Colors.black.withOpacity(0.3),
+                    Colors.black.withOpacity(0.4),
+                    Colors.black.withOpacity(0.5),
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.7),
                     Colors.black.withOpacity(0.8),
                   ],
                   begin: Alignment.topCenter,

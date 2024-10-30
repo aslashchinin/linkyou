@@ -32,7 +32,9 @@ class UserTags extends StatelessWidget {
         const SizedBox(height: 10),
         Row(
           children: [
-            RoundText(text: user.religion?.status ?? ''),
+            user.religion?.status != null
+                ? RoundText(text: user.religion!.status)
+                : const SizedBox.shrink(),
             RoundText(text: 'Цель: ${user.goal.name}'),
           ],
         ),

@@ -13,8 +13,9 @@ dependencies:
   http: ^1.2.1
   provider: ^6.0.0
   carousel_slider: ^4.0.0
-  percent_indicator: ^4.2.2
+  percent_indicator: ^4.2.3
   shared_preferences: ^2.0.6
+  flutter_cache_manager: ^3.0.0
   cached_network_image: ^3.3.1
   socket_io_client: ^2.0.3+1
   get_it: ^7.2.0
