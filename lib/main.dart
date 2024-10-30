@@ -3,7 +3,6 @@ import 'package:linkyou/views/blocks/users_top/users_top_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/core/services/route_service.dart';
-import 'package:linkyou/views/screens/welcome/welcome_screen.dart';
 import 'package:linkyou/views/screens/welcome/welcome_viewmodel.dart';
 import 'package:linkyou/views/screens/auth/auth_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_registration/form_registration_viewmodel.dart';
@@ -15,6 +14,8 @@ import 'package:linkyou/core/services/locator_service.dart';
 import 'package:linkyou/views/blocks/users_new/users_new_viewmodel.dart';
 import 'package:linkyou/views/blocks/users_daily/users_daily_viewmodel.dart';
 import 'package:linkyou/views/blocks/users_daily_cities/users_daily_cities_viewmodel.dart';
+import 'package:linkyou/views/screens/splash/splash_screen.dart';
+import 'package:linkyou/views/screens/splash/splash_viewmodel.dart';
 
 void main() {
   setupTopUsersModule();
@@ -26,13 +27,14 @@ class LinkYouApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<UsersTopViewModel>(),
-        ),
+      providers: [        
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => serviceLocator<UsersTopViewModel>(),
+        ),
+        
         ChangeNotifierProvider<WelcomeViewModel>(
           create: (_) => WelcomeViewModel(),
         ),
@@ -63,10 +65,13 @@ class LinkYouApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => serviceLocator<FormLoginViewModel>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => SplashViewModel(),
+        ),
       ],
       child: Consumer<AuthProvider>(
         builder: (context, authProvider, child) {
-          return MaterialApp(
+          return authProvider.isLoading ? const Center(child: CircularProgressIndicator()) : MaterialApp(
             title: 'LinkYou Mobile Application',
             theme: ThemeData(
               primarySwatch: Colors.blue,
@@ -76,7 +81,7 @@ class LinkYouApp extends StatelessWidget {
                 ),
               ),
             ),
-            home: const WelcomeScreen(),
+            home: SplashScreen(authProvider: authProvider),
             routes: RouteService.routes,
           );
         },

@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'layout_menu_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_login/form_login_block.dart';
 import 'package:linkyou/views/blocks/form_registration/form_registration_block.dart';
+import 'package:linkyou/core/providers/auth_provider.dart';
+import 'package:linkyou/views/blocks/layout_user_menu/layout_user_menu_block.dart';
 
 class LayoutMenuBlock extends StatefulWidget {
   const LayoutMenuBlock({super.key});
@@ -30,33 +32,42 @@ class _LayoutMenuBlockState extends State<LayoutMenuBlock>
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<LayoutMenuViewModel>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Image.asset('assets/logo/logo.png'),
-          ),
-          TabBar(
-            controller: _tabController,
-            tabs: const [
-              Tab(text: 'Вход'),
-              Tab(text: 'Регистрация'),
-            ],
-          ),
           SizedBox(
-            height: 300.0,
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                FormLoginBlock(),
-                FormRegistrationBlock(),
-              ],
+            height: 100,
+            child: DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Image.asset('assets/logo/logo.png'),
             ),
           ),
+          !authProvider.isAuthenticated
+              ? TabBar(
+                  controller: _tabController,
+                  tabs: const [
+                    Tab(text: 'Вход'),
+                    Tab(text: 'Регистрация'),
+                  ],
+                )
+              : const SizedBox(),
+          !authProvider.isAuthenticated
+              ? SizedBox(
+                  height: 300.0,
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: const [
+                      FormLoginBlock(),
+                      FormRegistrationBlock(),
+                    ],
+                  ),
+                )
+              : const LayoutUserMenuBlock(),
           const Divider(
             color: Color(0xFFe9e9f5),
             height: 1,
@@ -91,6 +102,13 @@ class _LayoutMenuBlockState extends State<LayoutMenuBlock>
             title: const Text('Наш блог'),
             onTap: () => viewModel.blog(context),
           ),
+          authProvider.isAuthenticated
+              ? ListTile(
+                  leading: const Icon(Icons.logout),
+                  title: const Text('Выйти'),
+                  onTap: () => viewModel.logout(context),
+                )
+              : const SizedBox(),
         ],
       ),
     );
