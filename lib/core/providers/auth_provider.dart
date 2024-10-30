@@ -22,11 +22,17 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> loadFromPrefs() async {
     final prefs = await SharedPreferences.getInstance();
+    
+    _isLoading = false;
+
+    if (prefs.getString('token') == null || prefs.getString('user') == null) {
+      notifyListeners();
+      return;
+    }
 
     _token = prefs.getString('token');
     _user = User.fromJson(jsonDecode(prefs.getString('user') ?? '{}'));
-
-    _isLoading = false;
+    
 
     if (_token != null && _user != null) {
       _isAuthenticated = true;

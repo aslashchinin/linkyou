@@ -5,6 +5,7 @@ import 'package:linkyou/views/blocks/form_login/form_login_block.dart';
 import 'package:linkyou/views/blocks/form_registration/form_registration_block.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/views/blocks/layout_user_menu/layout_user_menu_block.dart';
+import 'package:linkyou/views/widgets/tiles/menu_item_tile.dart';
 
 class LayoutMenuBlock extends StatefulWidget {
   const LayoutMenuBlock({super.key});
@@ -32,7 +33,7 @@ class _LayoutMenuBlockState extends State<LayoutMenuBlock>
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<LayoutMenuViewModel>(context);
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context, listen: true);
 
     return Drawer(
       child: ListView(
@@ -72,40 +73,40 @@ class _LayoutMenuBlockState extends State<LayoutMenuBlock>
             color: Color(0xFFe9e9f5),
             height: 1,
           ),
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Знакомства'),
+          MenuItemTile(
+            leading: const Icon(Icons.home, size: 20),
+            title: 'Знакомства',
             onTap: () => viewModel.home(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.search),
-            title: const Text('Поиск'),
+          MenuItemTile(
+            leading: const Icon(Icons.search, size: 20),
+            title: 'Поиск',
             onTap: () => viewModel.search(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.article),
-            title: const Text('Блоги'),
+          MenuItemTile(
+            leading: const Icon(Icons.article, size: 20),
+            title: 'Блоги',
             onTap: () => viewModel.blogs(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.emoji_events),
-            title: const Text('Лучшие-100'),
+          MenuItemTile(
+            leading: const Icon(Icons.emoji_events, size: 20),
+            title: 'Лучшие-100',
             onTap: () => viewModel.top(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.info),
-            title: const Text('О нас'),
+          MenuItemTile(
+            leading: const Icon(Icons.info, size: 20),
+            title: 'О нас',
             onTap: () => viewModel.about(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.edit),
-            title: const Text('Наш блог'),
+          MenuItemTile(
+            leading: const Icon(Icons.edit, size: 20),
+            title: 'Наш блог',
             onTap: () => viewModel.blog(context),
           ),
           authProvider.isAuthenticated
-              ? ListTile(
-                  leading: const Icon(Icons.logout),
-                  title: const Text('Выйти'),
+              ? MenuItemTile(
+                  leading: const Icon(Icons.logout, size: 20),
+                  title: 'Выйти',
                   onTap: () => viewModel.logout(context),
                 )
               : const SizedBox(),

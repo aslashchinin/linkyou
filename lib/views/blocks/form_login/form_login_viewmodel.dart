@@ -3,7 +3,7 @@ import 'package:linkyou/views/blocks/form_password_recovery/form_password_recove
 import 'package:linkyou/data/user/user_repository_interface.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/views/screens/home/home_screen.dart';
-
+import 'package:provider/provider.dart';
 class FormLoginViewModel extends ChangeNotifier {
   FormLoginViewModel({required UserRepositoryInterface repository})
       : _repository = repository;
@@ -15,8 +15,9 @@ class FormLoginViewModel extends ChangeNotifier {
       BuildContext context, String email, String password) async {
     try {
       final response = await repository.login(email, password);
-      // Save token and user to shared preferences
-      AuthProvider().login(response.data);
+      
+      Provider.of<AuthProvider>(context, listen: false).login(response.data);
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
