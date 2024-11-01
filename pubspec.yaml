@@ -5,7 +5,7 @@ version: 0.1.0
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/logo/logo.png"
+  image_path: "assets/icons/Icon-App-83.5x83.5@2x.png"
 
 environment:
   sdk: '>=3.4.1 <4.0.0'
@@ -34,6 +34,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/wellcomeTizer/welcome.png
+    - assets/icons/Icon-App-83.5x83.5@2x.png
     - assets/logo/logo.png
     - assets/logo-blue/logo.png
     - assets/crown/crown.png

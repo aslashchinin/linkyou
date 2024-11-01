@@ -8,6 +8,8 @@ import 'package:linkyou/views/blocks/users_daily/users_daily_viewmodel.dart';
 import 'package:linkyou/views/blocks/users_daily_cities/users_daily_cities_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_login/form_login_viewmodel.dart';
 import 'package:linkyou/views/screens/user/user_viewmodel.dart';
+import 'package:linkyou/views/blocks/user_photos/user_photo_viewmodel.dart';
+import 'package:linkyou/views/blocks/gifts_slider/gifts_slider_viewmodel.dart';
 final serviceLocator = GetIt.instance;
 
 void setupTopUsersModule() {
@@ -40,5 +42,11 @@ void setupTopUsersModule() {
   );
   serviceLocator.registerFactory(
     () => UserViewModel(repository: serviceLocator<UserRepositoryInterface>()),
+  );
+  serviceLocator.registerFactory(
+    () => UserPhotoViewModel(repository: serviceLocator<UserRepositoryInterface>()),
+  );
+  serviceLocator.registerFactory(
+    () => GiftsSliderViewModel(repository: serviceLocator<UserRepositoryInterface>()),
   );
 }

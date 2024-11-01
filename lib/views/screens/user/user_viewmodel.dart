@@ -10,7 +10,7 @@ class UserViewModel extends ChangeNotifier {
   User? _user;
   User? get user => _user;
 
-  Future<void> loadUser(int id) async {
+  Future<void> loadUser(BigInt id) async {
     final response = await repository.getUser(id);
     _user = response.data;
     

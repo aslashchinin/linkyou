@@ -12,7 +12,7 @@ class ApiBase {
       Uri.parse('$baseUrl$endpoint'),
       headers: _setHeaders(),
     );
-
+    print(endpoint);
     return _processResponse(response);
   }
 

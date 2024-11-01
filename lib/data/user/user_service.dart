@@ -87,11 +87,40 @@ class UserService extends ApiBase {
     );
   }
 
-  Future<ServiceResponse<Map<String, dynamic>>> getUser(int id) async {
+  Future<ServiceResponse<Map<String, dynamic>>> getUser(BigInt id) async {
     final response = await get('/user/$id');
-    
+
     return ServiceResponse(
       data: Map<String, dynamic>.from(json.decode(response.body)),
+      headers: response.headers,
+    );
+  }
+
+  Future<ServiceResponse<List<Map<String, dynamic>>>> getUserPhotos(
+      BigInt id) async {
+    final response = await get('/photos/$id');
+
+    return ServiceResponse(
+      data: List<Map<String, dynamic>>.from(json.decode(response.body)),
+      headers: response.headers,
+    );
+  }
+
+  Future<ServiceResponse<List<Map<String, dynamic>>>> getUserGifts(
+      BigInt id) async {
+    final response = await get('/gifts/$id');
+
+    return ServiceResponse(
+      data: List<Map<String, dynamic>>.from(json.decode(response.body)),
+      headers: response.headers,
+    );
+  }
+
+  Future<ServiceResponse<List<Map<String, dynamic>>>> getGiftsList() async {
+    final response = await get('/gifts');
+
+    return ServiceResponse(
+      data: List<Map<String, dynamic>>.from(json.decode(response.body)),
       headers: response.headers,
     );
   }

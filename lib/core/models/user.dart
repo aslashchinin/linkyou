@@ -13,10 +13,11 @@ import 'location.dart';
 import 'birthday.dart';
 import 'language.dart';
 import 'rating.dart';
-import 'gifts.dart';
+import 'user_gifts.dart';
 import 'interests.dart';
 import 'likes.dart';
 import 'religion.dart';
+import 'orientation.dart';
 
 class User {
   final int id;
@@ -33,19 +34,21 @@ class User {
   final Nationality? nationality;
   final Goal goal;
   final LookingFor lookingFor;
+  final Orientation? orientation;
   final Children? children;
   final Relationship? relationship;
   final Smoking? smoking;
   final Alcohol? alcohol;
   final Age age;
   final int? height;
+  final int? weight;
   final String? about;
   final Job? job;
   final Location location;
   final Birthday birthday;
   final List<Language> languages;
   final Rating? rating;
-  final Gifts? gifts;
+  final UserGifts? gifts;
   final Interests? interests;
   final Likes likes;
   final int photosCount;
@@ -70,12 +73,14 @@ class User {
     required this.nationality,
     required this.goal,
     required this.lookingFor,
+    required this.orientation,
     required this.children,
     required this.relationship,
     required this.smoking,
     required this.alcohol,
     required this.age,
     required this.height,
+    required this.weight,
     required this.about,
     required this.job,
     required this.location,
@@ -111,6 +116,9 @@ class User {
           : null,
       goal: Goal.fromJson(json['goal']),
       lookingFor: LookingFor.fromJson(json['lookingFor']),
+      orientation: json['orientation'] != null
+          ? Orientation.fromJson(json['orientation'])
+          : null,
       children: json['children'] != null
           ? Children.fromJson(json['children'])
           : null,
@@ -125,6 +133,7 @@ class User {
           : null,
       age: Age.fromJson(json['age']),
       height: json['height'],
+      weight: json['weight'],
       about: json['about'],
       job: json['job'] != null ? Job.fromJson(json['job']) : null,
       location: Location.fromJson(json['location']),
@@ -132,7 +141,7 @@ class User {
       languages: List<Language>.from(
           json['languages'].map((x) => Language.fromJson(x))),
       rating: json['rating'] != null ? Rating.fromJson(json['rating']) : null,
-      gifts: Gifts.fromJson(json['gifts']),
+      gifts: json['gifts'] != null ? UserGifts.fromJson(json['gifts']) : null,
       interests: Interests.fromJson(json['interests']),
       likes: Likes.fromJson(json['likes']),
       photosCount: json['photos_count'],
@@ -162,12 +171,14 @@ class User {
       'nationality': nationality?.toJson(),
       'goal': goal.toJson(),
       'lookingFor': lookingFor.toJson(),
+      'orientation': orientation?.toJson(),
       'children': children?.toJson(),
       'relationship': relationship?.toJson(),
       'smoking': smoking?.toJson(),
       'alcohol': alcohol?.toJson(),
       'age': age.toJson(),
       'height': height,
+      'weight': weight,
       'about': about,
       'job': job?.toJson(),
       'location': location.toJson(),

@@ -1,23 +1,30 @@
+import 'package:linkyou/core/models/gift.dart';
+
 class Gifts {
-  final int count;
-  final int freeGifts;
+  final int id;
+  final String name;
+  final List<Gift> items;
 
   Gifts({
-    required this.count,
-    required this.freeGifts,
+    required this.id,
+    required this.name,
+    required this.items,
   });
 
+  // Функция, преобразующая JSON в объект модели
   factory Gifts.fromJson(Map<String, dynamic> json) {
     return Gifts(
-      count: json['count'],
-      freeGifts: json['free_gifts'],
+      id: json['id'],
+      name: json['name'],
+      items: List<Gift>.from(json['items'].map((item) => Gift.fromJson(item))),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'count': count,
-      'free_gifts': freeGifts,
+      'id': id,
+      'name': name,
+      'items': items.map((item) => item.toJson()).toList(),
     };
   }
 }

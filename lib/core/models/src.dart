@@ -2,7 +2,7 @@ class Src {
   final String small;
   final String defaultSrc;
   final String origin;
-  final String square;
+  final String? square;
 
   Src({
     required this.small,
@@ -16,7 +16,7 @@ class Src {
       small: _fixUrl(json['small']),
       defaultSrc: _fixUrl(json['default']),
       origin: _fixUrl(json['origin']),
-      square: _fixUrl(json['square']),
+      square: _fixUrl(json['square'] ?? ""),
     );
   }
 

@@ -7,6 +7,9 @@ import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/models/city_highlighted.dart';
 import 'package:linkyou/core/models/login.dart';
 import 'package:linkyou/core/models/user.dart';
+import 'package:linkyou/core/models/photo.dart';
+import 'package:linkyou/core/models/user_gift.dart';
+import 'package:linkyou/core/models/gifts.dart';
 
 class UserRepository implements UserRepositoryInterface {
   final UserService _userService;
@@ -95,7 +98,7 @@ class UserRepository implements UserRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<User>> getUser(int id) async {
+  Future<RepositoryResponse<User>> getUser(BigInt id) async {
     try {
       final serviceResponse = await _userService.getUser(id);
       final user = User.fromJson(serviceResponse.data);
@@ -104,6 +107,48 @@ class UserRepository implements UserRepositoryInterface {
       return RepositoryResponse(data: user, pagination: pagination);
     } catch (e, stackTrace) {
       print(stackTrace.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<RepositoryResponse<List<Photo>>> getUserPhotos(BigInt id) async {
+    try {
+      final serviceResponse = await _userService.getUserPhotos(id);
+      final photos = serviceResponse.data
+          .map((json) => Photo.fromJson(json))
+          .toList();
+      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+      return RepositoryResponse(data: photos, pagination: pagination);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<RepositoryResponse<List<UserGift>>> getUserGifts(BigInt id) async {
+    try {
+      final serviceResponse = await _userService.getUserGifts(id);
+      final gifts = serviceResponse.data
+          .map((json) => UserGift.fromJson(json))
+          .toList();
+      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+      return RepositoryResponse(data: gifts, pagination: pagination);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<RepositoryResponse<List<Gifts>>> getGiftsList() async {
+    try {
+      final serviceResponse = await _userService.getGiftsList();
+      final gifts = serviceResponse.data
+          .map((json) => Gifts.fromJson(json))
+          .toList();
+      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+      return RepositoryResponse(data: gifts, pagination: pagination);
+    } catch (e) {
       rethrow;
     }
   }

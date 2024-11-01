@@ -9,6 +9,11 @@ import 'package:linkyou/views/widgets/user/user_stat_info.dart';
 import 'package:linkyou/views/widgets/user/user_tags.dart';
 import 'package:linkyou/views/widgets/user/user_rating.dart';
 import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
+import 'package:linkyou/views/widgets/controlls/block_divider.dart';
+import 'package:linkyou/views/blocks/user_photos/user_photo_block.dart';
+import 'package:linkyou/views/widgets/user/user_gifts.dart';
+import 'package:linkyou/views/widgets/user/user_about.dart';
+
 class UserScreen extends ScreenBase {
   const UserScreen({super.key, required this.userId});
   final int userId;
@@ -22,7 +27,8 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<UserViewModel>(context, listen: false).loadUser(widget.userId);
+    Provider.of<UserViewModel>(context, listen: false)
+        .loadUser(BigInt.from(widget.userId));
   }
 
   @override
@@ -48,6 +54,13 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
                 UserTags(user: viewModel.user!),
                 const SizedBox(height: 20),
                 UserRating(user: viewModel.user!),
+                const BlockDivider(),
+                UserPhotoBlock(user: viewModel.user!),
+                const BlockDivider(),
+                UserGifts(user: viewModel.user!),
+                const BlockDivider(),
+                UserAbout(user: viewModel.user!),
+                const BlockDivider(),
               ],
             ),
           );

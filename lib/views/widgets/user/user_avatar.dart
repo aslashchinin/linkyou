@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:linkyou/core/models/user.dart';
 import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
 
 class UserAvatar extends StatelessWidget {
   const UserAvatar({required this.user, super.key});
@@ -25,11 +26,7 @@ class UserAvatar extends StatelessWidget {
                 maxNrOfCacheObjects: 100,
               ),
             ),
-            progressIndicatorBuilder: (context, url, progress) => Center(
-              child: CircularProgressIndicator(
-                value: progress.progress,
-              ),
-            ),
+            placeholder: (context, url) => const Center(child: CircularProgressBlue()),
             fadeInDuration: Duration.zero,
             fadeOutDuration: Duration.zero,
             imageUrl: url,

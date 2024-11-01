@@ -17,6 +17,9 @@ import 'package:linkyou/views/blocks/users_daily_cities/users_daily_cities_viewm
 import 'package:linkyou/views/screens/splash/splash_screen.dart';
 import 'package:linkyou/views/screens/splash/splash_viewmodel.dart';
 import 'package:linkyou/views/screens/user/user_viewmodel.dart';
+import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
+import 'package:linkyou/views/blocks/user_photos/user_photo_viewmodel.dart';
+import 'package:linkyou/views/blocks/gifts_slider/gifts_slider_viewmodel.dart';
 
 void main() {
   setupTopUsersModule();
@@ -72,10 +75,16 @@ class LinkYouApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => serviceLocator<UserViewModel>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => serviceLocator<UserPhotoViewModel>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => serviceLocator<GiftsSliderViewModel>(),
+        ),
       ],
       child: Consumer<AuthProvider>(
         builder: (context, authProvider, child) {
-          return authProvider.isLoading ? const Center(child: CircularProgressIndicator()) : MaterialApp(
+          return authProvider.isLoading ? const Center(child: CircularProgressBlue()) : MaterialApp(
             title: 'LinkYou Mobile Application',
             theme: ThemeData(
               primarySwatch: Colors.blue,

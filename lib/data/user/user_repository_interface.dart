@@ -4,6 +4,9 @@ import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/models/city_highlighted.dart';
 import 'package:linkyou/core/models/login.dart';
 import 'package:linkyou/core/models/user.dart';
+import 'package:linkyou/core/models/photo.dart';
+import 'package:linkyou/core/models/user_gift.dart';
+import 'package:linkyou/core/models/gifts.dart';
 
 abstract class UserRepositoryInterface {
   Future<RepositoryResponse<List<UserShort>>> getTopUsers({
@@ -26,5 +29,11 @@ abstract class UserRepositoryInterface {
 
   Future<RepositoryResponse<Login>> login(String email, String password);
 
-  Future<RepositoryResponse<User>> getUser(int id);
+  Future<RepositoryResponse<User>> getUser(BigInt id);
+
+  Future<RepositoryResponse<List<Photo>>> getUserPhotos(BigInt id);
+
+  Future<RepositoryResponse<List<UserGift>>> getUserGifts(BigInt id);
+
+  Future<RepositoryResponse<List<Gifts>>> getGiftsList();
 }
