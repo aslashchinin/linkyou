@@ -13,6 +13,8 @@ import 'package:linkyou/views/widgets/controlls/block_divider.dart';
 import 'package:linkyou/views/blocks/user_photos/user_photo_block.dart';
 import 'package:linkyou/views/widgets/user/user_gifts.dart';
 import 'package:linkyou/views/widgets/user/user_about.dart';
+import 'package:linkyou/views/widgets/user/user_interests.dart';
+import 'package:linkyou/views/widgets/user/user_education.dart';
 
 class UserScreen extends ScreenBase {
   const UserScreen({super.key, required this.userId});
@@ -58,9 +60,19 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
                 UserPhotoBlock(user: viewModel.user!),
                 const BlockDivider(),
                 UserGifts(user: viewModel.user!),
-                const BlockDivider(),
-                UserAbout(user: viewModel.user!),
-                const BlockDivider(),
+                if (viewModel.user!.about != null) ...[
+                  const BlockDivider(),
+                  UserAbout(user: viewModel.user!),
+                ],
+                if (viewModel.user!.interests?.interests.isNotEmpty ??
+                    false) ...[
+                  const BlockDivider(),
+                  UserInterests(user: viewModel.user!),
+                ],
+                if (viewModel.user!.education != null) ...[
+                  const BlockDivider(),
+                  UserEducation(user: viewModel.user!),
+                ],
               ],
             ),
           );

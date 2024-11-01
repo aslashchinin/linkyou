@@ -18,6 +18,7 @@ import 'interests.dart';
 import 'likes.dart';
 import 'religion.dart';
 import 'orientation.dart';
+import 'education.dart';
 
 class User {
   final int id;
@@ -47,6 +48,7 @@ class User {
   final Location location;
   final Birthday birthday;
   final List<Language> languages;
+  final List<Education>? education;
   final Rating? rating;
   final UserGifts? gifts;
   final Interests? interests;
@@ -96,6 +98,7 @@ class User {
     required this.ubLogsCount,
     required this.isOnline,
     required this.religion,
+    required this.education,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -130,6 +133,10 @@ class User {
           : null,
       alcohol: json['alcohol'] != null
           ? Alcohol.fromJson(json['alcohol'])
+          : null,
+      education: json['education'] != null
+          ? List<Education>.from(
+              json['education'].map((x) => Education.fromJson(x)))
           : null,
       age: Age.fromJson(json['age']),
       height: json['height'],

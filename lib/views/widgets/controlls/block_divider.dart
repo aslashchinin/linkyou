@@ -6,7 +6,7 @@ class BlockDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20,
+      height: 15,
       color: const Color(0xFFeeeef8),
     );
   }

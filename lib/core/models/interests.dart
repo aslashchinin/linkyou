@@ -10,7 +10,11 @@ class Interests {
   factory Interests.fromJson(Map<String, dynamic> json) {
     return Interests(
       id: json['id'],
-      interests: List<String>.from(json['interests'].map((x) => x)),
+      interests: List<String>.from(
+        (json['interests'] as List)
+            .where((element) => (element as String).trim().isNotEmpty)
+            .toList(),
+      ),
     );
   }
 
