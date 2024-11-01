@@ -7,8 +7,8 @@ import 'package:linkyou/views/widgets/user/user_avatar.dart';
 import 'package:linkyou/views/widgets/user/user_action_buttons.dart';
 import 'package:linkyou/views/widgets/user/user_stat_info.dart';
 import 'package:linkyou/views/widgets/user/user_tags.dart';
-import 'package:linkyou/views/widgets/controlls/divider.dart' as LineDivider;
 import 'package:linkyou/views/widgets/user/user_rating.dart';
+import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
 class UserScreen extends ScreenBase {
   const UserScreen({super.key, required this.userId});
   final int userId;
@@ -17,6 +17,8 @@ class UserScreen extends ScreenBase {
 }
 
 class UserScreenState extends ScreenBaseState<UserScreen> {
+  int? lastUserId;
+
   @override
   void initState() {
     super.initState();
@@ -26,13 +28,16 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
   @override
   Widget buildContent(BuildContext context) {
     final viewModel = Provider.of<UserViewModel>(context);
+    lastUserId = viewModel.user?.id;
 
-    return viewModel.user == null
-        ? const Center(child: CircularProgressIndicator())
+    return viewModel.user == null || lastUserId != widget.userId
+        ? const Center(child: CircularProgressBlue())
         : SingleChildScrollView(
             child: Column(
               children: [
-                UserAvatar(user: viewModel.user!),
+                UserAvatar(
+                  user: viewModel.user!,
+                ),
                 UserActionButtons(user: viewModel.user!),
                 UserStatInfo(user: viewModel.user!),
                 const Divider(

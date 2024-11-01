@@ -44,7 +44,7 @@ class User {
   final Location location;
   final Birthday birthday;
   final List<Language> languages;
-  final Rating rating;
+  final Rating? rating;
   final Gifts? gifts;
   final Interests? interests;
   final Likes likes;
@@ -131,7 +131,7 @@ class User {
       birthday: Birthday.fromJson(json['birthday']),
       languages: List<Language>.from(
           json['languages'].map((x) => Language.fromJson(x))),
-      rating: Rating.fromJson(json['rating']),
+      rating: json['rating'] != null ? Rating.fromJson(json['rating']) : null,
       gifts: Gifts.fromJson(json['gifts']),
       interests: Interests.fromJson(json['interests']),
       likes: Likes.fromJson(json['likes']),
@@ -173,7 +173,7 @@ class User {
       'location': location.toJson(),
       'birthday': birthday.toJson(),
       'languages': List<dynamic>.from(languages.map((x) => x.toJson())),
-      'rating': rating.toJson(),
+      'rating': rating?.toJson(),
       'gifts': gifts?.toJson(),
       'interests': interests?.toJson(),
       'likes': likes.toJson(),

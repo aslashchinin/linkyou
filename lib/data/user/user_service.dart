@@ -89,7 +89,7 @@ class UserService extends ApiBase {
 
   Future<ServiceResponse<Map<String, dynamic>>> getUser(int id) async {
     final response = await get('/user/$id');
-    print(response.body);
+    
     return ServiceResponse(
       data: Map<String, dynamic>.from(json.decode(response.body)),
       headers: response.headers,

@@ -16,9 +16,9 @@ class UserRating extends StatelessWidget {
           CircularPercentIndicator(
             radius: 60.0,
             lineWidth: 5.0,
-            percent: user.rating.score / 10.0,
+            percent: user.rating?.score != null ? user.rating!.score / 10.0 : 0,
             center: Text(
-              '${user.rating.score}',
+              user.rating?.score != null ? '${user.rating!.score}' : '0',
               style: const TextStyle(fontSize: 20),
             ),
             progressColor: const Color(0xFF24cbf4),
@@ -30,7 +30,8 @@ class UserRating extends StatelessWidget {
             children: [
               const Text('Рейтинг анкеты',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              Text('Понравилась ${user.rating.likes} из ${user.rating.views}',
+              Text(
+                  'Понравилась ${user.rating?.likes != null ? user.rating!.likes : 0} из ${user.rating?.views != null ? user.rating!.views : 0}',
                   style: const TextStyle(fontSize: 14)),
             ],
           ),

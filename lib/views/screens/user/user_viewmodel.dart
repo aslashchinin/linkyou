@@ -16,4 +16,9 @@ class UserViewModel extends ChangeNotifier {
     
     notifyListeners();
   }
+
+  void resetUser() {
+    _user = null;
+    notifyListeners();
+  }
 }

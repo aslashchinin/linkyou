@@ -4,7 +4,6 @@ import 'package:linkyou/core/models/user.dart';
 import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-
 class UserAvatar extends StatelessWidget {
   const UserAvatar({required this.user, super.key});
 
@@ -12,24 +11,28 @@ class UserAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String url = user.avatar.src.origin;
+
     return GestureDetector(
-      onTap: () {
-        showFullScreenImage(user.avatar.src.origin, context);
-      },
+      onTap: () => showFullScreenImage(url, context),
       child: Stack(
         children: [
           CachedNetworkImage(
             cacheManager: CacheManager(
               Config(
-                user.avatar.src.origin,
-                stalePeriod: const Duration(days: 30))
+                url,
+                stalePeriod: const Duration(days: 7),
+                maxNrOfCacheObjects: 100,
+              ),
             ),
             progressIndicatorBuilder: (context, url, progress) => Center(
               child: CircularProgressIndicator(
                 value: progress.progress,
               ),
             ),
-            imageUrl: user.avatar.src.origin,
+            fadeInDuration: Duration.zero,
+            fadeOutDuration: Duration.zero,
+            imageUrl: url,
             errorWidget: (context, url, error) =>
                 const Icon(Icons.error), // Ошибка загрузки
             height: 450,
@@ -51,17 +54,9 @@ class UserAvatar extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    Colors.black.withOpacity(0.0),
-                    Colors.black.withOpacity(0.1),
-                    Colors.black.withOpacity(0.2),
-                    Colors.black.withOpacity(0.3),
-                    Colors.black.withOpacity(0.4),
-                    Colors.black.withOpacity(0.5),
-                    Colors.black.withOpacity(0.6),
-                    Colors.black.withOpacity(0.7),
-                    Colors.black.withOpacity(0.8),
-                  ],
+                  colors: List.generate(100, (index) {
+                    return Colors.black.withOpacity(index * 0.01);
+                  }),
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
