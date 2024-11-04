@@ -38,15 +38,21 @@ class UserEducation extends StatelessWidget {
                 : const SizedBox.shrink(),
             user.languages.isNotEmpty
                 ? Column(
-                    children: user.languages.map(_buildLanguage).toList(),
+                    children: user.languages
+                        .asMap()
+                        .entries
+                        .map((entry) =>
+                            _buildLanguage(entry.value, entry.key == 0))
+                        .toList(),
                   )
                 : const SizedBox.shrink(),
           ],
         ));
   }
 
-  Widget _buildLanguage(Language language) {
-    return _buildRow('Знание языков', language.language.name);
+  Widget _buildLanguage(Language language, bool isShowTitle) {
+    String title = '${language.language.name} (${language.level.name})';
+    return _buildRow(isShowTitle ? 'Знание языков' : '', title);
   }
 
   Widget _buildEducation(Education education) {
@@ -81,7 +87,7 @@ class UserEducation extends StatelessWidget {
             flex: 1,
             child: Text(
               value,
-              textAlign: TextAlign.right, // Выравниваем значение вправо
+              textAlign: TextAlign.right,
               style: const TextStyle(fontSize: 16),
             ),
           ),

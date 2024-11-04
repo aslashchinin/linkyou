@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:linkyou/views/blocks/users_daily/users_daily_slider_block.dart';
 import 'package:provider/provider.dart';
 import 'package:linkyou/core/base/screen_base.dart';
 import 'package:linkyou/views/screens/user/user_viewmodel.dart';
@@ -15,6 +16,10 @@ import 'package:linkyou/views/widgets/user/user_gifts.dart';
 import 'package:linkyou/views/widgets/user/user_about.dart';
 import 'package:linkyou/views/widgets/user/user_interests.dart';
 import 'package:linkyou/views/widgets/user/user_education.dart';
+import 'package:linkyou/views/widgets/user/user_books.dart';
+import 'package:linkyou/views/widgets/user/user_job.dart';
+import 'package:linkyou/views/widgets/user/user_pets.dart';
+import 'package:linkyou/views/widgets/user/user_music.dart';
 
 class UserScreen extends ScreenBase {
   const UserScreen({super.key, required this.userId});
@@ -73,6 +78,27 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
                   const BlockDivider(),
                   UserEducation(user: viewModel.user!),
                 ],
+                if (viewModel.user!.job != null) ...[
+                  const BlockDivider(),
+                  UserJob(user: viewModel.user!),
+                ],
+                if (viewModel.user!.books != null &&
+                    viewModel.user!.books!.isNotEmpty) ...[
+                  const BlockDivider(),
+                  UserBooks(user: viewModel.user!),
+                ],
+                if (viewModel.user!.pets != null &&
+                    viewModel.user!.pets!.isNotEmpty) ...[
+                  const BlockDivider(),
+                  UserPets(user: viewModel.user!),
+                ],
+                if (viewModel.user!.music != null &&
+                    viewModel.user!.music!.isNotEmpty) ...[
+                  const BlockDivider(),
+                  UserMusic(user: viewModel.user!),
+                ],
+                const BlockDivider(),
+                const UsersDailySliderBlock(),
               ],
             ),
           );

@@ -19,6 +19,9 @@ import 'likes.dart';
 import 'religion.dart';
 import 'orientation.dart';
 import 'education.dart';
+import 'book.dart';
+import 'pet.dart';
+import 'music.dart';
 
 class User {
   final int id;
@@ -59,6 +62,9 @@ class User {
   final int ubLogsCount;
   final bool isOnline;
   final Religion? religion;
+  final List<Book>? books;
+  final List<Pet>? pets;
+  final List<Music>? music;
 
   User({
     required this.id,
@@ -99,6 +105,9 @@ class User {
     required this.isOnline,
     required this.religion,
     required this.education,
+    required this.books,
+    required this.pets,
+    required this.music,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -122,23 +131,29 @@ class User {
       orientation: json['orientation'] != null
           ? Orientation.fromJson(json['orientation'])
           : null,
-      children: json['children'] != null
-          ? Children.fromJson(json['children'])
-          : null,
+      children:
+          json['children'] != null ? Children.fromJson(json['children']) : null,
       relationship: json['relationship'] != null
           ? Relationship.fromJson(json['relationship'])
           : null,
-      smoking: json['smoking'] != null
-          ? Smoking.fromJson(json['smoking'])
-          : null,
-      alcohol: json['alcohol'] != null
-          ? Alcohol.fromJson(json['alcohol'])
-          : null,
+      smoking:
+          json['smoking'] != null ? Smoking.fromJson(json['smoking']) : null,
+      alcohol:
+          json['alcohol'] != null ? Alcohol.fromJson(json['alcohol']) : null,
       education: json['education'] != null
           ? List<Education>.from(
               json['education'].map((x) => Education.fromJson(x)))
           : null,
       age: Age.fromJson(json['age']),
+      books: json['books'] != null
+          ? List<Book>.from(json['books'].map((x) => Book.fromJson(x)))
+          : [],
+      pets: json['pets'] != null
+          ? List<Pet>.from(json['pets'].map((x) => Pet.fromJson(x)))
+          : [],
+      music: json['music'] != null
+          ? List<Music>.from(json['music'].map((x) => Music.fromJson(x)))
+          : [],
       height: json['height'],
       weight: json['weight'],
       about: json['about'],
@@ -156,9 +171,8 @@ class User {
       isBlacklisted: json['is_blacklisted'],
       ubLogsCount: json['ublogs_count'],
       isOnline: json['is_online'],
-      religion: json['religion'] != null
-          ? Religion.fromJson(json['religion'])
-          : null,
+      religion:
+          json['religion'] != null ? Religion.fromJson(json['religion']) : null,
     );
   }
 
@@ -201,6 +215,14 @@ class User {
       'ublogs_count': ubLogsCount,
       'is_online': isOnline,
       'religion': religion?.toJson(),
+      'books': books != null
+          ? List<dynamic>.from(books!.map((x) => x.toJson()))
+          : [],
+      'pets':
+          pets != null ? List<dynamic>.from(pets!.map((x) => x.toJson())) : [],
+      'music': music != null
+          ? List<dynamic>.from(music!.map((x) => x.toJson()))
+          : [],
     };
   }
 }

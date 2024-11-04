@@ -19,28 +19,13 @@ class UserAvatar extends StatelessWidget {
       child: Stack(
         children: [
           CachedNetworkImage(
-            cacheManager: CacheManager(
-              Config(
-                url,
-                stalePeriod: const Duration(days: 7),
-                maxNrOfCacheObjects: 100,
-              ),
-            ),
-            placeholder: (context, url) => const Center(child: CircularProgressBlue()),
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressBlue()),
             fadeInDuration: Duration.zero,
             fadeOutDuration: Duration.zero,
             imageUrl: url,
-            errorWidget: (context, url, error) =>
-                const Icon(Icons.error), // Ошибка загрузки
+            errorWidget: (context, url, error) => const Icon(Icons.error),
             height: 450,
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
           ),

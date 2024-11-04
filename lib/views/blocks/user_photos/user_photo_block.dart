@@ -4,7 +4,6 @@ import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
 import 'package:provider/provider.dart';
 import 'user_photo_viewmodel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class UserPhotoBlock extends StatefulWidget {
   const UserPhotoBlock({super.key, required this.user});
@@ -76,13 +75,6 @@ class _UserPhotoBlockState extends State<UserPhotoBlock> {
       width: width,
       height: 100,
       child: CachedNetworkImage(
-        cacheManager: CacheManager(
-          Config(
-            url,
-            stalePeriod: const Duration(days: 7),
-            maxNrOfCacheObjects: 100,
-          ),
-        ),
         placeholder: (context, url) =>
             const Center(child: CircularProgressBlue()),
         fadeInDuration: Duration.zero,

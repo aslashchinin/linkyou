@@ -31,7 +31,7 @@ class UserGifts extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            GiftsSliderBlock(),
+            const GiftsSliderBlock(),
           ],
         ));
   }
