@@ -3,6 +3,7 @@ import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:linkyou/views/widgets/controlls/round_button.dart';
 import 'package:linkyou/views/widgets/tiles/menu_item_tile.dart';
+import 'package:linkyou/views/blocks/layout_menu/layout_menu_viewmodel.dart';
 
 class LayoutUserMenuBlock extends StatelessWidget {
   const LayoutUserMenuBlock({super.key});
@@ -10,6 +11,7 @@ class LayoutUserMenuBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
+    final layoutMenuViewModel = Provider.of<LayoutMenuViewModel>(context);
 
     return Column(
       children: [
@@ -55,6 +57,13 @@ class LayoutUserMenuBlock extends StatelessWidget {
           leading: const Icon(Icons.people, size: 20),
           onTap: () {
             // Handle navigation
+          },
+        ),
+        MenuItemTile(
+          title: 'Like You',
+          leading: const Icon(Icons.link_rounded, size: 20),
+          onTap: () {
+            layoutMenuViewModel.likeYou(context);
           },
         ),
         MenuItemTile(

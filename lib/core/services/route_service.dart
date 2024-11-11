@@ -6,6 +6,7 @@ import 'package:linkyou/views/screens/top/top_screen.dart';
 import 'package:linkyou/views/screens/search/search_screen.dart';
 import 'package:linkyou/views/screens/about/about_screen.dart';
 import 'package:linkyou/views/screens/user/user_screen.dart';
+import 'package:linkyou/views/screens/likeyou/likeyou_screen.dart';
 
 class RouteService {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -19,6 +20,7 @@ class RouteService {
   static const String search = '/search';
   static const String about = '/about';
   static const String user = '/user';
+  static const String likeYou = '/likeyou';
 
   static Map<String, WidgetBuilder> get routes {
     return {
@@ -30,6 +32,7 @@ class RouteService {
       search: (context) => const SearchScreen(),
       about: (context) => const AboutScreen(),
       user: (context) => UserScreen(userId: ModalRoute.of(context)!.settings.arguments as int),
+      likeYou: (context) => const LikeYouScreen(),
     };
   }
 }

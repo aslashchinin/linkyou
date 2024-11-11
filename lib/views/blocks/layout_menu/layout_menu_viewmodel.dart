@@ -39,4 +39,9 @@ class LayoutMenuViewModel extends ChangeNotifier {
     Navigator.pushNamed(context, RouteService.home);
     notifyListeners();
   }
+
+  void likeYou(BuildContext context) {
+    Navigator.pushNamed(context, RouteService.likeYou);
+    notifyListeners();
+  }
 }
