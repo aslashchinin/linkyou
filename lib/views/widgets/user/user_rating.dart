@@ -9,6 +9,9 @@ class UserRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (user.rating?.code != 'ok') {
+      return const SizedBox.shrink();
+    }    
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
       child: Row(

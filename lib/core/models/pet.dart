@@ -1,3 +1,5 @@
+import 'src.dart';
+
 class Pet {
   final int id;
   final int userId;
@@ -21,8 +23,8 @@ class Pet {
       userId: json['user_id'],
       name: json['name'],
       type: json['type'],
-      description: json['description'],
-      avatar: json['avatar'],
+      description: json['description'] ?? '',
+      avatar: Src.fixUrl(json['avatar'] ?? "assets/no_pet_avatar.png"),
     );
   }
 

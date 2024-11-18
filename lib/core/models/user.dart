@@ -111,8 +111,9 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['id'],
+    try {
+      return User(
+        id: json['id'],
       avatar: Avatar.fromJson(json['avatar']),
       name: json['name'],
       gender: Gender.fromJson(json['gender']),
@@ -173,7 +174,12 @@ class User {
       isOnline: json['is_online'],
       religion:
           json['religion'] != null ? Religion.fromJson(json['religion']) : null,
-    );
+      );
+    } catch (e, stackTrace) {
+      print('Ошибка: $e');
+      print('Стек вызовов: $stackTrace');
+      rethrow;
+    }
   }
 
   Map<String, dynamic> toJson() {

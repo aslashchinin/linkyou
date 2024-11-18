@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:linkyou/core/helpers/build_helper.dart';
 import 'package:linkyou/core/models/user.dart';
-
+  
 class UserBooks extends StatelessWidget {
   final User user;
 
@@ -30,38 +31,8 @@ class UserBooks extends StatelessWidget {
           ...user.books!
               .asMap()
               .entries
-              .map((entry) => _buildRow(entry.value.name, entry.value.author))
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRow(String key, String value) {
-    if (value.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text(
-              key,
-              textAlign: TextAlign.left,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(
-              value,
-              textAlign: TextAlign.right, // Выравниваем значение вправо
-              style: const TextStyle(fontSize: 16),
-            ),
-          ),
+              .map((entry) =>
+              BuildHelper.buildRow(entry.value.name, entry.value.author))
         ],
       ),
     );

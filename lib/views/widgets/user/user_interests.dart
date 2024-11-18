@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/models/user.dart';
-
+import 'package:linkyou/core/helpers/build_helper.dart';
 class UserInterests extends StatelessWidget {
   final User user;
 
@@ -32,22 +32,11 @@ class UserInterests extends StatelessWidget {
               spacing: 5.0,
               runSpacing: 3.0,
               children: user.interests?.interests
-                      .map((interest) => _buildIconInfo(interest))
+                      .map((interest) => BuildHelper.buildInfo(interest))
                       .toList() ??
                   [],
             ),
           ],
         ));
-  }
-
-  Widget _buildIconInfo(String info) {
-    return Chip(
-      label: Text(info),
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.grey),
-        borderRadius: BorderRadius.circular(20),
-      ),
-    );
   }
 }

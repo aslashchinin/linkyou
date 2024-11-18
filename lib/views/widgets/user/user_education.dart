@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/models/user.dart';
-import 'package:linkyou/core/models/education.dart';
-import 'package:linkyou/core/models/language.dart';
+import 'package:linkyou/core/helpers/build_helper.dart';
 
 class UserEducation extends StatelessWidget {
   final User user;
@@ -10,7 +9,6 @@ class UserEducation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(user.education);
     return Padding(
         padding:
             const EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 20),
@@ -33,7 +31,9 @@ class UserEducation extends StatelessWidget {
             const SizedBox(height: 10),
             user.education != null
                 ? Column(
-                    children: user.education!.map(_buildEducation).toList(),
+                    children: user.education!
+                        .map(BuildHelper.buildEducation)
+                        .toList(),
                   )
                 : const SizedBox.shrink(),
             user.languages.isNotEmpty
@@ -41,58 +41,12 @@ class UserEducation extends StatelessWidget {
                     children: user.languages
                         .asMap()
                         .entries
-                        .map((entry) =>
-                            _buildLanguage(entry.value, entry.key == 0))
+                        .map((entry) => BuildHelper.buildLanguage(
+                            entry.value, entry.key == 0))
                         .toList(),
                   )
                 : const SizedBox.shrink(),
           ],
         ));
-  }
-
-  Widget _buildLanguage(Language language, bool isShowTitle) {
-    String title = '${language.language.name} (${language.level.name})';
-    return _buildRow(isShowTitle ? 'Знание языков' : '', title);
-  }
-
-  Widget _buildEducation(Education education) {
-    return Column(
-      children: [
-        _buildRow('Образования', education.educationType.name),
-        _buildRow('Название учебного заведения', education.institution.name),
-        _buildRow('Специальность', education.speciality.name)
-      ],
-    );
-  }
-
-  Widget _buildRow(String key, String value) {
-    if (value.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text(
-              key,
-              textAlign: TextAlign.left,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(
-              value,
-              textAlign: TextAlign.right,
-              style: const TextStyle(fontSize: 16),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

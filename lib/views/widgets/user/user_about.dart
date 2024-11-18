@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/models/user.dart';
-
+import 'package:linkyou/core/helpers/build_helper.dart';
 class UserAbout extends StatelessWidget {
   final User user;
 
@@ -32,46 +32,19 @@ class UserAbout extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 15, top: 10),
                     child: Text(user.about!))
                 : const SizedBox.shrink(),
-            _buildRow('Рост', user.height != null ? '${user.height} см' : ''),
-            _buildRow('Вес', user.weight != null ? '${user.weight} кг' : ''),
-            _buildRow(
+            BuildHelper.buildRow(
+                'Рост', user.height != null ? '${user.height} см' : ''),
+            BuildHelper.buildRow(
+                'Вес', user.weight != null ? '${user.weight} кг' : ''),
+            BuildHelper.buildRow(
                 'Состоите ли в отношениях', user.relationship?.name ?? ''),
-            _buildRow('Ориентация', user.orientation?.name ?? ''),
-            _buildRow('Дети', user.children?.name ?? ''),
-            _buildRow('Отношение к курению', user.smoking?.name ?? ''),
-            _buildRow('Отношение к алкоголю', user.alcohol?.name ?? ''),
+            BuildHelper.buildRow('Ориентация', user.orientation?.name ?? ''),
+            BuildHelper.buildRow('Дети', user.children?.name ?? ''),
+            BuildHelper.buildRow(
+                'Отношение к курению', user.smoking?.name ?? ''),
+            BuildHelper.buildRow(
+                'Отношение к алкоголю', user.alcohol?.name ?? ''),
           ],
         ));
-  }
-
-  Widget _buildRow(String key, String value) {
-    if (value.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text(
-              key,
-              textAlign: TextAlign.left,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(
-              value,
-              textAlign: TextAlign.right, // Выравниваем значение вправо
-              style: const TextStyle(fontSize: 16),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

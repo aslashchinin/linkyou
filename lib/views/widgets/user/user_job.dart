@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/models/user.dart';
-
+import 'package:linkyou/core/helpers/build_helper.dart';
 class UserJob extends StatelessWidget {
   final User user;
 
@@ -27,41 +27,14 @@ class UserJob extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          _buildRow('Моя должность / профессия', user.job?.profession ?? ''),
-          _buildRow('Профессиональная область', user.job?.occupation ?? ''),
-          _buildRow('Работаю в компании', user.job?.companyName ?? ''),
-          _buildRow('Материальное положение', user.job?.finance.name ?? ''),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRow(String key, String value) {
-    if (value.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text(
-              key,
-              textAlign: TextAlign.left,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(
-              value,
-              textAlign: TextAlign.right, // Выравниваем значение вправо
-              style: const TextStyle(fontSize: 16),
-            ),
-          ),
+          BuildHelper.buildRow(
+              'Моя должность / профессия', user.job?.profession ?? ''),
+          BuildHelper.buildRow(
+              'Профессиональная область', user.job?.occupation ?? ''),
+          BuildHelper.buildRow(
+              'Работаю в компании', user.job?.companyName ?? ''),
+          BuildHelper.buildRow(
+              'Материальное положение', user.job?.finance.name ?? ''),
         ],
       ),
     );

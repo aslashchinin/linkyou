@@ -13,10 +13,10 @@ class Rating {
 
   factory Rating.fromJson(Map<String, dynamic> json) {
     return Rating(
-      score: json['score'] ?? 0,
-      likes: json['likes'] ?? 0,
-      views: json['views'] ?? 0,
-      code: json['code'] ?? '',
+      score: (json['score'] ?? 0.0) + 0.0,
+      likes: (json['likes'] ?? 0) + 0,
+      views: (json['views'] ?? 0) + 0,
+      code: json['code'] ?? 'error',
     );
   }
 
