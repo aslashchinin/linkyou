@@ -39,6 +39,15 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
   }
 
   @override
+  void didUpdateWidget(covariant UserScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (lastUserId != widget.userId) {
+      Provider.of<UserViewModel>(context, listen: false)
+          .loadUser(BigInt.from(widget.userId));
+    }
+  }
+
+  @override
   Widget buildContent(BuildContext context) {
     final viewModel = Provider.of<UserViewModel>(context);
     lastUserId = viewModel.user?.id;
