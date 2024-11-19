@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:linkyou/core/providers/auth_provider.dart';
+import 'package:linkyou/core/services/locator_service.dart';
 
 class ApiBase {
   static const String baseUrl = 'https://linkyou.ru/api/v2';
@@ -69,12 +71,17 @@ class ApiBase {
   }
 
   Map<String, String> _setHeaders() {
+    final authProvider = serviceLocator<AuthProvider>();
+
     final headers = <String, String>{
       'Content-Type': 'application/json',
     };
-    if (bearerToken != null) {
-      headers['Authorization'] = 'Bearer $bearerToken';
+
+    if (authProvider.token != null && authProvider.token!.isNotEmpty) {
+      headers['Authorization'] = 'Bearer ${authProvider.token}';
+      print('With token');
     }
+
     return headers;
   }
 
