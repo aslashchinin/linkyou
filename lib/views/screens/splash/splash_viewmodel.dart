@@ -34,6 +34,8 @@ class SplashViewModel extends ChangeNotifier {
     try {
       _currentUserStatus = CommonLoadingStatus.loading;
       notifyListeners();
+    
+      await Future.delayed(const Duration(seconds: 3)); 
 
       final response = await _repository.getCurrentUser();
       _currentUser = response.data;
