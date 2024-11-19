@@ -17,6 +17,10 @@ abstract class BaseUsersViewModel extends ChangeNotifier {
 
   int _currentListPage = 0;
   int get currentListPage => _currentListPage;
+  set currentListPage(int value) {
+    _currentListPage = value;
+    notifyListeners();
+  }
 
   @protected
   void setState(UserState newState) {

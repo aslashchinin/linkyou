@@ -14,6 +14,7 @@ class UsersDailyViewModel extends BaseUsersViewModel {
     );
 
     this.cityId = cityId;
+    currentListPage = 0;
   }
 
   Future<void> loadMoreUsers({int cityId = 0}) async {

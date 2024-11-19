@@ -112,6 +112,18 @@ class UserRepository implements UserRepositoryInterface {
   }
 
   @override
+  Future<RepositoryResponse<User>> getCurrentUser() async {
+    try {
+      final serviceResponse = await _userService.getCurrentUser();
+      final user = User.fromJson(serviceResponse.data);
+      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+      return RepositoryResponse(data: user, pagination: pagination);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
   Future<RepositoryResponse<List<Photo>>> getUserPhotos(BigInt id) async {
     try {
       final serviceResponse = await _userService.getUserPhotos(id);

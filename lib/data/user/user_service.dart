@@ -2,9 +2,12 @@ import 'dart:convert';
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
+import 'package:linkyou/core/providers/auth_provider.dart';
 
 class UserService extends ApiBase {
-  UserService({super.bearerToken});
+  UserService({required AuthProvider authProvider})
+      : super(authProvider: authProvider);
+
 
   Future<ServiceResponse<List<Map<String, dynamic>>>> getTopUsers(
       {Gender? gender, int page = 0}) async {
@@ -89,6 +92,15 @@ class UserService extends ApiBase {
 
   Future<ServiceResponse<Map<String, dynamic>>> getUser(BigInt id) async {
     final response = await get('/user/$id');
+
+    return ServiceResponse(
+      data: Map<String, dynamic>.from(json.decode(response.body)),
+      headers: response.headers,
+    );
+  }
+
+  Future<ServiceResponse<Map<String, dynamic>>> getCurrentUser() async {
+    final response = await get('/user/current');
 
     return ServiceResponse(
       data: Map<String, dynamic>.from(json.decode(response.body)),

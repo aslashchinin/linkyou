@@ -31,6 +31,8 @@ abstract class UserRepositoryInterface {
 
   Future<RepositoryResponse<User>> getUser(BigInt id);
 
+  Future<RepositoryResponse<User>> getCurrentUser();
+
   Future<RepositoryResponse<List<Photo>>> getUserPhotos(BigInt id);
 
   Future<RepositoryResponse<List<UserGift>>> getUserGifts(BigInt id);

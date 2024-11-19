@@ -10,15 +10,18 @@ import 'package:linkyou/views/blocks/form_login/form_login_viewmodel.dart';
 import 'package:linkyou/views/screens/user/user_viewmodel.dart';
 import 'package:linkyou/views/blocks/user_photos/user_photo_viewmodel.dart';
 import 'package:linkyou/views/blocks/gifts_slider/gifts_slider_viewmodel.dart';
+import 'package:linkyou/views/screens/splash/splash_viewmodel.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
+
 final serviceLocator = GetIt.instance;
 
 void setupTopUsersModule() {  
-  if (!serviceLocator.isRegistered<UserService>()) {
-    serviceLocator.registerLazySingleton(() => UserService());
-  }
   if (!serviceLocator.isRegistered<AuthProvider>()) {
     serviceLocator.registerLazySingleton(() => AuthProvider());
+  }
+
+  if (!serviceLocator.isRegistered<UserService>()) {
+    serviceLocator.registerLazySingleton(() => UserService(authProvider: serviceLocator<AuthProvider>()));
   }
 
   serviceLocator.registerLazySingleton<UserRepositoryInterface>(
@@ -51,5 +54,9 @@ void setupTopUsersModule() {
   );
   serviceLocator.registerFactory(
     () => GiftsSliderViewModel(repository: serviceLocator<UserRepositoryInterface>()),
+  );
+  serviceLocator.registerFactory(
+    () =>
+        SplashViewModel(repository: serviceLocator<UserRepositoryInterface>()),
   );
 }

@@ -7,13 +7,25 @@ import 'package:linkyou/core/models/user.dart';
 class AuthProvider with ChangeNotifier {
   bool _isAuthenticated = false;
   bool _isLoading = true;
+  
   User? _user;
   String? _token;
 
   User? get user => _user;
   String? get token => _token;
+  
+  set user(User? value) {
+    _user = value;
+    notifyListeners();
+  }
+
   bool get isAuthenticated => _isAuthenticated;
   bool get isLoading => _isLoading;
+
+  set isAuthenticated(bool value) {
+    _isAuthenticated = value;
+    notifyListeners();
+  }
 
   AuthProvider() {
     print('Load Auth Provider');

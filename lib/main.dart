@@ -70,7 +70,7 @@ class LinkYouApp extends StatelessWidget {
           create: (_) => serviceLocator<FormLoginViewModel>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => SplashViewModel(),
+          create: (_) => serviceLocator<SplashViewModel>(),
         ),
         ChangeNotifierProvider(
           create: (_) => serviceLocator<UserViewModel>(),
@@ -84,6 +84,7 @@ class LinkYouApp extends StatelessWidget {
       ],
       child: Consumer<AuthProvider>(
         builder: (context, authProvider, child) {
+          final authProvider = serviceLocator<AuthProvider>();
           return authProvider.isLoading ? const Center(child: CircularProgressBlue()) : MaterialApp(
             title: 'LinkYou Mobile Application',
             theme: ThemeData(

@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
-
+import 'package:linkyou/core/providers/auth_provider.dart';
 class ArticleService extends ApiBase {
-  ArticleService({super.bearerToken});
+  ArticleService({required AuthProvider authProvider})
+      : super(authProvider: authProvider);
 
   Future<ServiceResponse<Map<String, dynamic>>> getArticle(
       String articleId) async {
