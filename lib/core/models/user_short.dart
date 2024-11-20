@@ -6,7 +6,7 @@ import 'location_short.dart';
 import 'likes_short.dart';
 
 class UserShort {
-  final int id;
+  final BigInt id;
   final AvatarShort avatar;
   final String name;
   final GenderShort gender;
@@ -46,7 +46,7 @@ class UserShort {
 
   factory UserShort.fromJson(Map<String, dynamic> json) {
     return UserShort(
-      id: json['id'],
+      id: BigInt.from(json['id']),
       avatar: AvatarShort.fromJson(json['avatar']),
       name: json['name'],
       gender: GenderShort.fromJson(json['gender']),

@@ -1,6 +1,6 @@
 class Book {
   final int id;
-  final int userId;
+  final BigInt userId;
   final String name;
   final String author;
   final bool deleted;
@@ -18,7 +18,7 @@ class Book {
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(
       id: json['id'],
-      userId: json['user_id'],
+      userId: BigInt.from(json['user_id']),
       name: json['name'],
       author: json['author'],
       deleted: json['deleted'] == "true", // учитывая, что в JSON это строка

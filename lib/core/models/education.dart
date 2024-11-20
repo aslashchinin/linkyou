@@ -4,7 +4,7 @@ import 'speciality.dart';
 
 class Education {
   final int id;
-  final int userId;
+  final BigInt userId;
   final Speciality speciality;
   final EducationType educationType;
   final bool active;
@@ -26,7 +26,7 @@ class Education {
   factory Education.fromJson(Map<String, dynamic> json) {
     return Education(
       id: json['id'],
-      userId: json['user_id'],
+      userId: BigInt.from(json['user_id']),
       speciality: Speciality.fromJson(json['speciality']),
       educationType: EducationType.fromJson(json['educationType']),
       active: json['active'],

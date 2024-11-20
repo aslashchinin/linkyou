@@ -21,8 +21,9 @@ class RouteService {
   static const String about = '/about';
   static const String user = '/user';
   static const String likeYou = '/likeyou';
+  static const String userUblogs = '/user_ublogs';
 
-  static Map<String, WidgetBuilder> get routes {
+  static Map<String, WidgetBuilder> get routes {    
     return {
       welcome: (context) => const WelcomeScreen(),
       registration: (context) => const AuthScreen(initialTab: 1),
@@ -31,7 +32,8 @@ class RouteService {
       top: (context) => const TopScreen(),
       search: (context) => const SearchScreen(),
       about: (context) => const AboutScreen(),
-      user: (context) => UserScreen(userId: ModalRoute.of(context)!.settings.arguments as int),
+      user: (context) => UserScreen(
+          userId: ModalRoute.of(context)!.settings.arguments as BigInt),
       likeYou: (context) => const LikeYouScreen(),
     };
   }

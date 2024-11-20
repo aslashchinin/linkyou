@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
@@ -17,8 +16,8 @@ class UserService extends ApiBase {
       final response = await get(url);
 
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching top users: $e');
@@ -35,8 +34,8 @@ class UserService extends ApiBase {
       final response = await get(url);
 
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching daily users: $e');
@@ -52,8 +51,8 @@ class UserService extends ApiBase {
       final response = await get(url);
 
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching daily users cities: $e');
@@ -69,8 +68,8 @@ class UserService extends ApiBase {
       final response = await get(url);
 
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching new users: $e');
@@ -85,8 +84,8 @@ class UserService extends ApiBase {
     });
 
     return ServiceResponse(
-      data: Map<String, dynamic>.from(json.decode(response.body)),
-      headers: response.headers,
+      data: Map<String, dynamic>.from(response.data),
+      headers: response.headers.map,
     );
   }
 
@@ -94,8 +93,8 @@ class UserService extends ApiBase {
     final response = await get('/user/$id');
 
     return ServiceResponse(
-      data: Map<String, dynamic>.from(json.decode(response.body)),
-      headers: response.headers,
+      data: Map<String, dynamic>.from(response.data),
+      headers: response.headers.map,
     );
   }
 
@@ -103,8 +102,8 @@ class UserService extends ApiBase {
     final response = await get('/user/current');
 
     return ServiceResponse(
-      data: Map<String, dynamic>.from(json.decode(response.body)),
-      headers: response.headers,
+      data: Map<String, dynamic>.from(response.data),
+      headers: response.headers.map,
     );
   }
 
@@ -113,8 +112,8 @@ class UserService extends ApiBase {
     final response = await get('/photos/$id');
 
     return ServiceResponse(
-      data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-      headers: response.headers,
+      data: List<Map<String, dynamic>>.from(response.data),
+      headers: response.headers.map,
     );
   }
 
@@ -123,8 +122,8 @@ class UserService extends ApiBase {
     final response = await get('/gifts/$id');
 
     return ServiceResponse(
-      data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-      headers: response.headers,
+      data: List<Map<String, dynamic>>.from(response.data),
+      headers: response.headers.map,
     );
   }
 
@@ -132,8 +131,8 @@ class UserService extends ApiBase {
     final response = await get('/gifts');
 
     return ServiceResponse(
-      data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-      headers: response.headers,
+      data: List<Map<String, dynamic>>.from(response.data),
+      headers: response.headers.map,
     );
   }
 }

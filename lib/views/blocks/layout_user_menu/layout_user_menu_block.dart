@@ -16,6 +16,9 @@ class LayoutUserMenuBlock extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          onTap: () {
+            layoutMenuViewModel.userProfile(context, authProvider.user!.id);
+          },
           leading: GestureDetector(
             child: CircleAvatar(
               backgroundImage:

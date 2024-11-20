@@ -1,94 +1,73 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
 
 class ApiBase {
   static const String baseUrl = 'https://linkyou.ru/api/v2';
   String? bearerToken;
+  final Dio dio;
   final AuthProvider authProvider;
 
-  ApiBase({required this.authProvider}) {
-    bearerToken = authProvider.token; // Получаем токен из AuthProvider
+  ApiBase({required this.authProvider})
+      : dio = Dio(BaseOptions(
+          baseUrl: baseUrl,
+          contentType: Headers.jsonContentType,
+        )) {
+    bearerToken = authProvider.token;
+
+    dio.interceptors.add(InterceptorsWrapper(
+      onError: (DioException e, ErrorInterceptorHandler handler) {
+        print('Ошибка: ${e.response?.statusCode} - ${e.message}');
+        handler.next(e);
+      },
+    ));
+
+    // Устанавливаем общий заголовок Authorization
+    dio.options.headers['Authorization'] = 'Bearer $bearerToken';
   }
 
-  Future<http.Response> get(String endpoint) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl$endpoint'),
-      headers: _setHeaders(),
-    );
-
-    print(endpoint);
-
-    return _processResponse(response);
-  }
-
-  Future<http.Response> post(String endpoint,
-      {Map<String, dynamic>? body}) async {
-    // Создаем MultipartRequest
-    var request = http.MultipartRequest('POST', Uri.parse('$baseUrl$endpoint'));
-
-    // Устанавливаем заголовки, если необходимо
-    request.headers.addAll(_setHeaders());
-
-    // Добавляем поля из body в request, если body не null
-    if (body != null) {
-      body.forEach((key, value) {
-        // Проверяем тип значения, если оно строка, добавляем как текстовое поле
-        if (value is String) {
-          request.fields[key] = value;
-        } else if (value is int || value is double || value is bool) {
-          // Преобразуем примитивы в строку
-          request.fields[key] = value.toString();
-        } else {
-          // Если значение сложного типа, вы можете реализовать дополнительные проверки
-          throw Exception('Unsupported value type for form-data');
-        }
-      });
+  Future<Response> get(String endpoint) async {
+    try {
+      final response = await dio.get(endpoint);
+      print('GET $endpoint');
+      return _processResponse(response);
+    } on DioException catch (e) {
+      throw Exception('Ошибка при выполнении GET: $e');
     }
-
-    // Отправляем запрос
-    final streamedResponse = await request.send();
-
-    // Читаем ответ как обычный Response
-    final response = await http.Response.fromStream(streamedResponse);
-
-    // Обрабатываем ответ
-    return _processResponse(response);
   }
 
-  Future<http.Response> put(String endpoint,
-      {Map<String, dynamic>? body}) async {
-    final response = await http.put(
-      Uri.parse('$baseUrl$endpoint'),
-      headers: _setHeaders(),
-      body: jsonEncode(body),
-    );
-    return _processResponse(response);
-  }
-
-  Future<http.Response> delete(String endpoint) async {
-    final response = await http.delete(
-      Uri.parse('$baseUrl$endpoint'),
-      headers: _setHeaders(),
-    );
-    return _processResponse(response);
-  }
-
-  Map<String, String> _setHeaders() {
-    final headers = <String, String>{
-      'Content-Type': 'application/json',
-    };
-
-    if (bearerToken != null && bearerToken!.isNotEmpty) {
-      headers['Authorization'] = 'Bearer $bearerToken';
+  Future<Response> post(String endpoint, {Map<String, dynamic>? body}) async {
+    try {
+      final response = await dio.post(endpoint, data: body);
+      print('POST $endpoint');
+      return _processResponse(response);
+    } on DioException catch (e) {
+      throw Exception('Ошибка при выполнении POST: $e');
     }
-
-    return headers;
   }
 
-  http.Response _processResponse(http.Response response) {
-    if (response.statusCode < 200 || response.statusCode >= 300) {
-      throw Exception('Error: ${response.statusCode} ${response.body}');
+  Future<Response> put(String endpoint, {Map<String, dynamic>? body}) async {
+    try {
+      final response = await dio.put(endpoint, data: body);
+      print('PUT $endpoint');
+      return _processResponse(response);
+    } on DioException catch (e) {
+      throw Exception('Ошибка при выполнении PUT: $e');
+    }
+  }
+
+  Future<Response> delete(String endpoint) async {
+    try {
+      final response = await dio.delete(endpoint);
+      print('DELETE $endpoint');
+      return _processResponse(response);
+    } on DioException catch (e) {
+      throw Exception('Ошибка при выполнении DELETE: $e');
+    }
+  }
+
+  Response _processResponse(Response response) {
+    if (response.statusCode! < 200 || response.statusCode! >= 300) {
+      throw Exception('Error: ${response.statusCode} ${response.data}');
     }
     return response;
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/models/user.dart';
+import 'package:linkyou/views/widgets/tiles/music_tile.dart';
 
 class UserMusic extends StatelessWidget {
   final User user;
@@ -27,6 +28,10 @@ class UserMusic extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
+          Column(
+            children:
+                user.music!.map((music) => MusicTile(music: music)).toList(),
+          )
         ],
       ),
     );

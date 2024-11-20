@@ -1,9 +1,9 @@
-import 'user.dart';
+import 'user_short.dart';
 import 'ublog_photo.dart';
 
 class UblogPost {
   final int id;
-  final User user;
+  final UserShort user;
   final String text;
   final String textShort;
   final List<String> tags;
@@ -37,7 +37,7 @@ class UblogPost {
   factory UblogPost.fromJson(Map<String, dynamic> json) {
     return UblogPost(
       id: json['id'],
-      user: User.fromJson(json['user']),
+      user: UserShort.fromJson(json['user']),
       text: json['text'],
       textShort: json['text_short'],
       tags: List<String>.from(json['tags']),

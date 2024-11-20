@@ -14,12 +14,13 @@ class UblogRepository implements UblogRepositoryInterface {
 
   @override
   Future<RepositoryResponse<List<UblogPost>>> getUblogsList(
-      String userId) async {
+      BigInt userId, int? limit) async {
     try {
-      final serviceResponse = await _ublogService.getUblogsList(userId);
+      final serviceResponse = await _ublogService.getUblogsList(userId, limit);
       final ublogs =
           serviceResponse.data.map((json) => UblogPost.fromJson(json)).toList();
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+
       return RepositoryResponse(data: ublogs, pagination: pagination);
     } catch (e) {
       rethrow;
@@ -66,7 +67,7 @@ class UblogRepository implements UblogRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<void>> deleteUblog(String ublogId) async {
+  Future<RepositoryResponse<void>> deleteUblog(BigInt ublogId) async {
     try {
       final serviceResponse = await _ublogService.deleteUblog(ublogId);
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
@@ -78,7 +79,7 @@ class UblogRepository implements UblogRepositoryInterface {
 
   @override
   Future<RepositoryResponse<UblogPost>> editUblog(
-      String ublogId, String text) async {
+      BigInt ublogId, String text) async {
     try {
       final serviceResponse = await _ublogService.editUblog(ublogId, text);
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
@@ -91,7 +92,7 @@ class UblogRepository implements UblogRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<UblogPost>> getUblog(String ublogId) async {
+  Future<RepositoryResponse<UblogPost>> getUblog(BigInt ublogId) async {
     try {
       final serviceResponse = await _ublogService.getUblog(ublogId);
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
@@ -104,7 +105,7 @@ class UblogRepository implements UblogRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<void>> pinUblog(String ublogId) async {
+  Future<RepositoryResponse<void>> pinUblog(BigInt ublogId) async {
     try {
       final serviceResponse = await _ublogService.pinUblog(ublogId);
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
@@ -115,7 +116,7 @@ class UblogRepository implements UblogRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<void>> unpinUblog(String ublogId) async {
+  Future<RepositoryResponse<void>> unpinUblog(BigInt ublogId) async {
     try {
       final serviceResponse = await _ublogService.unpinUblog(ublogId);
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
@@ -127,7 +128,7 @@ class UblogRepository implements UblogRepositoryInterface {
 
   @override
   Future<RepositoryResponse<List<UblogComment>>> getUblogComments(
-      String ublogId) async {
+      BigInt ublogId) async {
     try {
       final serviceResponse = await _ublogService.getUblogComments(ublogId);
       final comments = serviceResponse.data
@@ -142,7 +143,7 @@ class UblogRepository implements UblogRepositoryInterface {
 
   @override
   Future<RepositoryResponse<void>> addComment(
-      String ublogId, String comment) async {
+      BigInt ublogId, String comment) async {
     try {
       final serviceResponse = await _ublogService.addComment(ublogId, comment);
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);

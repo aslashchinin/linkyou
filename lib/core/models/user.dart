@@ -24,7 +24,7 @@ import 'pet.dart';
 import 'music.dart';
 
 class User {
-  final int id;
+  final BigInt id;
   final Avatar avatar;
   final String name;
   final Gender gender;
@@ -113,67 +113,69 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     try {
       return User(
-        id: json['id'],
-      avatar: Avatar.fromJson(json['avatar']),
-      name: json['name'],
-      gender: Gender.fromJson(json['gender']),
-      role: json['role'],
-      isInvisible: json['is_invisible'] ?? false,
-      roleStatus: json['role_status'],
-      lastAuth: json['last_auth'],
-      isTop100: json['is_top100'] ?? false,
-      isPremium: json['is_premium'] ?? false,
-      isVip: json['is_vip'] ?? false,
-      nationality: json['nationality'] != null
-          ? Nationality.fromJson(json['nationality'])
-          : null,
-      goal: Goal.fromJson(json['goal']),
-      lookingFor: LookingFor.fromJson(json['lookingFor']),
-      orientation: json['orientation'] != null
-          ? Orientation.fromJson(json['orientation'])
-          : null,
-      children:
-          json['children'] != null ? Children.fromJson(json['children']) : null,
-      relationship: json['relationship'] != null
-          ? Relationship.fromJson(json['relationship'])
-          : null,
-      smoking:
-          json['smoking'] != null ? Smoking.fromJson(json['smoking']) : null,
-      alcohol:
-          json['alcohol'] != null ? Alcohol.fromJson(json['alcohol']) : null,
-      education: json['education'] != null
-          ? List<Education>.from(
-              json['education'].map((x) => Education.fromJson(x)))
-          : null,
-      age: Age.fromJson(json['age']),
-      books: json['books'] != null
-          ? List<Book>.from(json['books'].map((x) => Book.fromJson(x)))
-          : [],
-      pets: json['pets'] != null
-          ? List<Pet>.from(json['pets'].map((x) => Pet.fromJson(x)))
-          : [],
-      music: json['music'] != null
-          ? List<Music>.from(json['music'].map((x) => Music.fromJson(x)))
-          : [],
-      height: json['height'],
-      weight: json['weight'],
-      about: json['about'],
-      job: json['job'] != null ? Job.fromJson(json['job']) : null,
-      location: Location.fromJson(json['location']),
-      birthday: Birthday.fromJson(json['birthday']),
-      languages: List<Language>.from(
-          json['languages'].map((x) => Language.fromJson(x))),
-      rating: json['rating'] != null ? Rating.fromJson(json['rating']) : null,
-      gifts: json['gifts'] != null ? UserGifts.fromJson(json['gifts']) : null,
-      interests: Interests.fromJson(json['interests']),
-      likes: Likes.fromJson(json['likes']),
-      photosCount: json['photos_count'],
-      isFavorited: json['is_favorited'],
-      isBlacklisted: json['is_blacklisted'],
-      ubLogsCount: json['ublogs_count'],
-      isOnline: json['is_online'],
-      religion:
-          json['religion'] != null ? Religion.fromJson(json['religion']) : null,
+        id: BigInt.from(json['id']),
+        avatar: Avatar.fromJson(json['avatar']),
+        name: json['name'],
+        gender: Gender.fromJson(json['gender']),
+        role: json['role'],
+        isInvisible: json['is_invisible'] ?? false,
+        roleStatus: json['role_status'],
+        lastAuth: json['last_auth'],
+        isTop100: json['is_top100'] ?? false,
+        isPremium: json['is_premium'] ?? false,
+        isVip: json['is_vip'] ?? false,
+        nationality: json['nationality'] != null
+            ? Nationality.fromJson(json['nationality'])
+            : null,
+        goal: Goal.fromJson(json['goal']),
+        lookingFor: LookingFor.fromJson(json['lookingFor']),
+        orientation: json['orientation'] != null
+            ? Orientation.fromJson(json['orientation'])
+            : null,
+        children: json['children'] != null
+            ? Children.fromJson(json['children'])
+            : null,
+        relationship: json['relationship'] != null
+            ? Relationship.fromJson(json['relationship'])
+            : null,
+        smoking:
+            json['smoking'] != null ? Smoking.fromJson(json['smoking']) : null,
+        alcohol:
+            json['alcohol'] != null ? Alcohol.fromJson(json['alcohol']) : null,
+        education: json['education'] != null
+            ? List<Education>.from(
+                json['education'].map((x) => Education.fromJson(x)))
+            : null,
+        age: Age.fromJson(json['age']),
+        books: json['books'] != null
+            ? List<Book>.from(json['books'].map((x) => Book.fromJson(x)))
+            : [],
+        pets: json['pets'] != null
+            ? List<Pet>.from(json['pets'].map((x) => Pet.fromJson(x)))
+            : [],
+        music: json['music'] != null
+            ? List<Music>.from(json['music'].map((x) => Music.fromJson(x)))
+            : [],
+        height: json['height'],
+        weight: json['weight'],
+        about: json['about'],
+        job: json['job'] != null ? Job.fromJson(json['job']) : null,
+        location: Location.fromJson(json['location']),
+        birthday: Birthday.fromJson(json['birthday']),
+        languages: List<Language>.from(
+            json['languages'].map((x) => Language.fromJson(x))),
+        rating: json['rating'] != null ? Rating.fromJson(json['rating']) : null,
+        gifts: json['gifts'] != null ? UserGifts.fromJson(json['gifts']) : null,
+        interests: Interests.fromJson(json['interests']),
+        likes: Likes.fromJson(json['likes']),
+        photosCount: json['photos_count'],
+        isFavorited: json['is_favorited'],
+        isBlacklisted: json['is_blacklisted'],
+        ubLogsCount: json['ublogs_count'],
+        isOnline: json['is_online'],
+        religion: json['religion'] != null
+            ? Religion.fromJson(json['religion'])
+            : null,
       );
     } catch (e, stackTrace) {
       print('Ошибка: $e');

@@ -1,6 +1,6 @@
 class Institution {
   final int id;
-  final int userId;
+  final BigInt userId;
   final String name;
   final bool active;
   final bool deleted;
@@ -16,7 +16,7 @@ class Institution {
   factory Institution.fromJson(Map<String, dynamic> json) {
     return Institution(
       id: json['id'],
-      userId: json['user_id'],
+      userId: BigInt.from(json['user_id']),
       name: json['name'],
       active: json['active'],
       deleted: json['deleted'],

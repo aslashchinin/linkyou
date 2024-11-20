@@ -20,22 +20,24 @@ import 'package:linkyou/views/widgets/user/user_books.dart';
 import 'package:linkyou/views/widgets/user/user_job.dart';
 import 'package:linkyou/views/widgets/user/user_pets.dart';
 import 'package:linkyou/views/widgets/user/user_music.dart';
+import 'package:linkyou/views/blocks/user_ublogs/user_ublogs_block.dart';
+
 
 class UserScreen extends ScreenBase {
   const UserScreen({super.key, required this.userId});
-  final int userId;
+  final BigInt userId;
   @override
   UserScreenState createState() => UserScreenState();
 }
 
 class UserScreenState extends ScreenBaseState<UserScreen> {
-  int? lastUserId;
+  BigInt? lastUserId;
 
   @override
   void initState() {
     super.initState();
     Provider.of<UserViewModel>(context, listen: false)
-        .loadUser(BigInt.from(widget.userId));
+        .loadUser(widget.userId);
   }
 
   @override
@@ -43,7 +45,7 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
     super.didUpdateWidget(oldWidget);
     if (lastUserId != widget.userId) {
       Provider.of<UserViewModel>(context, listen: false)
-          .loadUser(BigInt.from(widget.userId));
+          .loadUser(widget.userId);
     }
   }
 
@@ -73,7 +75,11 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
                 const BlockDivider(),
                 UserPhotoBlock(user: viewModel.user!),
                 const BlockDivider(),
-                UserGifts(user: viewModel.user!),
+                UserGifts(user: viewModel.user!),                
+                if (viewModel.user!.ubLogsCount > 0) ...[
+                  const BlockDivider(),
+                  UserUblogsBlock(user: viewModel.user!),
+                ],
                 if (viewModel.user!.about != null) ...[
                   const BlockDivider(),
                   UserAbout(user: viewModel.user!),

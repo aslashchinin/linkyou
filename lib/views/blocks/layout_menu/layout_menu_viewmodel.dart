@@ -34,6 +34,11 @@ class LayoutMenuViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void userProfile(BuildContext context, BigInt userId) {
+    Navigator.pushNamed(context, RouteService.user, arguments: userId);
+    notifyListeners();
+  }
+
   void logout(BuildContext context) {
     Provider.of<AuthProvider>(context, listen: false).logout();
     Navigator.pushNamed(context, RouteService.home);

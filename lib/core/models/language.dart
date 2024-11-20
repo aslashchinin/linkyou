@@ -7,7 +7,7 @@ class Language {
   final LanguageData language;
   final String lastUpdate;
   final Level level;
-  final int userId;
+  final BigInt userId;
 
   Language({
     required this.deleted,
@@ -25,7 +25,7 @@ class Language {
       language: LanguageData.fromJson(json['language']),
       lastUpdate: json['last_update'],
       level: Level.fromJson(json['level']),
-      userId: json['user_id'],
+      userId: BigInt.from(json['user_id']),
     );
   }
 

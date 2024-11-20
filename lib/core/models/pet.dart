@@ -2,7 +2,7 @@ import 'src.dart';
 
 class Pet {
   final int id;
-  final int userId;
+  final BigInt userId;
   final String name;
   final String type;
   final String description;
@@ -20,11 +20,11 @@ class Pet {
   factory Pet.fromJson(Map<String, dynamic> json) {
     return Pet(
       id: json['id'],
-      userId: json['user_id'],
+      userId: BigInt.from(json['user_id']),
       name: json['name'],
       type: json['type'],
       description: json['description'] ?? '',
-      avatar: Src.fixUrl(json['avatar'] ?? "assets/no_pet_avatar.png"),
+      avatar: Src.fixUrl(json['avatar']),
     );
   }
 

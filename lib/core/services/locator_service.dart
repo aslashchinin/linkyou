@@ -12,6 +12,10 @@ import 'package:linkyou/views/blocks/user_photos/user_photo_viewmodel.dart';
 import 'package:linkyou/views/blocks/gifts_slider/gifts_slider_viewmodel.dart';
 import 'package:linkyou/views/screens/splash/splash_viewmodel.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
+import 'package:linkyou/views/blocks/user_ublogs/user_ublogs_viewmodel.dart';
+import 'package:linkyou/data/ublog/ublog_repository_interface.dart';
+import 'package:linkyou/data/ublog/ublog_service.dart';
+import 'package:linkyou/data/ublog/ublog_repository.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -24,8 +28,16 @@ void setupTopUsersModule() {
     serviceLocator.registerLazySingleton(() => UserService(authProvider: serviceLocator<AuthProvider>()));
   }
 
+  if (!serviceLocator.isRegistered<UblogService>()) {
+    serviceLocator.registerLazySingleton(
+        () => UblogService(authProvider: serviceLocator<AuthProvider>()));
+  }
+
   serviceLocator.registerLazySingleton<UserRepositoryInterface>(
     () => UserRepository(userService: serviceLocator<UserService>()),
+  );
+  serviceLocator.registerLazySingleton<UblogRepositoryInterface>(
+    () => UblogRepository(ublogService: serviceLocator<UblogService>()),
   );
   serviceLocator.registerFactory(
     () => UsersTopViewModel(
@@ -58,5 +70,9 @@ void setupTopUsersModule() {
   serviceLocator.registerFactory(
     () =>
         SplashViewModel(repository: serviceLocator<UserRepositoryInterface>()),
+  );
+  serviceLocator.registerFactory(
+    () => UserUblogsViewModel(
+        repository: serviceLocator<UblogRepositoryInterface>()),
   );
 }

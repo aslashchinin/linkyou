@@ -9,13 +9,16 @@ class UblogService extends ApiBase {
       : super(authProvider: authProvider);
 
   Future<ServiceResponse<List<Map<String, dynamic>>>> getUblogsList(
-      String userId) async {
+      BigInt userId, int? limit) async {
     try {
       String url = '/ublogs/$userId';
+      if (limit != null) {
+        url += '?limit=$limit';
+      }
       final response = await get(url);
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching ublogs list: $e');
@@ -27,8 +30,8 @@ class UblogService extends ApiBase {
       String url = '/ublogs/all';
       final response = await get(url);
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching all ublogs: $e');
@@ -40,8 +43,8 @@ class UblogService extends ApiBase {
       String url = '/ublogs/popular';
       final response = await get(url);
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching popular ublogs: $e');
@@ -54,8 +57,8 @@ class UblogService extends ApiBase {
       String url = '/ublogs/add';
       final response = await post(url, body: input.toJson());
       return ServiceResponse(
-        data: json.decode(response.body),
-        headers: response.headers,
+        data: json.decode(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error adding ublog: $e');
@@ -63,13 +66,13 @@ class UblogService extends ApiBase {
   }
 
   Future<ServiceResponse<Map<String, dynamic>>> deleteUblog(
-      String ublogId) async {
+      BigInt ublogId) async {
     try {
       String url = '/ublog/$ublogId/delete';
       final response = await post(url);
       return ServiceResponse(
-        data: json.decode(response.body),
-        headers: response.headers,
+        data: json.decode(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error deleting ublog: $e');
@@ -77,40 +80,40 @@ class UblogService extends ApiBase {
   }
 
   Future<ServiceResponse<Map<String, dynamic>>> editUblog(
-      String ublogId, String text) async {
+      BigInt ublogId, String text) async {
     try {
       String url = '/ublog/$ublogId/edit';
       final response = await post(url, body: {'text': text});
       return ServiceResponse(
-        data: json.decode(response.body),
-        headers: response.headers,
+        data: json.decode(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error editing ublog: $e');
     }
   }
 
-  Future<ServiceResponse<Map<String, dynamic>>> getUblog(String ublogId) async {
+  Future<ServiceResponse<Map<String, dynamic>>> getUblog(BigInt ublogId) async {
     try {
       String url = '/ublog/$ublogId';
       final response = await get(url);
       return ServiceResponse(
-        data: json.decode(response.body),
-        headers: response.headers,
+        data: json.decode(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching ublog: $e');
     }
   }
 
-  Future<ServiceResponse<Map<String, dynamic>>> pinUblog(String ublogId) async {
+  Future<ServiceResponse<Map<String, dynamic>>> pinUblog(BigInt ublogId) async {
     try {
       String url = '/ublog/$ublogId/pin';
       final response = await post(url);
 
       return ServiceResponse(
-        data: json.decode(response.body),
-        headers: response.headers,
+        data: json.decode(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error pinning ublog: $e');
@@ -118,13 +121,13 @@ class UblogService extends ApiBase {
   }
 
   Future<ServiceResponse<Map<String, dynamic>>> unpinUblog(
-      String ublogId) async {
+      BigInt ublogId) async {
     try {
       String url = '/ublog/$ublogId/unpin';
       final response = await post(url);
       return ServiceResponse(
-        data: json.decode(response.body),
-        headers: response.headers,
+        data: json.decode(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error unpinning ublog: $e');
@@ -132,13 +135,13 @@ class UblogService extends ApiBase {
   }
 
   Future<ServiceResponse<List<Map<String, dynamic>>>> getUblogComments(
-      String ublogId) async {
+      BigInt ublogId) async {
     try {
       String url = '/ublog/$ublogId/comments';
       final response = await get(url);
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching ublog comments: $e');
@@ -146,13 +149,13 @@ class UblogService extends ApiBase {
   }
 
   Future<ServiceResponse<Map<String, dynamic>>> addComment(
-      String ublogId, String comment) async {
+      BigInt ublogId, String comment) async {
     try {
       String url = '/ublog/$ublogId/comment/add';
       final response = await post(url, body: {'comment': comment});
       return ServiceResponse(
-        data: json.decode(response.body),
-        headers: response.headers,
+        data: json.decode(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error adding comment to ublog: $e');

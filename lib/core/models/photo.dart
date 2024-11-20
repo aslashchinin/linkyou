@@ -2,7 +2,7 @@ import 'package:linkyou/core/models/src.dart';
 
 class Photo {
   final int id;
-  final int userId;
+  final BigInt userId;
   final String datetime;
   final String description;
   final Src src;
@@ -26,7 +26,7 @@ class Photo {
   factory Photo.fromJson(Map<String, dynamic> json) {
     return Photo(
       id: json['id'],
-      userId: json['user_id'],
+      userId: BigInt.from(json['user_id']),
       datetime: json['datetime'],
       description: json['description'] ?? "",
       src: Src.fromJson(json['src']),

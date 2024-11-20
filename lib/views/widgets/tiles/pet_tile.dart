@@ -9,6 +9,7 @@ class PetTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(pet.avatar);
+
     return Container(
       padding: const EdgeInsets.all(10),
       child: Row(
@@ -16,7 +17,12 @@ class PetTile extends StatelessWidget {
           SizedBox(
             width: 100,
             height: 100,
-            child: Image.network(pet.avatar),
+            child: pet.avatar.isNotEmpty
+                ? Image.network(pet.avatar)
+                : const Image(
+                    image: AssetImage('assets/no_pet_avatar.png'),
+                    fit: BoxFit.cover,
+                  ),
           ),
           const SizedBox(width: 16),
           Column(

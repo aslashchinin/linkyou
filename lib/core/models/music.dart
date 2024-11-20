@@ -3,7 +3,7 @@ class Music {
   final String datetime;
   final String link;
   final String source;
-  final int userId;
+  final BigInt userId;
 
   Music({
     required this.id,
@@ -19,7 +19,7 @@ class Music {
       datetime: json['datetime'],
       link: json['link'],
       source: json['source'],
-      userId: json['user_id'],
+      userId: BigInt.from(json['user_id']),
     );
   }
 

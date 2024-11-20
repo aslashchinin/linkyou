@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/models/education.dart';
 import 'package:linkyou/core/models/language.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
 
 class BuildHelper {
   static Widget buildLanguage(Language language, bool isShowTitle) {
@@ -78,6 +80,71 @@ class BuildHelper {
         side: const BorderSide(color: Colors.grey),
         borderRadius: BorderRadius.circular(20),
       ),
+    );
+  }
+
+  // Виджет для обычного изображения
+  static Widget buildImage(String url, double width) {
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      width: width,
+      height: 100,
+      child: CachedNetworkImage(
+        placeholder: (context, url) =>
+            const Center(child: CircularProgressBlue()),
+        fadeInDuration: Duration.zero,
+        fadeOutDuration: Duration.zero,
+        imageUrl: url,
+        errorWidget: (context, url, error) => const Icon(Icons.error),
+        height: 100,
+        imageBuilder: (context, imageProvider) => Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  // Виджет для последнего изображения с наложением текста
+  static Widget buildLastImageWithOverlay(String url, double width,
+      {int remaining = 0}) {
+    return Stack(
+      children: [
+        buildImage(url, width),
+        Positioned.fill(
+          left: 5,
+          right: 5,
+          child: Container(
+            width: width,
+            height: 100,
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.4),
+            ),
+          ),
+        ),
+
+        // Текст с количеством оставшихся фотографий
+        remaining > 0
+            ? Positioned.fill(
+                child: Center(
+                  child: Text(
+                    '+$remaining',
+                    style: const TextStyle(
+                      color: Colors.white, // Белый текст
+                      fontSize: 24, // Размер шрифта
+                      fontWeight: FontWeight.bold, // Жирный шрифт
+                    ),
+                  ),
+                ),
+              )
+            : const SizedBox(),
+      ],
     );
   }
 }

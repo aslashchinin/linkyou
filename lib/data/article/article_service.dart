@@ -1,7 +1,7 @@
-import 'dart:convert';
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
+
 class ArticleService extends ApiBase {
   ArticleService({required AuthProvider authProvider})
       : super(authProvider: authProvider);
@@ -11,8 +11,8 @@ class ArticleService extends ApiBase {
     try {
       final response = await get('/article/$articleId');
       return ServiceResponse(
-        data: Map<String, dynamic>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: Map<String, dynamic>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching article: $e');
@@ -23,8 +23,8 @@ class ArticleService extends ApiBase {
     try {
       final response = await get('/articles/');
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching articles list: $e');
@@ -36,8 +36,8 @@ class ArticleService extends ApiBase {
     try {
       final response = await get('/article/$articleId/comments');
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.body)),
-        headers: response.headers,
+        data: List<Map<String, dynamic>>.from(response.data),
+        headers: response.headers.map,
       );
     } catch (e) {
       throw Exception('Error fetching article comments: $e');
