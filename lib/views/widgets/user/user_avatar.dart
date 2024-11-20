@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:linkyou/core/models/user.dart';
 import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
 
 class UserAvatar extends StatelessWidget {
