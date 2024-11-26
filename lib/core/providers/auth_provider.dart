@@ -13,7 +13,12 @@ class AuthProvider with ChangeNotifier {
 
   User? get user => _user;
   String? get token => _token;
-  
+
+  set token(String? value) {
+    _token = value;
+    notifyListeners();
+  }
+
   set user(User? value) {
     _user = value;
     notifyListeners();
@@ -47,6 +52,7 @@ class AuthProvider with ChangeNotifier {
     
 
     if (_token != null && _user != null) {
+      print('User is authenticated');
       _isAuthenticated = true;
     }
 

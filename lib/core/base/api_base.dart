@@ -3,8 +3,7 @@ import 'package:linkyou/core/providers/auth_provider.dart';
 
 class ApiBase {
   static const String baseUrl = 'https://linkyou.ru/api/v2';
-  String? bearerToken;
-  
+
   final Dio dio;
   final AuthProvider authProvider;
 
@@ -13,44 +12,57 @@ class ApiBase {
           baseUrl: baseUrl,
           contentType: Headers.jsonContentType,
         )) {
-    bearerToken = authProvider.token;
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          print("Запрос: ${options.method} ${options.path}");
+          print("Параметры: ${options.queryParameters}");
+          print("Данные: ${options.data}");
+          print("Заголовки: ${options.headers}");
+          return handler.next(options);
+        },
+        onResponse: (response, handler) {
+          print("Ответ: ${response.statusCode} ${response.data}");
+          return handler.next(response);
+        },
+        onError: (DioError e, handler) {
+          print("Ошибка: ${e.message}");
+          return handler.next(e);
+        },
+      ),
+    );
 
-    dio.interceptors.add(InterceptorsWrapper(
-      onError: (DioException e, ErrorInterceptorHandler handler) {
-        print('Ошибка: ${e.response?.statusCode} - ${e.message}');
-        handler.next(e);
-      },
-    ));
-
-    // Устанавливаем общий заголовок Authorization
-    if (bearerToken != null) {
-      dio.options.headers['Authorization'] = 'Bearer $bearerToken';
+    if (authProvider.token != null && authProvider.token!.isNotEmpty) {
+      print('Bearer token: ${authProvider.token}');
+      dio.options.headers['Authorization'] = 'Bearer ${authProvider.token}';
     }
   }
 
   Future<Response> get(String endpoint) async {
     try {
       final response = await dio.get(endpoint);
-      print('GET $endpoint');
       return _processResponse(response);
     } on DioException catch (e) {
+      print(dio.options.headers);
       throw Exception('Ошибка при выполнении GET: $e');
     }
   }
 
   Future<Response> post(String endpoint, {Map<String, dynamic>? body}) async {
     try {
-      final response = await dio.post(endpoint, data: body);
-      print('POST $endpoint');
+      final response =
+          await dio.post(endpoint, data: FormData.fromMap(body ?? {}));
       return _processResponse(response);
     } on DioException catch (e) {
+      print(dio.options.headers);
       throw Exception('Ошибка при выполнении POST: $e');
     }
   }
 
   Future<Response> put(String endpoint, {Map<String, dynamic>? body}) async {
     try {
-      final response = await dio.put(endpoint, data: body);
+      final response =
+          await dio.put(endpoint, data: FormData.fromMap(body ?? {}));
       print('PUT $endpoint');
       return _processResponse(response);
     } on DioException catch (e) {

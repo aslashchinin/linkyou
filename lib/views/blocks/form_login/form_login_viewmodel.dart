@@ -20,7 +20,7 @@ class FormLoginViewModel extends ChangeNotifier {
         login: email,
         password: password,
       ));
-      
+
       final authProvider = serviceLocator<AuthProvider>();
       authProvider.login(response.data);
 
@@ -28,7 +28,6 @@ class FormLoginViewModel extends ChangeNotifier {
         MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
     } catch (e) {
-      print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Авторизация не удалась')),
       );

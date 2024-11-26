@@ -39,7 +39,8 @@ class _SplashScreenState extends State<SplashScreen> {
         viewModel.navigateToHome(context);
       } else if (viewModel.currentUserStatus == CommonLoadingStatus.error) {
         authProvider.isAuthenticated = false;
-        
+        authProvider.user = null;
+        authProvider.token = null;
         viewModel.navigateToWelcome(context);
       }
     });
