@@ -76,7 +76,8 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
                 UserPhotoBlock(user: viewModel.user!),
                 const BlockDivider(),
                 UserGifts(user: viewModel.user!),                
-                if (viewModel.user!.ublogPost != null) ...[
+                if (viewModel.user!.ublogPost != null &&
+                    viewModel.user!.ubLogsCount > 0) ...[
                   const BlockDivider(),
                   UserUblog(
                       ublogPost: viewModel.user!.ublogPost!,

@@ -36,14 +36,13 @@ class LinkYouApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [        
+      providers: [
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => serviceLocator<UsersTopViewModel>(),
         ),
-        
         ChangeNotifierProvider<WelcomeViewModel>(
           create: (_) => WelcomeViewModel(),
         ),
@@ -52,7 +51,7 @@ class LinkYouApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<FormRegistrationViewModel>(
           create: (_) => FormRegistrationViewModel(),
-        ),        
+        ),
         ChangeNotifierProvider<FormPasswordRecoveryViewModel>(
           create: (_) => FormPasswordRecoveryViewModel(),
         ),
@@ -90,19 +89,21 @@ class LinkYouApp extends StatelessWidget {
       child: Consumer<AuthProvider>(
         builder: (context, authProvider, child) {
           final authProvider = serviceLocator<AuthProvider>();
-          return authProvider.isLoading ? const Center(child: CircularProgressBlue()) : MaterialApp(
-            title: 'LinkYou Mobile Application',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-              appBarTheme: const AppBarTheme(
-                iconTheme: IconThemeData(
-                  color: Colors.blue,
-                ),
-              ),
-            ),
-            home: SplashScreen(authProvider: authProvider),
-            routes: RouteService.routes,
-          );
+          return authProvider.isLoading
+              ? const Center(child: CircularProgressBlue())
+              : MaterialApp(
+                  title: 'LinkYou Mobile Application',
+                  theme: ThemeData(
+                    primarySwatch: Colors.blue,
+                    appBarTheme: const AppBarTheme(
+                      iconTheme: IconThemeData(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  home: SplashScreen(authProvider: authProvider),
+                  routes: RouteService.routes,
+                );
         },
       ),
     );

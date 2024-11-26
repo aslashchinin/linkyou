@@ -5,7 +5,6 @@ import 'package:linkyou/core/models/pagination_info.dart';
 import 'package:linkyou/core/responses/repository_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/models/city_highlighted.dart';
-import 'package:linkyou/core/models/login.dart';
 import 'package:linkyou/core/models/user.dart';
 import 'package:linkyou/core/models/photo.dart';
 import 'package:linkyou/core/models/user_gift.dart';
@@ -76,22 +75,6 @@ class UserRepository implements UserRepositoryInterface {
           serviceResponse.data.map((json) => UserShort.fromJson(json)).toList();
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
       return RepositoryResponse(data: users, pagination: pagination);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<RepositoryResponse<Login>> login(String email, String password) async {
-    try {
-      final serviceResponse = await _userService.login(email, password);
-      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
-      final login = Login.fromJson(serviceResponse.data);
-
-      return RepositoryResponse(
-        data: login,
-        pagination: pagination,
-      );
     } catch (e) {
       rethrow;
     }

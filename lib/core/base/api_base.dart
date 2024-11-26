@@ -4,6 +4,7 @@ import 'package:linkyou/core/providers/auth_provider.dart';
 class ApiBase {
   static const String baseUrl = 'https://linkyou.ru/api/v2';
   String? bearerToken;
+  
   final Dio dio;
   final AuthProvider authProvider;
 
@@ -22,7 +23,9 @@ class ApiBase {
     ));
 
     // Устанавливаем общий заголовок Authorization
-    dio.options.headers['Authorization'] = 'Bearer $bearerToken';
+    if (bearerToken != null) {
+      dio.options.headers['Authorization'] = 'Bearer $bearerToken';
+    }
   }
 
   Future<Response> get(String endpoint) async {

@@ -76,19 +76,6 @@ class UserService extends ApiBase {
     }
   }
 
-  Future<ServiceResponse<Map<String, dynamic>>> login(
-      String email, String password) async {
-    final response = await post('/auth/signin', body: {
-      'login': email,
-      'password': password,
-    });
-
-    return ServiceResponse(
-      data: Map<String, dynamic>.from(response.data),
-      headers: response.headers.map,
-    );
-  }
-
   Future<ServiceResponse<Map<String, dynamic>>> getUser(BigInt id) async {
     final response = await get('/user/$id');
 

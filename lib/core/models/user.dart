@@ -179,7 +179,8 @@ class User {
         religion: json['religion'] != null
             ? Religion.fromJson(json['religion'])
             : null,
-        ublogPost: json['ublogs']['last'] != null
+        ublogPost:
+            json['ublogs']['last'] != null && json['ublogs']['last'].length > 0
             ? UblogPost.fromJson(json['ublogs']['last'])
             : null,
       );

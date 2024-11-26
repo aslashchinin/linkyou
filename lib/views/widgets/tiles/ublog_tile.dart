@@ -29,7 +29,9 @@ class UblogTile extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         // Text with emoji
-        HtmlWidget(ublogPost.text, customStylesBuilder: (element) {
+        HtmlWidget(
+            "<div style='white-space: pre-wrap;'>${ublogPost.text}</div>",
+            customStylesBuilder: (element) {
           final String src = element.attributes['src'] ?? '';
 
           if (element.localName == 'img' && src.contains('emoji')) {

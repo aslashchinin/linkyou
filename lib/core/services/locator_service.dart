@@ -15,16 +15,22 @@ import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/data/ublog/ublog_repository_interface.dart';
 import 'package:linkyou/data/ublog/ublog_service.dart';
 import 'package:linkyou/data/ublog/ublog_repository.dart';
+import 'package:linkyou/data/auth/auth_repository_interface.dart';
+import 'package:linkyou/data/auth/auth_service.dart';
+import 'package:linkyou/data/auth/auth_repository.dart';
 
 final serviceLocator = GetIt.instance;
 
-void setupTopUsersModule() {  
+void setupTopUsersModule() {
+  // Providers
   if (!serviceLocator.isRegistered<AuthProvider>()) {
     serviceLocator.registerLazySingleton(() => AuthProvider());
   }
 
+  // Services
   if (!serviceLocator.isRegistered<UserService>()) {
-    serviceLocator.registerLazySingleton(() => UserService(authProvider: serviceLocator<AuthProvider>()));
+    serviceLocator.registerLazySingleton(
+        () => UserService(authProvider: serviceLocator<AuthProvider>()));
   }
 
   if (!serviceLocator.isRegistered<UblogService>()) {
@@ -32,12 +38,23 @@ void setupTopUsersModule() {
         () => UblogService(authProvider: serviceLocator<AuthProvider>()));
   }
 
+  if (!serviceLocator.isRegistered<AuthService>()) {
+    serviceLocator.registerLazySingleton(
+        () => AuthService(authProvider: serviceLocator<AuthProvider>()));
+  }
+
+  // Repositories
   serviceLocator.registerLazySingleton<UserRepositoryInterface>(
     () => UserRepository(userService: serviceLocator<UserService>()),
   );
   serviceLocator.registerLazySingleton<UblogRepositoryInterface>(
     () => UblogRepository(ublogService: serviceLocator<UblogService>()),
   );
+  serviceLocator.registerLazySingleton<AuthRepositoryInterface>(
+    () => AuthRepository(authService: serviceLocator<AuthService>()),
+  );
+
+  // ViewModels
   serviceLocator.registerFactory(
     () => UsersTopViewModel(
         repository: serviceLocator<UserRepositoryInterface>()),
@@ -55,16 +72,19 @@ void setupTopUsersModule() {
         repository: serviceLocator<UserRepositoryInterface>()),
   );
   serviceLocator.registerFactory(
-    () => FormLoginViewModel(repository: serviceLocator<UserRepositoryInterface>()),
+    () => FormLoginViewModel(
+        repository: serviceLocator<AuthRepositoryInterface>()),
   );
   serviceLocator.registerFactory(
     () => UserViewModel(repository: serviceLocator<UserRepositoryInterface>()),
   );
   serviceLocator.registerFactory(
-    () => UserPhotoViewModel(repository: serviceLocator<UserRepositoryInterface>()),
+    () => UserPhotoViewModel(
+        repository: serviceLocator<UserRepositoryInterface>()),
   );
   serviceLocator.registerFactory(
-    () => GiftsSliderViewModel(repository: serviceLocator<UserRepositoryInterface>()),
+    () => GiftsSliderViewModel(
+        repository: serviceLocator<UserRepositoryInterface>()),
   );
   serviceLocator.registerFactory(
     () =>
