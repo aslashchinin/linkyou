@@ -20,7 +20,7 @@ import 'package:linkyou/views/widgets/user/user_books.dart';
 import 'package:linkyou/views/widgets/user/user_job.dart';
 import 'package:linkyou/views/widgets/user/user_pets.dart';
 import 'package:linkyou/views/widgets/user/user_music.dart';
-import 'package:linkyou/views/blocks/user_ublogs/user_ublogs_block.dart';
+import 'package:linkyou/views/widgets/user/user_ublog.dart';
 
 
 class UserScreen extends ScreenBase {
@@ -76,9 +76,11 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
                 UserPhotoBlock(user: viewModel.user!),
                 const BlockDivider(),
                 UserGifts(user: viewModel.user!),                
-                if (viewModel.user!.ubLogsCount > 0) ...[
+                if (viewModel.user!.ublogPost != null) ...[
                   const BlockDivider(),
-                  UserUblogsBlock(user: viewModel.user!),
+                  UserUblog(
+                      ublogPost: viewModel.user!.ublogPost!,
+                      ublogsCount: viewModel.user!.ubLogsCount),
                 ],
                 if (viewModel.user!.about != null) ...[
                   const BlockDivider(),

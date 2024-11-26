@@ -22,6 +22,7 @@ import 'education.dart';
 import 'book.dart';
 import 'pet.dart';
 import 'music.dart';
+import 'ublog_post.dart';
 
 class User {
   final BigInt id;
@@ -65,6 +66,7 @@ class User {
   final List<Book>? books;
   final List<Pet>? pets;
   final List<Music>? music;
+  final UblogPost? ublogPost;
 
   User({
     required this.id,
@@ -108,6 +110,7 @@ class User {
     required this.books,
     required this.pets,
     required this.music,
+    required this.ublogPost,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -176,6 +179,9 @@ class User {
         religion: json['religion'] != null
             ? Religion.fromJson(json['religion'])
             : null,
+        ublogPost: json['ublogs']['last'] != null
+            ? UblogPost.fromJson(json['ublogs']['last'])
+            : null,
       );
     } catch (e, stackTrace) {
       print('Ошибка: $e');
@@ -231,6 +237,9 @@ class User {
       'music': music != null
           ? List<dynamic>.from(music!.map((x) => x.toJson()))
           : [],
+      'ublogs': {
+        'last': ublogPost?.toJson(),
+      },
     };
   }
 }

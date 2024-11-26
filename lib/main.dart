@@ -20,7 +20,6 @@ import 'package:linkyou/views/screens/user/user_viewmodel.dart';
 import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
 import 'package:linkyou/views/blocks/user_photos/user_photo_viewmodel.dart';
 import 'package:linkyou/views/blocks/gifts_slider/gifts_slider_viewmodel.dart';
-import 'package:linkyou/views/blocks/user_ublogs/user_ublogs_viewmodel.dart';
 import 'package:intl/intl_standalone.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -86,9 +85,6 @@ class LinkYouApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => serviceLocator<GiftsSliderViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<UserUblogsViewModel>(),
         ),
       ],
       child: Consumer<AuthProvider>(

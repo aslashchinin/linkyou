@@ -5,11 +5,12 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:intl/intl.dart';
 import 'package:linkyou/views/widgets/tiles/video_tile.dart';
 import 'package:linkyou/views/widgets/tiles/ublog_photo_tail.dart';
+import 'package:linkyou/core/helpers/pluralizer_helper.dart';
 
 class UblogTile extends StatelessWidget {
-  const UblogTile({required this.ublog, super.key});
+  const UblogTile({required this.ublogPost, super.key});
 
-  final UblogPost ublog;
+  final UblogPost ublogPost;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +21,15 @@ class UblogTile extends StatelessWidget {
           height: 1,
         ),
         const SizedBox(height: 15),
+        // Avatar
         UserAvatarTile(
-          user: ublog.user,
+          user: ublogPost.user,
           additionalText: DateFormat('dd MMMM yyyy, HH:mm')
-              .format(DateTime.parse(ublog.datetime)),
+              .format(DateTime.parse(ublogPost.datetime)),
         ),
         const SizedBox(height: 15),
-        HtmlWidget(ublog.text, customStylesBuilder: (element) {
+        // Text with emoji
+        HtmlWidget(ublogPost.text, customStylesBuilder: (element) {
           final String src = element.attributes['src'] ?? '';
 
           if (element.localName == 'img' && src.contains('emoji')) {
@@ -35,22 +38,31 @@ class UblogTile extends StatelessWidget {
           return null;
         }),
         const SizedBox(height: 15),
-        ublog.photos.isNotEmpty
+        // ******
+        // Photos
+        // ******
+        ublogPost.photos.isNotEmpty
             ? Row(
-                children: ublog.photos
+                children: ublogPost.photos
                     .map((photo) => UblogPhotoTail(photo: photo))
                     .toList(),
               )
             : const SizedBox(),
         const SizedBox(height: 15),
-        ublog.videoLink.isNotEmpty
-            ? VideoTile(videoLink: ublog.videoLink)
+        // ******
+        // Videos
+        // ******
+        ublogPost.videoLink.isNotEmpty
+            ? VideoTile(videoLink: ublogPost.videoLink)
             : const SizedBox(),
         Divider(
           color: Colors.grey[300],
           height: 1,
         ),
         const SizedBox(height: 10),
+        // ******************
+        // Likes and comments
+        // ******************
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -58,12 +70,16 @@ class UblogTile extends StatelessWidget {
               children: [
                 const Icon(Icons.favorite_border, color: Colors.grey),
                 const SizedBox(width: 4),
-                Text('${ublog.likesCount} лайк',
+                Text(
+                    PluralizerHelper.getCount(
+                        ublogPost.likesCount, 'лайк', 'лайка', 'лайков'),
                     style: const TextStyle(fontSize: 14)),
                 const SizedBox(width: 16),
                 const Icon(Icons.comment, color: Colors.grey),
                 const SizedBox(width: 4),
-                Text('${ublog.commentsCount} комментариев',
+                Text(
+                    PluralizerHelper.getCount(ublogPost.commentsCount,
+                        'комментарий', 'комментария', 'комментариев'),
                     style: const TextStyle(fontSize: 14)),
               ],
             ),
@@ -71,7 +87,7 @@ class UblogTile extends StatelessWidget {
               children: [
                 const Icon(Icons.visibility, color: Colors.grey),
                 const SizedBox(width: 4),
-                Text('${ublog.viewsCount}',
+                Text(ublogPost.viewsCount.toString(),
                     style: const TextStyle(fontSize: 14)),
               ],
             ),
