@@ -21,14 +21,18 @@ class UblogTile extends StatelessWidget {
           height: 1,
         ),
         const SizedBox(height: 15),
+        // ******
         // Avatar
+        // ******
         UserAvatarTile(
           user: ublogPost.user,
           additionalText: DateFormat('dd MMMM yyyy, HH:mm')
               .format(DateTime.parse(ublogPost.datetime)),
         ),
         const SizedBox(height: 15),
+        // ******
         // Text with emoji
+        // ******
         HtmlWidget(
             "<div style='white-space: pre-wrap;'>${ublogPost.text}</div>",
             customStylesBuilder: (element) {
@@ -43,14 +47,7 @@ class UblogTile extends StatelessWidget {
         // ******
         // Photos
         // ******
-        ublogPost.photos.isNotEmpty
-            ? Row(
-                children: ublogPost.photos
-                    .map((photo) => UblogPhotoTail(photo: photo))
-                    .toList(),
-              )
-            : const SizedBox(),
-        const SizedBox(height: 15),
+        // const SizedBox(height: 15),
         // ******
         // Videos
         // ******

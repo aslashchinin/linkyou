@@ -179,8 +179,9 @@ class User {
         religion: json['religion'] != null
             ? Religion.fromJson(json['religion'])
             : null,
-        ublogPost:
-            json['ublogs']['last'] != null && json['ublogs']['last'].length > 0
+        ublogPost: (json['ublogs'] != null &&
+                json['ublogs']['last'] != null &&
+                json['ublogs']['last'].isNotEmpty)
             ? UblogPost.fromJson(json['ublogs']['last'])
             : null,
       );
@@ -192,55 +193,62 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'avatar': avatar.toJson(),
-      'name': name,
-      'gender': gender.toJson(),
-      'role': role,
-      'is_invisible': isInvisible,
-      'role_status': roleStatus,
-      'last_auth': lastAuth,
-      'is_top100': isTop100,
-      'is_premium': isPremium,
-      'is_vip': isVip,
-      'nationality': nationality?.toJson(),
-      'goal': goal.toJson(),
-      'lookingFor': lookingFor.toJson(),
-      'orientation': orientation?.toJson(),
-      'children': children?.toJson(),
-      'relationship': relationship?.toJson(),
-      'smoking': smoking?.toJson(),
-      'alcohol': alcohol?.toJson(),
-      'age': age.toJson(),
-      'height': height,
-      'weight': weight,
-      'about': about,
-      'job': job?.toJson(),
-      'location': location.toJson(),
-      'birthday': birthday.toJson(),
-      'languages': List<dynamic>.from(languages.map((x) => x.toJson())),
-      'rating': rating?.toJson(),
-      'gifts': gifts?.toJson(),
-      'interests': interests?.toJson(),
-      'likes': likes.toJson(),
-      'photos_count': photosCount,
-      'is_favorited': isFavorited,
-      'is_blacklisted': isBlacklisted,
-      'ublogs_count': ubLogsCount,
-      'is_online': isOnline,
-      'religion': religion?.toJson(),
-      'books': books != null
-          ? List<dynamic>.from(books!.map((x) => x.toJson()))
-          : [],
-      'pets':
-          pets != null ? List<dynamic>.from(pets!.map((x) => x.toJson())) : [],
-      'music': music != null
-          ? List<dynamic>.from(music!.map((x) => x.toJson()))
-          : [],
-      'ublogs': {
-        'last': ublogPost?.toJson(),
-      },
-    };
+    try {
+      return {
+        'id': id.toString(),
+        'avatar': avatar.toJson(),
+        'name': name,
+        'gender': gender.toJson(),
+        'role': role,
+        'is_invisible': isInvisible,
+        'role_status': roleStatus,
+        'last_auth': lastAuth,
+        'is_top100': isTop100,
+        'is_premium': isPremium,
+        'is_vip': isVip,
+        'nationality': nationality?.toJson(),
+        'goal': goal.toJson(),
+        'lookingFor': lookingFor.toJson(),
+        'orientation': orientation?.toJson(),
+        'children': children?.toJson(),
+        'relationship': relationship?.toJson(),
+        'smoking': smoking?.toJson(),
+        'alcohol': alcohol?.toJson(),
+        'age': age.toJson(),
+        'height': height,
+        'weight': weight,
+        'about': about,
+        'job': job?.toJson(),
+        'location': location.toJson(),
+        'birthday': birthday.toJson(),
+        'languages': List<dynamic>.from(languages.map((x) => x.toJson())),
+        'rating': rating?.toJson(),
+        'gifts': gifts?.toJson(),
+        'interests': interests?.toJson(),
+        'likes': likes.toJson(),
+        'photos_count': photosCount,
+        'is_favorited': isFavorited,
+        'is_blacklisted': isBlacklisted,
+        'ublogs_count': ubLogsCount,
+        'is_online': isOnline,
+        'religion': religion?.toJson(),
+        'books': books != null
+            ? List<dynamic>.from(books!.map((x) => x.toJson()))
+            : [],
+        'pets': pets != null
+            ? List<dynamic>.from(pets!.map((x) => x.toJson()))
+            : [],
+        'music': music != null
+            ? List<dynamic>.from(music!.map((x) => x.toJson()))
+            : [],
+        'ublogs': {
+          'last': ublogPost?.toJson(),
+        },
+      };
+    } catch (e, stackTrace) {
+      print('Ошибка: $e');
+      print('Стек вызовов: $stackTrace');
+      rethrow;
+    }
   }
 }

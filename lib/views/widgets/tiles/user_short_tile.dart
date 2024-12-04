@@ -56,7 +56,7 @@ class UserShortTile extends StatelessWidget {
                               size: 16), // Иконка фото (с размером)
                           const SizedBox(
                               width: 4), // Пробел между иконкой и текстом
-                          Text('${user.ubLogsCount} фото ·'),
+                          Text('${user.photosCount} фото ·'),
 
                           const SizedBox(
                               width: 8), // Пробел между разными частями текста

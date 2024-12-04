@@ -4,13 +4,14 @@ import 'package:provider/provider.dart';
 import 'package:linkyou/views/widgets/controlls/round_button.dart';
 import 'package:linkyou/views/widgets/tiles/menu_item_tile.dart';
 import 'package:linkyou/views/blocks/layout_menu/layout_menu_viewmodel.dart';
+import 'package:linkyou/core/services/locator_service.dart';
 
 class LayoutUserMenuBlock extends StatelessWidget {
   const LayoutUserMenuBlock({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = serviceLocator<AuthProvider>();
     final layoutMenuViewModel = Provider.of<LayoutMenuViewModel>(context);
 
     return Column(

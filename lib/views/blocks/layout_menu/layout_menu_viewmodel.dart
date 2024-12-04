@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/services/route_service.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:linkyou/core/services/locator_service.dart';
 
 class LayoutMenuViewModel extends ChangeNotifier {
   LayoutMenuViewModel();
@@ -40,7 +40,8 @@ class LayoutMenuViewModel extends ChangeNotifier {
   }
 
   void logout(BuildContext context) {
-    Provider.of<AuthProvider>(context, listen: false).logout();
+    final authProvider = serviceLocator<AuthProvider>();
+    authProvider.logout();
     Navigator.pushNamed(context, RouteService.home);
     notifyListeners();
   }

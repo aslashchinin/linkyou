@@ -6,7 +6,7 @@ import 'package:linkyou/views/blocks/form_registration/form_registration_block.d
 import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/views/blocks/layout_user_menu/layout_user_menu_block.dart';
 import 'package:linkyou/views/widgets/tiles/menu_item_tile.dart';
-
+import 'package:linkyou/core/services/locator_service.dart';
 class LayoutMenuBlock extends StatefulWidget {
   const LayoutMenuBlock({super.key});
 
@@ -33,7 +33,7 @@ class _LayoutMenuBlockState extends State<LayoutMenuBlock>
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<LayoutMenuViewModel>(context);
-    final authProvider = Provider.of<AuthProvider>(context, listen: true);
+    final authProvider = serviceLocator<AuthProvider>();
 
     return Drawer(
       child: ListView(

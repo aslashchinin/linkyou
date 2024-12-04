@@ -16,24 +16,37 @@ class FormLoginViewModel extends ChangeNotifier {
   Future<void> login(
       BuildContext context, String email, String password) async {
     try {
+      // Ждем ответ от метода входа
       final response = await repository.signIn(AuthSigninInput(
         login: email,
         password: password,
       ));
 
+      // Получаем экземпляр AuthProvider
       final authProvider = serviceLocator<AuthProvider>();
+
+      // Обновляем состояние AuthProvider
       authProvider.login(response.data);
 
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
+      // Проверка токена и переход на HomeScreen
+      if (authProvider.token != null) {
+        // Ждем завершения обновления состояния
+        notifyListeners();
+        // Переход на основной экран
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+      } else {
+        throw Exception('Токен отсутствует');
+      }
     } catch (e) {
+      // Обработка ошибок
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Авторизация не удалась')),
       );
+      // Логируем ошибку (по желанию)
+      print(e.toString());
     }
-
-    notifyListeners();
   }
 
   void showPasswordRecoveryDialog(BuildContext context) {

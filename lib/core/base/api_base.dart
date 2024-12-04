@@ -15,68 +15,72 @@ class ApiBase {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          print("Запрос: ${options.method} ${options.path}");
-          print("Параметры: ${options.queryParameters}");
-          print("Данные: ${options.data}");
-          print("Заголовки: ${options.headers}");
+          _addAuthorizationHeader(options);
+          _logRequest(options);
           return handler.next(options);
         },
         onResponse: (response, handler) {
-          print("Ответ: ${response.statusCode} ${response.data}");
+          _logResponse(response);
           return handler.next(response);
         },
         onError: (DioError e, handler) {
-          print("Ошибка: ${e.message}");
+          _logError(e);
           return handler.next(e);
         },
       ),
     );
+  }
 
+  void _addAuthorizationHeader(RequestOptions options) {
     if (authProvider.token != null && authProvider.token!.isNotEmpty) {
-      print('Bearer token: ${authProvider.token}');
-      dio.options.headers['Authorization'] = 'Bearer ${authProvider.token}';
+      options.headers['Authorization'] = 'Bearer ${authProvider.token}';
+    } else {
+      options.headers
+          .remove('Authorization'); // Удаляем заголовок, если токен отсутствует
     }
+  }
+
+  void _logRequest(RequestOptions options) {
+    print("Запрос: ${options.method} ${options.path}");
+    print("Параметры: ${options.queryParameters}");
+    print("Данные: ${options.data}");
+    print("Заголовки: ${options.headers}");
+  }
+
+  void _logResponse(Response response) {
+    print("Ответ: ${response.statusCode} ${response.data}");
+  }
+
+  void _logError(DioError e) {
+    print("Ошибка: ${e.message}");
   }
 
   Future<Response> get(String endpoint) async {
-    try {
-      final response = await dio.get(endpoint);
-      return _processResponse(response);
-    } on DioException catch (e) {
-      print(dio.options.headers);
-      throw Exception('Ошибка при выполнении GET: $e');
-    }
+    return _requestWithHandling(() => dio.get(endpoint));
   }
 
   Future<Response> post(String endpoint, {Map<String, dynamic>? body}) async {
-    try {
-      final response =
-          await dio.post(endpoint, data: FormData.fromMap(body ?? {}));
-      return _processResponse(response);
-    } on DioException catch (e) {
-      print(dio.options.headers);
-      throw Exception('Ошибка при выполнении POST: $e');
-    }
+    return _requestWithHandling(
+        () => dio.post(endpoint, data: FormData.fromMap(body ?? {})));
   }
 
   Future<Response> put(String endpoint, {Map<String, dynamic>? body}) async {
-    try {
-      final response =
-          await dio.put(endpoint, data: FormData.fromMap(body ?? {}));
-      print('PUT $endpoint');
-      return _processResponse(response);
-    } on DioException catch (e) {
-      throw Exception('Ошибка при выполнении PUT: $e');
-    }
+    return _requestWithHandling(
+        () => dio.put(endpoint, data: FormData.fromMap(body ?? {})));
   }
 
   Future<Response> delete(String endpoint) async {
+    return _requestWithHandling(() => dio.delete(endpoint));
+  }
+
+  Future<Response> _requestWithHandling(
+      Future<Response> Function() requestFunction) async {
     try {
-      final response = await dio.delete(endpoint);
-      print('DELETE $endpoint');
+      final response = await requestFunction();
       return _processResponse(response);
     } on DioException catch (e) {
-      throw Exception('Ошибка при выполнении DELETE: $e');
+      print(dio.options.headers);
+      throw Exception('Ошибка при выполнении запроса: $e');
     }
   }
 

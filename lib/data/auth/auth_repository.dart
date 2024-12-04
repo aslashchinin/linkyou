@@ -52,10 +52,9 @@ class AuthRepository implements AuthRepositoryInterface {
     try {
       final serviceResponse = await _authService.signIn(input);
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
-      final login = Login.fromJson(serviceResponse.data);
 
       return RepositoryResponse(
-        data: login,
+        data: Login.fromJson(serviceResponse.data),
         pagination: pagination,
       );
     } catch (e) {
