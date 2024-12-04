@@ -160,10 +160,18 @@ class BuildHelper {
                 flex: 2,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    photoUrls[0],
-                    fit: BoxFit.cover,
-                    height: 150,
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UblogGalleryWindow(
+                              photoUrls: photoUrls, initialIndex: 0)),
+                    ),
+                    child: Image.network(
+                      photoUrls[0],
+                      fit: BoxFit.cover,
+                      height: 150,
+                    ),
                   ),
                 ),
               ),
