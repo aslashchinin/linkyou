@@ -19,7 +19,6 @@ import 'package:linkyou/views/widgets/user/user_education.dart';
 import 'package:linkyou/views/widgets/user/user_books.dart';
 import 'package:linkyou/views/widgets/user/user_job.dart';
 import 'package:linkyou/views/widgets/user/user_pets.dart';
-import 'package:linkyou/views/widgets/user/user_music.dart';
 import 'package:linkyou/views/widgets/user/user_ublog.dart';
 
 

@@ -27,7 +27,7 @@ void main() async {
   setupTopUsersModule();
   WidgetsFlutterBinding.ensureInitialized();
   String? locale = await findSystemLocale();
-  await initializeDateFormatting(locale ?? 'ru_RU', null);
+  await initializeDateFormatting(locale, null);
   runApp(const LinkYouApp());
 }
 
