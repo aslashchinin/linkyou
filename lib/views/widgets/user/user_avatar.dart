@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:linkyou/core/models/user.dart';
-import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
 import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
+import 'package:linkyou/views/widgets/windows/user_avatar_window.dart';
 
 class UserAvatar extends StatelessWidget {
   const UserAvatar({required this.user, super.key});
@@ -14,7 +14,11 @@ class UserAvatar extends StatelessWidget {
     String url = user.avatar.src.origin;
 
     return GestureDetector(
-      onTap: () => showFullScreenImage(url, context),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => UserAvatarWindow(imageUrl: url)),
+      ),
       child: Stack(
         children: [
           CachedNetworkImage(
@@ -66,27 +70,6 @@ class UserAvatar extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  void showFullScreenImage(String imageUrl, BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: const LayoutAppBarBlock(showStarIcon: false),
-          body: Center(
-            child: InteractiveViewer(
-              boundaryMargin: const EdgeInsets.all(0),
-              minScale: 0.1,
-              maxScale: 8.0,
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }

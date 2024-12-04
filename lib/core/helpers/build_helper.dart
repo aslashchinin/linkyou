@@ -3,6 +3,7 @@ import 'package:linkyou/core/models/education.dart';
 import 'package:linkyou/core/models/language.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
+import 'package:linkyou/views/widgets/windows/ublog_gallery_window.dart';
 
 class BuildHelper {
   static Widget buildLanguage(Language language, bool isShowTitle) {
@@ -144,6 +145,76 @@ class BuildHelper {
                 ),
               )
             : const SizedBox(),
+      ],
+    );
+  }
+
+  static Widget buildPhotoGallery(
+      List<String> photoUrls, BuildContext context) {
+    return Column(
+      children: [
+        if (photoUrls.isNotEmpty)
+          Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    photoUrls[0],
+                    fit: BoxFit.cover,
+                    height: 150,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        const SizedBox(height: 8),
+        for (int i = 1; i < photoUrls.length; i += 2) ...[
+          Row(
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UblogGalleryWindow(
+                              photoUrls: photoUrls, initialIndex: i)),
+                    ),
+                    child: Image.network(
+                      photoUrls[i],
+                      fit: BoxFit.cover,
+                      height: 150,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              if (i + 1 < photoUrls.length)
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UblogGalleryWindow(
+                                photoUrls: photoUrls, initialIndex: i + 1)),
+                      ),
+                      child: Image.network(
+                        photoUrls[i + 1],
+                        fit: BoxFit.cover,
+                        height: 150,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 8),
+        ]
       ],
     );
   }

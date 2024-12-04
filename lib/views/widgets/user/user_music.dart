@@ -30,7 +30,12 @@ class UserMusic extends StatelessWidget {
           const SizedBox(height: 10),
           Column(
             children:
-                user.music!.map((music) => MusicTile(music: music)).toList(),
+                user.music!
+                .map((music) => MusicTile(
+                      music: music,
+                      height: '100',
+                    ))
+                .toList(),
           )
         ],
       ),

@@ -10,10 +10,11 @@ class MusicTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: HtmlWidget(
-          '<div style="height: $height; width: 100%;"><iframe frameBorder="0" src="${music.source}" title="${music.link}"></iframe></div>'),
+          '<iframe height="$height" width="400" frameborder="0" src="${music.source}" title="${music.source}"></iframe>'),
     );
   }
 }

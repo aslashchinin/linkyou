@@ -4,8 +4,8 @@ import 'package:linkyou/views/widgets/tiles/user_avatar_tile.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:intl/intl.dart';
 import 'package:linkyou/views/widgets/tiles/video_tile.dart';
-import 'package:linkyou/views/widgets/tiles/ublog_photo_tail.dart';
 import 'package:linkyou/core/helpers/pluralizer_helper.dart';
+import 'package:linkyou/core/helpers/build_helper.dart';
 
 class UblogTile extends StatelessWidget {
   const UblogTile({required this.ublogPost, super.key});
@@ -47,7 +47,11 @@ class UblogTile extends StatelessWidget {
         // ******
         // Photos
         // ******
-        // const SizedBox(height: 15),
+        ublogPost.photos.isNotEmpty
+            ? BuildHelper.buildPhotoGallery(
+                ublogPost.photos.map((photo) => photo.src).toList(), context)
+            : const SizedBox(),
+        const SizedBox(height: 15),
         // ******
         // Videos
         // ******

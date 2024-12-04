@@ -110,11 +110,12 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
                   const BlockDivider(),
                   UserPets(user: viewModel.user!),
                 ],
-                if (viewModel.user!.music != null &&
-                    viewModel.user!.music!.isNotEmpty) ...[
-                  const BlockDivider(),
-                  UserMusic(user: viewModel.user!),
-                ],
+                // Временно отключено
+                // if (viewModel.user!.music != null &&
+                //     viewModel.user!.music!.isNotEmpty) ...[
+                //   const BlockDivider(),
+                //   UserMusic(user: viewModel.user!),
+                // ],
                 const BlockDivider(),
                 const UsersDailySliderBlock(),
               ],
