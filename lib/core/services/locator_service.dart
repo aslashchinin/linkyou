@@ -18,6 +18,11 @@ import 'package:linkyou/data/ublog/ublog_repository.dart';
 import 'package:linkyou/data/auth/auth_repository_interface.dart';
 import 'package:linkyou/data/auth/auth_service.dart';
 import 'package:linkyou/data/auth/auth_repository.dart';
+import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_viewmodel.dart';
+import 'package:linkyou/views/blocks/layout_menu/layout_menu_viewmodel.dart';
+import 'package:linkyou/views/screens/auth/auth_viewmodel.dart';
+import 'package:linkyou/views/blocks/form_registration/form_registration_viewmodel.dart';
+import 'package:linkyou/views/blocks/form_password_recovery/form_password_recovery_viewmodel.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -89,5 +94,20 @@ void setupTopUsersModule() {
   serviceLocator.registerFactory(
     () =>
         SplashViewModel(repository: serviceLocator<UserRepositoryInterface>()),
+  );
+  serviceLocator.registerFactory(
+    () => LayoutAppBarViewModel(),
+  );
+  serviceLocator.registerFactory(
+    () => LayoutMenuViewModel(),
+  );
+  serviceLocator.registerFactory(
+    () => AuthViewModel(),
+  );
+  serviceLocator.registerFactory(
+    () => FormRegistrationViewModel(),
+  );
+  serviceLocator.registerFactory(
+    () => FormPasswordRecoveryViewModel(),
   );
 }

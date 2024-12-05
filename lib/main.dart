@@ -33,59 +33,11 @@ void main() async {
 
 class LinkYouApp extends StatelessWidget {
   const LinkYouApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AuthProvider>(
-          create: (_) => AuthProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<UsersTopViewModel>(),
-        ),
-        ChangeNotifierProvider<WelcomeViewModel>(
-          create: (_) => WelcomeViewModel(),
-        ),
-        ChangeNotifierProvider<AuthViewModel>(
-          create: (_) => AuthViewModel(),
-        ),
-        ChangeNotifierProvider<FormRegistrationViewModel>(
-          create: (_) => FormRegistrationViewModel(),
-        ),
-        ChangeNotifierProvider<FormPasswordRecoveryViewModel>(
-          create: (_) => FormPasswordRecoveryViewModel(),
-        ),
-        ChangeNotifierProvider<LayoutAppBarViewModel>(
-          create: (_) => LayoutAppBarViewModel(),
-        ),
-        ChangeNotifierProvider<LayoutMenuViewModel>(
-          create: (_) => LayoutMenuViewModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<UsersNewViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<UsersDailyViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<UsersDailyCitiesViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<FormLoginViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<SplashViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<UserViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<UserPhotoViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => serviceLocator<GiftsSliderViewModel>(),
-        ),
-      ],
+      providers: _buildProviders(),
       child: Consumer<AuthProvider>(
         builder: (context, authProvider, child) {
           final authProvider = serviceLocator<AuthProvider>();
@@ -96,9 +48,7 @@ class LinkYouApp extends StatelessWidget {
                   theme: ThemeData(
                     primarySwatch: Colors.blue,
                     appBarTheme: const AppBarTheme(
-                      iconTheme: IconThemeData(
-                        color: Colors.blue,
-                      ),
+                      iconTheme: IconThemeData(color: Colors.blue),
                     ),
                   ),
                   home: SplashScreen(authProvider: authProvider),
@@ -107,5 +57,42 @@ class LinkYouApp extends StatelessWidget {
         },
       ),
     );
+  }
+
+  List<ChangeNotifierProvider> _buildProviders() {
+    return [
+      ChangeNotifierProvider<AuthProvider>(
+          create: (context) => serviceLocator<AuthProvider>()),
+      ChangeNotifierProvider<UsersTopViewModel>(
+          create: (context) => serviceLocator<UsersTopViewModel>()),
+      ChangeNotifierProvider<WelcomeViewModel>(
+          create: (context) => serviceLocator<WelcomeViewModel>()),
+      ChangeNotifierProvider<AuthViewModel>(
+          create: (context) => serviceLocator<AuthViewModel>()),
+      ChangeNotifierProvider<FormRegistrationViewModel>(
+          create: (context) => serviceLocator<FormRegistrationViewModel>()),
+      ChangeNotifierProvider<FormPasswordRecoveryViewModel>(
+          create: (context) => serviceLocator<FormPasswordRecoveryViewModel>()),
+      ChangeNotifierProvider<LayoutAppBarViewModel>(
+          create: (context) => serviceLocator<LayoutAppBarViewModel>()),
+      ChangeNotifierProvider<LayoutMenuViewModel>(
+          create: (context) => serviceLocator<LayoutMenuViewModel>()),
+      ChangeNotifierProvider<UsersNewViewModel>(
+          create: (context) => serviceLocator<UsersNewViewModel>()),
+      ChangeNotifierProvider<UsersDailyViewModel>(
+          create: (context) => serviceLocator<UsersDailyViewModel>()),
+      ChangeNotifierProvider<UsersDailyCitiesViewModel>(
+          create: (context) => serviceLocator<UsersDailyCitiesViewModel>()),
+      ChangeNotifierProvider<FormLoginViewModel>(
+          create: (context) => serviceLocator<FormLoginViewModel>()),
+      ChangeNotifierProvider<SplashViewModel>(
+          create: (context) => serviceLocator<SplashViewModel>()),
+      ChangeNotifierProvider<UserViewModel>(
+          create: (context) => serviceLocator<UserViewModel>()),
+      ChangeNotifierProvider<UserPhotoViewModel>(
+          create: (context) => serviceLocator<UserPhotoViewModel>()),
+      ChangeNotifierProvider<GiftsSliderViewModel>(
+          create: (context) => serviceLocator<GiftsSliderViewModel>()),
+    ];
   }
 }
