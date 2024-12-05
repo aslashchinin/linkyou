@@ -20,7 +20,8 @@ import 'package:linkyou/views/widgets/user/user_books.dart';
 import 'package:linkyou/views/widgets/user/user_job.dart';
 import 'package:linkyou/views/widgets/user/user_pets.dart';
 import 'package:linkyou/views/widgets/user/user_ublog.dart';
-
+import 'package:linkyou/core/providers/auth_provider.dart';
+import 'package:linkyou/core/services/locator_service.dart';
 
 class UserScreen extends ScreenBase {
   const UserScreen({super.key, required this.userId});
@@ -51,6 +52,8 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
   @override
   Widget buildContent(BuildContext context) {
     final viewModel = Provider.of<UserViewModel>(context);
+    final authProvider = serviceLocator<AuthProvider>();
+
     lastUserId = viewModel.user?.id;
 
     return viewModel.user == null || lastUserId != widget.userId
@@ -115,8 +118,11 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
                 //   const BlockDivider(),
                 //   UserMusic(user: viewModel.user!),
                 // ],
-                const BlockDivider(),
-                const UsersDailySliderBlock(),
+                if (authProvider.user != null &&
+                    authProvider.user!.id != viewModel.user!.id) ...[
+                  const BlockDivider(),
+                  const UsersDailySliderBlock(),
+                ],
               ],
             ),
           );

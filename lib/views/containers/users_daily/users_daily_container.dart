@@ -10,7 +10,7 @@ class UsersDailyContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usersViewModel = Provider.of<UsersDailyViewModel>(context);
+    final usersDailyViewModel = Provider.of<UsersDailyViewModel>(context);
 
     return Column(
       children: [
@@ -52,7 +52,9 @@ class UsersDailyContainer extends StatelessWidget {
               ),
               Expanded(
                 child: UsersDailyCitiesBlock(
-                  onCityChanged: (cityId) => usersViewModel.loadDailyUsers(cityId: cityId),
+                  onCityChanged: (cityId) {
+                    usersDailyViewModel.setCity(cityId);
+                  },
                 ),
               ),
             ],

@@ -18,7 +18,7 @@ class UserStatInfo extends StatelessWidget {
           runSpacing: 10,
           children: [
             BuildHelper.buildIconInfo(
-                Icons.favorite_border,
+                user.likes.isLiked ? Icons.favorite : Icons.favorite_border,
                 '${user.likes.count} лайков'),
             BuildHelper.buildIconInfo(
                 Icons.camera_enhance, '${user.photosCount} фото'),

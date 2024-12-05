@@ -4,23 +4,26 @@ import 'package:flutter/material.dart';
 class UsersDailyViewModel extends BaseUsersViewModel {
   UsersDailyViewModel({required super.repository});
 
-  int cityId = 0;
+  int _cityId = 0;
   int _currentSliderPage = 0;
   int get currentSliderPage => _currentSliderPage;
 
-  Future<void> loadDailyUsers({int cityId = 0}) async {
-    await handleUsersLoading(
-      loadFunction: () => repository.getDailyUsers(cityId: cityId),
-    );
-
-    this.cityId = cityId;
+  void setCity(int cityId) {
+    _cityId = cityId;
+    loadDailyUsers();
   }
 
-  Future<void> loadMoreUsers({int cityId = 0}) async {
+  Future<void> loadDailyUsers() async {
+    await handleUsersLoading(
+      loadFunction: () => repository.getDailyUsers(cityId: _cityId),
+    );
+  }
+
+  Future<void> loadMoreUsers() async {
     await handleUsersLoading(
       loadFunction: () => repository.getDailyUsers(
         page: currentListPage + 1,
-        cityId: this.cityId,
+        cityId: _cityId,
       ),
       isLoadMore: true,
     );
