@@ -8,13 +8,11 @@ class UsersDailyCitiesBlock extends StatefulWidget {
   final ValueChanged<int>? onCityChanged;
 
   @override
-  UsersDailyCitiesBlockState createState() => UsersDailyCitiesBlockState(onCityChanged: onCityChanged);
+  UsersDailyCitiesBlockState createState() => UsersDailyCitiesBlockState();
 }
 
 class UsersDailyCitiesBlockState extends State<UsersDailyCitiesBlock> {
-  UsersDailyCitiesBlockState({this.onCityChanged});
-
-  final ValueChanged<int>? onCityChanged;
+  UsersDailyCitiesBlockState();
 
   @override
   void initState() {
@@ -46,7 +44,7 @@ class UsersDailyCitiesBlockState extends State<UsersDailyCitiesBlock> {
       onChanged: (cityId) {
         setState(() {
           this.cityId = cityId; 
-          onCityChanged?.call(this.cityId ?? 0);
+          widget.onCityChanged?.call(this.cityId ?? 0);
         });        
       },
       value: cityId,

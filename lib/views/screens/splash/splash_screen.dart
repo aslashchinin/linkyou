@@ -10,10 +10,10 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key, required this.authProvider});
   
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class SplashScreenState extends State<SplashScreen> {
   late SplashViewModel viewModel;
   late final AuthProvider authProvider;
 

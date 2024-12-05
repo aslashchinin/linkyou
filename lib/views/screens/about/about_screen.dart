@@ -27,7 +27,7 @@ class AboutScreenState extends ScreenBaseState<AboutScreen> {
           ),
           const SizedBox(height: 20),
           // Картинка
-          Picture(path: 'assets/about/mission.png'),
+          const Picture(path: 'assets/about/mission.png'),
           const SizedBox(height: 20),
 
           // Поиск по профессии
@@ -40,7 +40,7 @@ class AboutScreenState extends ScreenBaseState<AboutScreen> {
             'Например, мужчина хирург познакомится с женским врачом. Топ-менеджер найдет для себя очаровательную и успешную спутницу жизни.',
           ),
           const SizedBox(height: 20),
-          Picture(path: 'assets/about/profession.png'),
+          const Picture(path: 'assets/about/profession.png'),
           const SizedBox(height: 20),
 
           // Поиск по национальности
@@ -53,7 +53,7 @@ class AboutScreenState extends ScreenBaseState<AboutScreen> {
             'Теперь Вы можете искать людей своей национальности и вероисповедания. Мы уважаем все религии и народы.',
           ),
           const SizedBox(height: 20),
-          Picture(path: 'assets/about/nationality.png'),
+          const Picture(path: 'assets/about/nationality.png'),
           const SizedBox(height: 20),
 
           // Живые люди
@@ -66,7 +66,7 @@ class AboutScreenState extends ScreenBaseState<AboutScreen> {
             'Мы за честность. Поэтому мы не создавали тысячи поддельных анкет, чтобы водить людей за нос.',
           ),
           const SizedBox(height: 20),
-          Picture(path: 'assets/about/robot.png'),
+          const Picture(path: 'assets/about/robot.png'),
           const SizedBox(height: 20),
 
           // Против хамства
@@ -79,7 +79,7 @@ class AboutScreenState extends ScreenBaseState<AboutScreen> {
             'Нашли на LinkYou скрытую рекламу интим услуг или Вас оскорбляет другой участник сервиса? Просто расскажите нам об этом через службу технической поддержки.',
           ),
           const SizedBox(height: 20),
-          Picture(path: 'assets/about/misbehavior.png'),
+          const Picture(path: 'assets/about/misbehavior.png'),
           const SizedBox(height: 20),
 
           // Полезные функции
@@ -92,7 +92,7 @@ class AboutScreenState extends ScreenBaseState<AboutScreen> {
             'Команда LinkYou не прекращает работать над улучшением своего сервиса, чтобы сделать его более эффективным и удобным для Вас.',
           ),
           const SizedBox(height: 20),
-          Picture(path: 'assets/about/surprise.png'),
+          const Picture(path: 'assets/about/surprise.png'),
           const SizedBox(height: 20),
           // Кнопка "Начать поиск"
           Center(

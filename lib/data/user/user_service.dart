@@ -1,11 +1,9 @@
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
-import 'package:linkyou/core/providers/auth_provider.dart';
 
 class UserService extends ApiBase {
-  UserService({required AuthProvider authProvider})
-      : super(authProvider: authProvider);
+  UserService({required super.authProvider});
 
 
   Future<ServiceResponse<List<Map<String, dynamic>>>> getTopUsers(

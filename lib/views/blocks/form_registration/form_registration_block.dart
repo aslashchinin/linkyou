@@ -10,8 +10,8 @@ class FormRegistrationBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<FormRegistrationViewModel>(context);
-    final _emailController = TextEditingController();
-    final _passwordController = TextEditingController();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
 
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -20,10 +20,10 @@ class FormRegistrationBlock extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          RoundInput(hint: 'E-mail', controller: _emailController),
+          RoundInput(hint: 'E-mail', controller: emailController),
           const SizedBox(height: 10),
           RoundInput(
-            controller: _passwordController,
+            controller: passwordController,
             hint: 'Пароль',
             obscureText: true,
           ),

@@ -73,7 +73,7 @@ class LikeYouScreenState extends ScreenBaseState<LikeYouScreen> {
             child: Container(
               width: screenSize.width, // 90% ширины экрана
               height: screenSize.height * 0.6, // 60% высоты экрана
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: Column(
@@ -84,10 +84,10 @@ class LikeYouScreenState extends ScreenBaseState<LikeYouScreen> {
                     height: screenSize.height * 0.4, // 40% высоты экрана
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     item["title"]!,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -95,7 +95,7 @@ class LikeYouScreenState extends ScreenBaseState<LikeYouScreen> {
           );
         },
         onStackFinished: () {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("No more cards"),
           ));
         },

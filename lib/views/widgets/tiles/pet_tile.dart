@@ -8,8 +8,6 @@ class PetTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(pet.avatar);
-
     return Container(
       padding: const EdgeInsets.all(10),
       child: Row(

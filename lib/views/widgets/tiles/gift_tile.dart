@@ -32,7 +32,6 @@ class GiftTile extends StatelessWidget {
               child: IconButton(
                 onPressed: () {
                   // Действие при нажатии
-                  print('Кнопка с плюсиком нажата');
                 },
                 icon: const Icon(Icons.add), // Плюсик
                 color: Colors.blue, // Синий цвет плюсика

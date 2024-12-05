@@ -11,10 +11,10 @@ class LayoutMenuBlock extends StatefulWidget {
   const LayoutMenuBlock({super.key});
 
   @override
-  _LayoutMenuBlockState createState() => _LayoutMenuBlockState();
+  LayoutMenuBlockState createState() => LayoutMenuBlockState();
 }
 
-class _LayoutMenuBlockState extends State<LayoutMenuBlock>
+class LayoutMenuBlockState extends State<LayoutMenuBlock>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 

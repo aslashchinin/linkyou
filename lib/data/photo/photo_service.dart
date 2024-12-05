@@ -1,13 +1,11 @@
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
-import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/core/models/photo_input.dart';
 import 'package:linkyou/core/models/photo_edit_input.dart';
 import 'package:linkyou/core/models/photo_comment_input.dart';
 
 class PhotoService extends ApiBase {
-  PhotoService({required AuthProvider authProvider})
-      : super(authProvider: authProvider);
+  PhotoService({required super.authProvider});
 
   Future<ServiceResponse<List<Map<String, dynamic>>>> getPhotosList(
       BigInt userId) async {

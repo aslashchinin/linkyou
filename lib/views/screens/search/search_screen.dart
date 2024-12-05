@@ -10,7 +10,7 @@ class SearchScreen extends ScreenBase {
 class SearchScreenState extends ScreenBaseState<SearchScreen> {
   @override
   Widget buildContent(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Text('Search Screen'),
       ],

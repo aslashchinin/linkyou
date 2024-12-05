@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'layout_appbar_viewmodel.dart';
+import 'package:linkyou/core/services/locator_service.dart';
 
 class LayoutAppBarBlock extends StatelessWidget implements PreferredSizeWidget {
   final bool showSearchIcon;
@@ -16,7 +16,7 @@ class LayoutAppBarBlock extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<LayoutAppBarViewModel>(context);
+    final viewModel = serviceLocator<LayoutAppBarViewModel>();
     return AppBar(
       backgroundColor: Colors.white,
       bottom: PreferredSize(

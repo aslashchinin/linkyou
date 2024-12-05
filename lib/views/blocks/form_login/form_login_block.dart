@@ -8,10 +8,10 @@ class FormLoginBlock extends StatefulWidget {
   const FormLoginBlock({super.key});
 
   @override
-  _FormLoginBlockState createState() => _FormLoginBlockState();
+  FormLoginBlockState createState() => FormLoginBlockState();
 }
 
-class _FormLoginBlockState extends State<FormLoginBlock> {
+class FormLoginBlockState extends State<FormLoginBlock> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 

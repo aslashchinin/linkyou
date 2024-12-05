@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Picture extends StatelessWidget {
   final String path;
-  Picture({required this.path});
+  const Picture({super.key, required this.path});
 
   @override
   Widget build(BuildContext context) {

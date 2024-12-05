@@ -10,10 +10,10 @@ class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key, required this.initialTab});
 
   @override
-  _AuthScreenState createState() => _AuthScreenState();
+  AuthScreenState createState() => AuthScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen>
+class AuthScreenState extends State<AuthScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 

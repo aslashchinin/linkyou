@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
 
 class ApiBase {
@@ -23,7 +24,7 @@ class ApiBase {
           _logResponse(response);
           return handler.next(response);
         },
-        onError: (DioError e, handler) {
+        onError: (DioException e, handler) {
           _logError(e);
           return handler.next(e);
         },
@@ -36,23 +37,29 @@ class ApiBase {
       options.headers['Authorization'] = 'Bearer ${authProvider.token}';
     } else {
       options.headers
-          .remove('Authorization'); // Удаляем заголовок, если токен отсутствует
+          .remove('Authorization');
     }
   }
 
   void _logRequest(RequestOptions options) {
-    print("Запрос: ${options.method} ${options.path}");
-    print("Параметры: ${options.queryParameters}");
-    print("Данные: ${options.data}");
-    print("Заголовки: ${options.headers}");
+    if (kDebugMode) {
+      print("Запрос: ${options.method} ${options.path}");
+      print("Параметры: ${options.queryParameters}");
+      print("Данные: ${options.data}");
+      print("Заголовки: ${options.headers}");
+    }
   }
 
   void _logResponse(Response response) {
-    print("Ответ: ${response.statusCode} ${response.data}");
+    if (kDebugMode) {
+      print("Ответ: ${response.statusCode} ${response.data}");
+    }
   }
 
-  void _logError(DioError e) {
-    print("Ошибка: ${e.message}");
+  void _logError(DioException e) {
+    if (kDebugMode) {
+      print("Ошибка: ${e.message}");
+    }
   }
 
   Future<Response> get(String endpoint) async {
@@ -79,7 +86,6 @@ class ApiBase {
       final response = await requestFunction();
       return _processResponse(response);
     } on DioException catch (e) {
-      print(dio.options.headers);
       throw Exception('Ошибка при выполнении запроса: $e');
     }
   }

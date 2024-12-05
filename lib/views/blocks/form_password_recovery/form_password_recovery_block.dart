@@ -6,10 +6,10 @@ class FormPasswordRecoveryBlock extends StatefulWidget {
   const FormPasswordRecoveryBlock({super.key});
 
   @override
-  _FormPasswordRecoveryBlockState createState() => _FormPasswordRecoveryBlockState();
+  FormPasswordRecoveryBlockState createState() => FormPasswordRecoveryBlockState();
 }
 
-class _FormPasswordRecoveryBlockState extends State<FormPasswordRecoveryBlock> {
+class FormPasswordRecoveryBlockState extends State<FormPasswordRecoveryBlock> {
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 

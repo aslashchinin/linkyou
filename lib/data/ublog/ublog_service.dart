@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
-import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/core/models/ublog_input.dart';
 
 class UblogService extends ApiBase {
-  UblogService({required AuthProvider authProvider})
-      : super(authProvider: authProvider);
+  UblogService({required super.authProvider});
 
   Future<ServiceResponse<List<Map<String, dynamic>>>> getUblogsList(
       BigInt userId, int? limit) async {

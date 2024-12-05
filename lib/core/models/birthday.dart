@@ -14,7 +14,7 @@ class Birthday {
   factory Birthday.fromJson(Map<String, dynamic> json) {
     return Birthday(
       age: json['age'],
-      date: json['date'] ?? null,
+      date: json['date'],
       zodiac: json['zodiac'] != null ? Zodiac.fromJson(json['zodiac']) : null,
     );
   }

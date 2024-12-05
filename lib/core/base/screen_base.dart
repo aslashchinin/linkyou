@@ -4,7 +4,7 @@ import 'package:linkyou/views/blocks/layout_menu/layout_menu_block.dart';
 
 // Абстрактный базовый класс виджета
 abstract class ScreenBase extends StatefulWidget {
-  const ScreenBase({Key? key}) : super(key: key);
+  const ScreenBase({super.key});
 
   @override
   ScreenBaseState createState();

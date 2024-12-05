@@ -44,7 +44,6 @@ class AuthService extends ApiBase {
       AuthSigninInput input) async {
     try {
       String url = '/auth/signin';
-      print(input.login);
       final response = await post(url, body: input.toJson());
       return ServiceResponse(
         data: Map<String, dynamic>.from(response.data),

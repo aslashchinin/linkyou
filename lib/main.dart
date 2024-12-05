@@ -8,7 +8,6 @@ import 'package:linkyou/views/screens/auth/auth_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_registration/form_registration_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_login/form_login_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_password_recovery/form_password_recovery_viewmodel.dart';
-import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_viewmodel.dart';
 import 'package:linkyou/views/blocks/layout_menu/layout_menu_viewmodel.dart';
 import 'package:linkyou/core/services/locator_service.dart';
 import 'package:linkyou/views/blocks/users_new/users_new_viewmodel.dart';
@@ -73,8 +72,6 @@ class LinkYouApp extends StatelessWidget {
           create: (context) => serviceLocator<FormRegistrationViewModel>()),
       ChangeNotifierProvider<FormPasswordRecoveryViewModel>(
           create: (context) => serviceLocator<FormPasswordRecoveryViewModel>()),
-      ChangeNotifierProvider<LayoutAppBarViewModel>(
-          create: (context) => serviceLocator<LayoutAppBarViewModel>()),
       ChangeNotifierProvider<LayoutMenuViewModel>(
           create: (context) => serviceLocator<LayoutMenuViewModel>()),
       ChangeNotifierProvider<UsersNewViewModel>(
