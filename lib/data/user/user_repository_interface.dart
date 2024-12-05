@@ -3,7 +3,6 @@ import 'package:linkyou/core/responses/repository_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/models/city_highlighted.dart';
 import 'package:linkyou/core/models/user.dart';
-import 'package:linkyou/core/models/photo.dart';
 import 'package:linkyou/core/models/user_gift.dart';
 import 'package:linkyou/core/models/gifts.dart';
 
@@ -29,8 +28,6 @@ abstract class UserRepositoryInterface {
   Future<RepositoryResponse<User>> getUser(BigInt id);
 
   Future<RepositoryResponse<User>> getCurrentUser();
-
-  Future<RepositoryResponse<List<Photo>>> getUserPhotos(BigInt id);
 
   Future<RepositoryResponse<List<UserGift>>> getUserGifts(BigInt id);
 

@@ -31,7 +31,13 @@ class UserScreen extends ScreenBase {
 }
 
 class UserScreenState extends ScreenBaseState<UserScreen> {
-  BigInt? lastUserId;
+  BigInt? _lastUserId;
+
+  BigInt? get lastUserId => _lastUserId;
+
+  void setLastUserId(BigInt userId) {
+    _lastUserId = userId;
+  }
 
   @override
   void initState() {
@@ -54,7 +60,7 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
     final viewModel = Provider.of<UserViewModel>(context);
     final authProvider = serviceLocator<AuthProvider>();
 
-    lastUserId = viewModel.user?.id;
+    setLastUserId(viewModel.user?.id ?? BigInt.zero);
 
     return viewModel.user == null || lastUserId != widget.userId
         ? const Center(child: CircularProgressBlue())

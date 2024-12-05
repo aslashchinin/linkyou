@@ -23,6 +23,9 @@ import 'package:linkyou/views/blocks/layout_menu/layout_menu_viewmodel.dart';
 import 'package:linkyou/views/screens/auth/auth_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_registration/form_registration_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_password_recovery/form_password_recovery_viewmodel.dart';
+import 'package:linkyou/data/photo/photo_repository_interface.dart';
+import 'package:linkyou/data/photo/photo_repository.dart';
+import 'package:linkyou/data/photo/photo_service.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -48,6 +51,11 @@ void setupTopUsersModule() {
         () => AuthService(authProvider: serviceLocator<AuthProvider>()));
   }
 
+  if (!serviceLocator.isRegistered<PhotoService>()) {
+    serviceLocator.registerLazySingleton(
+        () => PhotoService(authProvider: serviceLocator<AuthProvider>()));
+  }
+
   // Repositories
   serviceLocator.registerLazySingleton<UserRepositoryInterface>(
     () => UserRepository(userService: serviceLocator<UserService>()),
@@ -57,6 +65,9 @@ void setupTopUsersModule() {
   );
   serviceLocator.registerLazySingleton<AuthRepositoryInterface>(
     () => AuthRepository(authService: serviceLocator<AuthService>()),
+  );
+  serviceLocator.registerLazySingleton<PhotoRepositoryInterface>(
+    () => PhotoRepository(photoService: serviceLocator<PhotoService>()),
   );
 
   // ViewModels
@@ -85,7 +96,7 @@ void setupTopUsersModule() {
   );
   serviceLocator.registerFactory(
     () => UserPhotoViewModel(
-        repository: serviceLocator<UserRepositoryInterface>()),
+        repository: serviceLocator<PhotoRepositoryInterface>()),
   );
   serviceLocator.registerFactory(
     () => GiftsSliderViewModel(

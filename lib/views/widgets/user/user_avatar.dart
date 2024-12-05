@@ -12,7 +12,7 @@ class UserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String url = user.avatar.src.origin;
-
+    double height = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
@@ -28,7 +28,7 @@ class UserAvatar extends StatelessWidget {
             fadeOutDuration: Duration.zero,
             imageUrl: url,
             errorWidget: (context, url, error) => const Icon(Icons.error),
-            height: 450,
+            height: height * 0.7,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
           ),
