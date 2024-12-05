@@ -137,9 +137,9 @@ class BuildHelper {
                   child: Text(
                     '+$remaining',
                     style: const TextStyle(
-                      color: Colors.white, // Белый текст
-                      fontSize: 24, // Размер шрифта
-                      fontWeight: FontWeight.bold, // Жирный шрифт
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

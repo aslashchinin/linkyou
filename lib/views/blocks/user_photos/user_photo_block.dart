@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'user_photo_viewmodel.dart';
 import 'package:linkyou/core/helpers/build_helper.dart';
 import 'package:linkyou/core/helpers/pluralizer_helper.dart';
+import 'package:linkyou/views/widgets/windows/photo_gallery_window.dart';
 
 class UserPhotoBlock extends StatefulWidget {
   const UserPhotoBlock({super.key, required this.user});
@@ -57,12 +58,19 @@ class _UserPhotoBlockState extends State<UserPhotoBlock> {
                       .asMap()
                       .entries
                       .take(3)
-                      .map((entry) => entry.key > 1
-                          ? BuildHelper.buildLastImageWithOverlay(
-                              entry.value.src.small, width,
-                              remaining: viewModel.photos.length - 3)
-                          : BuildHelper.buildImage(
-                              entry.value.src.small, width))
+                      .map((entry) => GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PhotoGalleryWindow(
+                                      photos: viewModel.photos,
+                                      initialIndex: entry.key))),
+                          child: entry.key > 1
+                              ? BuildHelper.buildLastImageWithOverlay(
+                                  entry.value.src.small, width,
+                                  remaining: viewModel.photos.length - 3)
+                              : BuildHelper.buildImage(
+                                  entry.value.src.small, width)))
                       .toList(),
                 ),
               ],
