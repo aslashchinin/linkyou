@@ -10,6 +10,14 @@ class UsersDailyCitiesViewModel extends ChangeNotifier {
 
   List<CityHighlighted> cities = [];
 
+  int? _cityId;
+  int get cityId => _cityId ?? 0;
+
+  setCity(int? cityId) {
+    _cityId = cityId;
+    notifyListeners();
+  }
+
   Future<void> loadDailyUsersCities() async {
     final response = await repository.getDailyUsersCities();
     cities = response.data;
