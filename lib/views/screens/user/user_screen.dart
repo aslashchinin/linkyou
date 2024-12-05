@@ -22,6 +22,7 @@ import 'package:linkyou/views/widgets/user/user_pets.dart';
 import 'package:linkyou/views/widgets/user/user_ublog.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/core/services/locator_service.dart';
+import 'package:share_plus/share_plus.dart';
 
 class UserScreen extends ScreenBase {
   const UserScreen({super.key, required this.userId});
@@ -139,6 +140,7 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
 
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
+    final viewModel = Provider.of<UserViewModel>(context, listen: false);
     return LayoutAppBarBlock(
       showStarIcon: false,
       showSearchIcon: false,
@@ -166,8 +168,18 @@ class UserScreenState extends ScreenBaseState<UserScreen> {
                     },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.report),
-                    title: const Text('Пожаловаться'),
+                    leading: const Icon(Icons.share),
+                    title: const Text('Поделиться профилем'),
+                    onTap: () {
+                      Share.share(
+                          'https://linkyou.ru/user/${viewModel.user!.id}',
+                          subject: 'Поделиться профилем!');
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.report, color: Colors.red),
+                    title: const Text('Пожаловаться',
+                        style: TextStyle(color: Colors.red)),
                     onTap: () {
                       // Report action
                     },

@@ -23,6 +23,7 @@ import 'package:linkyou/views/screens/auth/auth_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_registration/form_registration_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_password_recovery/form_password_recovery_viewmodel.dart';
 import 'package:linkyou/views/screens/welcome/welcome_viewmodel.dart';
+import 'package:linkyou/views/screens/photo/photo_viewmodel.dart';
 
 // Services
 import 'package:linkyou/data/user/user_service.dart';

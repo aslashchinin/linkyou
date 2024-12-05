@@ -54,6 +54,12 @@ void _setupViewModels() {
         SplashViewModel(repository: serviceLocator<UserRepositoryInterface>()),
   );
 
+  // Photo
+  serviceLocator.registerFactory(
+    () =>
+        PhotoViewModel(repository: serviceLocator<PhotoRepositoryInterface>()),
+  );
+
   // Layout and Additional ViewModels
   serviceLocator.registerFactory(() => LayoutAppBarViewModel());
   serviceLocator.registerFactory(() => LayoutMenuViewModel());

@@ -29,6 +29,7 @@ dependencies:
   webview_flutter: ^4.10.0
   photo_view: ^0.14.0
   memory_info: ^0.0.4
+  share_plus: ^10.1.2
 
 dev_dependencies:
   flutter_launcher_icons: "^0.9.2"

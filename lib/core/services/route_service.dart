@@ -7,6 +7,8 @@ import 'package:linkyou/views/screens/search/search_screen.dart';
 import 'package:linkyou/views/screens/about/about_screen.dart';
 import 'package:linkyou/views/screens/user/user_screen.dart';
 import 'package:linkyou/views/screens/likeyou/likeyou_screen.dart';
+import 'package:linkyou/views/screens/photo_comment/photo_comment_screen.dart';
+import 'package:linkyou/core/models/photo.dart';
 
 class RouteService {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -22,6 +24,7 @@ class RouteService {
   static const String user = '/user';
   static const String likeYou = '/likeyou';
   static const String userUblogs = '/user_ublogs';
+  static const String photoComment = '/photo_comment';
 
   static Map<String, WidgetBuilder> get routes {    
     return {
@@ -35,6 +38,8 @@ class RouteService {
       user: (context) => UserScreen(
           userId: ModalRoute.of(context)!.settings.arguments as BigInt),
       likeYou: (context) => const LikeYouScreen(),
+      photoComment: (context) => PhotoCommentScreen(
+          photo: ModalRoute.of(context)!.settings.arguments as Photo),
     };
   }
 }
