@@ -1,6 +1,6 @@
 import 'package:linkyou/core/responses/repository_response.dart';
-import 'package:linkyou/core/models/article.dart';
-import 'package:linkyou/core/models/comment.dart';
+import 'package:linkyou/models/article.dart';
+import 'package:linkyou/models/comment.dart';
 import 'package:linkyou/core/base/repository_interface_base.dart';
 
 abstract class ArticleRepositoryInterface implements RepositoryInterfaceBase {

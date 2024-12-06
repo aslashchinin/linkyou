@@ -1,15 +1,15 @@
 import 'package:linkyou/core/responses/repository_response.dart';
-import 'package:linkyou/core/models/photo.dart';
-import 'package:linkyou/core/models/photo_input.dart';
-import 'package:linkyou/core/models/photo_edit_input.dart';
-import 'package:linkyou/core/models/photo_comment_input.dart';
-import 'package:linkyou/core/models/comment.dart';
+import 'package:linkyou/models/photo.dart';
+import 'package:linkyou/models/photo_input.dart';
+import 'package:linkyou/models/photo_edit_input.dart';
+import 'package:linkyou/models/photo_comment_input.dart';
+import 'package:linkyou/models/comment.dart';
 import 'package:linkyou/data/photo/photo_service.dart';
 import 'package:linkyou/data/photo/photo_repository_interface.dart';
-import 'package:linkyou/core/models/pagination_info.dart';
-import 'package:linkyou/core/models/like.dart';
-import 'package:linkyou/core/models/result.dart';
-import 'package:linkyou/core/models/photo_comment_add_result.dart';
+import 'package:linkyou/models/pagination_info.dart';
+import 'package:linkyou/models/like.dart';
+import 'package:linkyou/models/result.dart';
+import 'package:linkyou/models/photo_comment_add_result.dart';
 
 class PhotoRepository implements PhotoRepositoryInterface {
   final PhotoService _photoService;

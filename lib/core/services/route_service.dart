@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/screens/welcome/welcome_screen.dart';
-import 'package:linkyou/screens/home/home_screen.dart';
-import 'package:linkyou/screens/auth/auth_screen.dart';
-import 'package:linkyou/screens/top/top_screen.dart';
-import 'package:linkyou/screens/search/search_screen.dart';
-import 'package:linkyou/screens/about/about_screen.dart';
-import 'package:linkyou/screens/user/user_screen.dart';
-import 'package:linkyou/screens/likeyou/likeyou_screen.dart';
-import 'package:linkyou/screens/photo_comment/photo_comment_screen.dart';
-import 'package:linkyou/core/models/photo.dart';
+import 'package:linkyou/pages/welcome/welcome_screen.dart';
+import 'package:linkyou/pages/home/home_screen.dart';
+import 'package:linkyou/pages/auth/auth_screen.dart';
+import 'package:linkyou/pages/top/top_screen.dart';
+import 'package:linkyou/pages/search/search_screen.dart';
+import 'package:linkyou/pages/about/about_screen.dart';
+import 'package:linkyou/pages/user/user_screen.dart';
+import 'package:linkyou/pages/likeyou/likeyou_screen.dart';
+import 'package:linkyou/pages/photo_comment/photo_comment_screen.dart';
+import 'package:linkyou/models/photo.dart';
 
 class RouteService {
   static final GlobalKey<NavigatorState> navigatorKey =

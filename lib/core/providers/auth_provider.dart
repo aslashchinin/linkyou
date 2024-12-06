@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/core/models/login.dart';
+import 'package:linkyou/models/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:linkyou/core/models/user.dart';
+import 'package:linkyou/models/user.dart';
 
 class AuthProvider with ChangeNotifier {
   AuthProvider() {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
+import 'package:linkyou/ui/widgets/controlls/circular_progress_blue.dart';
 import 'package:linkyou/core/base/state_base.dart';
 import 'package:linkyou/core/enums/common_loading_enum.dart';
 import 'package:linkyou/core/base/model_interface_base.dart';

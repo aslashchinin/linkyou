@@ -1,10 +1,10 @@
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
-import 'package:linkyou/core/models/auth_change_email_input.dart';
-import 'package:linkyou/core/models/auth_change_password_input.dart';
-import 'package:linkyou/core/models/auth_forgot_input.dart';
-import 'package:linkyou/core/models/auth_signin_input.dart';
-import 'package:linkyou/core/models/auth_sign_up_input.dart';
+import 'package:linkyou/models/auth_change_email_input.dart';
+import 'package:linkyou/models/auth_change_password_input.dart';
+import 'package:linkyou/models/auth_forgot_input.dart';
+import 'package:linkyou/models/auth_signin_input.dart';
+import 'package:linkyou/models/auth_sign_up_input.dart';
 
 class AuthService extends ApiBase {
   AuthService({required super.authProvider});

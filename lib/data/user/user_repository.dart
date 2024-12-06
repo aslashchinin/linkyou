@@ -1,13 +1,13 @@
 import 'package:linkyou/data/user/user_service.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
-import 'package:linkyou/core/models/user_short.dart';
-import 'package:linkyou/core/models/pagination_info.dart';
+import 'package:linkyou/models/user_short.dart';
+import 'package:linkyou/models/pagination_info.dart';
 import 'package:linkyou/core/responses/repository_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
-import 'package:linkyou/core/models/city_highlighted.dart';
-import 'package:linkyou/core/models/user.dart';
-import 'package:linkyou/core/models/user_gift.dart';
-import 'package:linkyou/core/models/gifts.dart';
+import 'package:linkyou/models/city_highlighted.dart';
+import 'package:linkyou/models/user.dart';
+import 'package:linkyou/models/user_gift.dart';
+import 'package:linkyou/models/gifts.dart';
 
 class UserRepository implements UserRepositoryInterface {
   final UserService _userService;

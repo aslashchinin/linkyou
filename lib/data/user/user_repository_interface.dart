@@ -1,10 +1,10 @@
-import 'package:linkyou/core/models/user_short.dart';
+import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/core/responses/repository_response.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
-import 'package:linkyou/core/models/city_highlighted.dart';
-import 'package:linkyou/core/models/user.dart';
-import 'package:linkyou/core/models/user_gift.dart';
-import 'package:linkyou/core/models/gifts.dart';
+import 'package:linkyou/models/city_highlighted.dart';
+import 'package:linkyou/models/user.dart';
+import 'package:linkyou/models/user_gift.dart';
+import 'package:linkyou/models/gifts.dart';
 import 'package:linkyou/core/base/repository_interface_base.dart';
 
 abstract class UserRepositoryInterface implements RepositoryInterfaceBase {

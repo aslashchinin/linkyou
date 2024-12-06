@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
-import 'package:linkyou/views/blocks/layout_menu/layout_menu_block.dart';
+import 'package:linkyou/ui/blocks/layout_appbar/layout_appbar_block.dart';
+import 'package:linkyou/ui/blocks/layout_menu/layout_menu_block.dart';
 
 // Абстрактный базовый класс виджета
 abstract class ScreenBase extends StatefulWidget {

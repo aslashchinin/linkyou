@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/core/services/route_service.dart';
 import 'package:linkyou/core/services/locator_service.dart';
-import 'package:linkyou/screens/splash/splash_screen.dart';
-import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
+import 'package:linkyou/pages/splash/splash_screen.dart';
+import 'package:linkyou/ui/widgets/controlls/circular_progress_blue.dart';
 import 'package:intl/intl_standalone.dart';
 import 'package:intl/date_symbol_data_local.dart';
 

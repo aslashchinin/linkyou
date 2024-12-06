@@ -1,4 +1,4 @@
-import 'package:linkyou/core/models/user_short.dart';
+import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/core/enums/user_status_enum.dart';
 
 class UserState {

@@ -1,8 +1,8 @@
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
-import 'package:linkyou/core/models/photo_input.dart';
-import 'package:linkyou/core/models/photo_edit_input.dart';
-import 'package:linkyou/core/models/photo_comment_input.dart';
+import 'package:linkyou/models/photo_input.dart';
+import 'package:linkyou/models/photo_edit_input.dart';
+import 'package:linkyou/models/photo_comment_input.dart';
 
 class PhotoService extends ApiBase {
   PhotoService({required super.authProvider});

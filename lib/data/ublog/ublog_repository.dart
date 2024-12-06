@@ -1,10 +1,10 @@
 import 'package:linkyou/data/ublog/ublog_repository_interface.dart';
 import 'package:linkyou/core/responses/repository_response.dart';
-import 'package:linkyou/core/models/ublog_post.dart';
-import 'package:linkyou/core/models/ublog_comment.dart';
+import 'package:linkyou/models/ublog_post.dart';
+import 'package:linkyou/models/ublog_comment.dart';
 import 'package:linkyou/data/ublog/ublog_service.dart';
-import 'package:linkyou/core/models/pagination_info.dart';
-import 'package:linkyou/core/models/ublog_input.dart';
+import 'package:linkyou/models/pagination_info.dart';
+import 'package:linkyou/models/ublog_input.dart';
 
 class UblogRepository implements UblogRepositoryInterface {
   final UblogService _ublogService;

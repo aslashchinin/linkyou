@@ -1,5 +1,5 @@
 import 'package:linkyou/core/enums/common_loading_enum.dart';
-import 'package:linkyou/core/models/ublog_post.dart';
+import 'package:linkyou/models/ublog_post.dart';
 
 class UblogState {
   final List<UblogPost> ublogs;

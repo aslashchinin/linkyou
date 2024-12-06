@@ -1,4 +1,4 @@
-import 'package:linkyou/core/models/pagination_info.dart';
+import 'package:linkyou/models/pagination_info.dart';
 
 class RepositoryResponse<T> {
   final T data;

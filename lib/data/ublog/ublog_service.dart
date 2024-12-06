@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
-import 'package:linkyou/core/models/ublog_input.dart';
+import 'package:linkyou/models/ublog_input.dart';
 
 class UblogService extends ApiBase {
   UblogService({required super.authProvider});

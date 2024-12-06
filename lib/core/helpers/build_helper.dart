@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/core/models/education.dart';
-import 'package:linkyou/core/models/language.dart';
+import 'package:linkyou/models/education.dart';
+import 'package:linkyou/models/language.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
-import 'package:linkyou/views/widgets/windows/ublog_gallery_window.dart';
+import 'package:linkyou/ui/widgets/controlls/circular_progress_blue.dart';
+import 'package:linkyou/ui/widgets/windows/ublog_gallery_window.dart';
 
 class BuildHelper {
   static Widget buildLanguage(Language language, bool isShowTitle) {

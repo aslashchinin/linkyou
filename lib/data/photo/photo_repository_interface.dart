@@ -1,12 +1,12 @@
 import 'package:linkyou/core/responses/repository_response.dart';
-import 'package:linkyou/core/models/photo.dart';
-import 'package:linkyou/core/models/photo_input.dart';
-import 'package:linkyou/core/models/photo_edit_input.dart';
-import 'package:linkyou/core/models/photo_comment_input.dart';
-import 'package:linkyou/core/models/comment.dart';
-import 'package:linkyou/core/models/like.dart';
-import 'package:linkyou/core/models/result.dart';
-import 'package:linkyou/core/models/photo_comment_add_result.dart';
+import 'package:linkyou/models/photo.dart';
+import 'package:linkyou/models/photo_input.dart';
+import 'package:linkyou/models/photo_edit_input.dart';
+import 'package:linkyou/models/photo_comment_input.dart';
+import 'package:linkyou/models/comment.dart';
+import 'package:linkyou/models/like.dart';
+import 'package:linkyou/models/result.dart';
+import 'package:linkyou/models/photo_comment_add_result.dart';
 import 'package:linkyou/core/base/repository_interface_base.dart';
 
 abstract class PhotoRepositoryInterface implements RepositoryInterfaceBase {
