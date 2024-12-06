@@ -39,6 +39,7 @@ abstract class BlockViewModelBase<M extends ModelInterfaceBase,
   Future<void> handleItemsLoading({
     required Future<dynamic> Function() loadFunction,
     bool isLoadMore = false,
+    bool isReverse = false,
   }) async {
     try {
       setState(_state.copyWith(
@@ -51,7 +52,9 @@ abstract class BlockViewModelBase<M extends ModelInterfaceBase,
       setCurrentPage(repositoryResponse.pagination.currentPage);
 
       final updatedItems = isLoadMore
-          ? [..._state.items, ...repositoryResponse.data]
+          ? isReverse
+              ? [...repositoryResponse.data, ..._state.items]
+              : [..._state.items, ...repositoryResponse.data]
           : [...repositoryResponse.data];
 
       setState(_state.copyWith(

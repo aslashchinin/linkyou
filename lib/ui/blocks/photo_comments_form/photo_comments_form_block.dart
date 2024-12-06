@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PhotoCommentsFormBlock extends StatefulWidget {
-  const PhotoCommentsFormBlock({super.key});
+  const PhotoCommentsFormBlock({super.key, required this.onSendPressed});
+
+  final Function(String) onSendPressed;
 
   @override
   State<PhotoCommentsFormBlock> createState() => _PhotoCommentsFormBlockState();
@@ -9,6 +11,7 @@ class PhotoCommentsFormBlock extends StatefulWidget {
 
 class _PhotoCommentsFormBlockState extends State<PhotoCommentsFormBlock> {
   final TextEditingController _controller = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,10 @@ class _PhotoCommentsFormBlockState extends State<PhotoCommentsFormBlock> {
                 color: Colors.white,
               ),
               onPressed: () {
-                // Обработка нажатия кнопки отправки
+                if (_controller.text.isNotEmpty) {
+                  widget.onSendPressed(_controller.text);
+                  _controller.text = '';
+                }
               },
             ),
           ),

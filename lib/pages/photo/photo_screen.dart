@@ -60,7 +60,7 @@ class PhotoScreenState extends ScreenBaseState<PhotoScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
+                  bottom: 35,
                   left: 0,
                   right: 0,
                   child: Container(

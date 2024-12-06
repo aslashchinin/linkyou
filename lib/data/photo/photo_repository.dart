@@ -9,7 +9,6 @@ import 'package:linkyou/data/photo/photo_repository_interface.dart';
 import 'package:linkyou/models/pagination_info.dart';
 import 'package:linkyou/models/like.dart';
 import 'package:linkyou/models/result.dart';
-import 'package:linkyou/models/photo_comment_add_result.dart';
 
 class PhotoRepository implements PhotoRepositoryInterface {
   final PhotoService _photoService;
@@ -102,14 +101,14 @@ class PhotoRepository implements PhotoRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<PhotoCommentAddResult>> addPhotoComment(
+  Future<RepositoryResponse<List<Comment>>> addPhotoComment(
       int photoId, PhotoCommentInput input) async {
     try {
       final serviceResponse =
           await _photoService.addPhotoComment(photoId, input);
       return RepositoryResponse(
-          data: PhotoCommentAddResult.fromJson(serviceResponse.data),
-          pagination: PaginationInfo());
+          data: [Comment.fromJson(serviceResponse.data)],
+          pagination: PaginationInfo(currentPage: 2));
     } catch (e) {
       rethrow;
     }
