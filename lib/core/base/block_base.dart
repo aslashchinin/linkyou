@@ -1,16 +1,16 @@
-// base_users_block.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:linkyou/data/user/user_state.dart';
-import 'package:linkyou/core/enums/user_status_enum.dart';
 import 'package:linkyou/views/widgets/controlls/circular_progress_blue.dart';
+import 'package:linkyou/core/base/state_base.dart';
+import 'package:linkyou/core/enums/common_loading_enum.dart';
+import 'package:linkyou/core/base/model_interface_base.dart';
 
-abstract class BaseUsersBlock extends StatefulWidget {
-  const BaseUsersBlock({super.key});
+abstract class BaseBlock<T> extends StatefulWidget {
+  const BaseBlock({super.key});
 }
 
-abstract class BaseUsersBlockState<T extends BaseUsersBlock,
-    VM extends ChangeNotifier> extends State<T> {
+abstract class BaseBlockState<BB extends BaseBlock, VM extends ChangeNotifier,
+    M extends ModelInterfaceBase> extends State<BB> {
   late VM viewModel;
 
   @override
@@ -20,6 +20,8 @@ abstract class BaseUsersBlockState<T extends BaseUsersBlock,
       initializeData();
     });
   }
+
+  BaseState<M> getState();
 
   void initializeData();
 
@@ -46,7 +48,7 @@ abstract class BaseUsersBlockState<T extends BaseUsersBlock,
     );
   }
 
-  Widget buildLoadedState(UserState state);
+  Widget buildLoadedState(BaseState<M> state);
   void onRefreshPressed();
 
   @override
@@ -55,17 +57,15 @@ abstract class BaseUsersBlockState<T extends BaseUsersBlock,
     final state = getState();
 
     switch (state.status) {
-      case UserStatus.initial:
-      case UserStatus.loading:
+      case CommonLoadingStatus.initial:
+      case CommonLoadingStatus.loading:
         return buildLoadingState();
-      case UserStatus.loaded:
-      case UserStatus.loadingMore:
-      case UserStatus.end:
+      case CommonLoadingStatus.loaded:
+      case CommonLoadingStatus.loadingMore:
+      case CommonLoadingStatus.end:
         return buildLoadedState(state);
-      case UserStatus.error:
+      case CommonLoadingStatus.error:
         return buildErrorState(state.errorMessage);
     }
   }
-
-  UserState getState();
 }

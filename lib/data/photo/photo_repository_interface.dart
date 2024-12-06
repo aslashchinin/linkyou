@@ -7,8 +7,9 @@ import 'package:linkyou/core/models/comment.dart';
 import 'package:linkyou/core/models/like.dart';
 import 'package:linkyou/core/models/result.dart';
 import 'package:linkyou/core/models/photo_comment_add_result.dart';
+import 'package:linkyou/core/base/repository_interface_base.dart';
 
-abstract class PhotoRepositoryInterface {
+abstract class PhotoRepositoryInterface implements RepositoryInterfaceBase {
   Future<RepositoryResponse<List<Photo>>> getPhotosList(BigInt userId);
   Future<RepositoryResponse<Photo>> addPhoto(PhotoInput input);
   Future<RepositoryResponse<Photo>> getPhoto(int photoId);

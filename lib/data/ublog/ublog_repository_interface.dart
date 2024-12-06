@@ -2,8 +2,9 @@ import 'package:linkyou/core/responses/repository_response.dart';
 import 'package:linkyou/core/models/ublog_post.dart';
 import 'package:linkyou/core/models/ublog_comment.dart';
 import 'package:linkyou/core/models/ublog_input.dart';
+import 'package:linkyou/core/base/repository_interface_base.dart';
 
-abstract class UblogRepositoryInterface {
+abstract class UblogRepositoryInterface implements RepositoryInterfaceBase {
   Future<RepositoryResponse<List<UblogPost>>> getUblogsList(
       BigInt userId, int? limit);
   Future<RepositoryResponse<List<UblogPost>>> getUblogsAll();

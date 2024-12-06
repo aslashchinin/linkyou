@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'users_top_viewmodel.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/enums/user_status_enum.dart';
-import 'package:linkyou/core/base/users_block_base.dart';
-import 'package:linkyou/data/user/user_state.dart';
+import 'package:linkyou/core/base/block_base.dart';
 import 'package:linkyou/views/widgets/controlls/round_button.dart';
-class TopUsersListBlock extends BaseUsersBlock {
+import 'package:linkyou/core/models/user_short.dart';
+import 'package:linkyou/core/base/state_base.dart';
+import 'package:linkyou/core/enums/common_loading_enum.dart';
+
+class UsersTopBlock extends BaseBlock<UsersTopBlock> {
   final Gender gender;
 
-  const TopUsersListBlock({super.key, this.gender = Gender.female});
+  const UsersTopBlock({super.key, this.gender = Gender.female});
 
   @override
   TopUsersListBlockState createState() => TopUsersListBlockState();
 }
 
 class TopUsersListBlockState
-    extends BaseUsersBlockState<TopUsersListBlock, UsersTopViewModel> {
+    extends BaseBlockState<UsersTopBlock, UsersTopViewModel, UserShort> {
   @override
   void initializeData() {
-    final viewModel = Provider.of<UsersTopViewModel>(context, listen: false);
     viewModel.clearState();
     viewModel.loadTopUsers(gender: widget.gender);
   }
@@ -31,15 +32,15 @@ class TopUsersListBlockState
   }
 
   @override
-  UserState getState() => viewModel.state;
+  BaseState<UserShort> getState() => viewModel.state;
 
   @override
-  Widget buildLoadedState(UserState state) {
+  Widget buildLoadedState(BaseState<UserShort> state) {
     return ListView.builder(
-      itemCount: state.users.length + 1,
+      itemCount: state.items.length + 1,
       itemBuilder: (context, index) {
-        if (index == state.users.length) {
-          if (state.status == UserStatus.loadingMore) {
+        if (index == state.items.length) {
+          if (state.status == CommonLoadingStatus.loadingMore) {
             return buildLoadingState();
           }
           if (state.status == UserStatus.end) {
@@ -55,7 +56,7 @@ class TopUsersListBlockState
             ),
           );
         }
-        final user = state.users[index];
+        final user = state.items[index];
         return UserShortTile(
           user: user,
         );

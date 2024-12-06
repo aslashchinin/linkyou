@@ -1,7 +1,11 @@
-import 'package:linkyou/core/base/users_block_viewmodel_base.dart';
+import 'package:linkyou/core/base/block_viewmodel_base.dart';
+import 'package:linkyou/core/models/user_short.dart';
 import 'package:flutter/material.dart';
+import 'package:linkyou/data/user/user_repository_interface.dart';
+import 'package:linkyou/views/blocks/users_daily/users_daily_block.dart';
 
-class UsersDailyViewModel extends BaseUsersViewModel {
+class UsersDailyViewModel
+    extends BaseViewModel<UsersDailyBlock, UserShort, UserRepositoryInterface> {
   UsersDailyViewModel({required super.repository});
 
   int _cityId = 0;
@@ -14,13 +18,13 @@ class UsersDailyViewModel extends BaseUsersViewModel {
   }
 
   Future<void> loadDailyUsers() async {
-    await handleUsersLoading(
+    await handleItemsLoading(
       loadFunction: () => repository.getDailyUsers(cityId: _cityId),
     );
   }
 
   Future<void> loadMoreUsers() async {
-    await handleUsersLoading(
+    await handleItemsLoading(
       loadFunction: () => repository.getDailyUsers(
         page: currentListPage + 1,
         cityId: _cityId,
@@ -30,7 +34,7 @@ class UsersDailyViewModel extends BaseUsersViewModel {
   }
 
   void onNextPage(PageController controller) {
-    if (_currentSliderPage < (state.users.length / 3).ceil() - 1) {
+    if (_currentSliderPage < (state.items.length / 3).ceil() - 1) {
       _currentSliderPage++;
       controller.animateToPage(
         _currentSliderPage,

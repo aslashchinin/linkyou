@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/base/screen_base.dart';
-import 'package:linkyou/views/blocks/users_top/users_top_list_block.dart';
+import 'package:linkyou/views/blocks/users_top/users_top_block.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
 import 'package:linkyou/views/widgets/headers/screen_header.dart';
@@ -33,8 +33,8 @@ class _TopScreenState extends ScreenBaseState<TopScreen>
           child: TabBarView(
             controller: _tabController,
             children: const [
-              TopUsersListBlock(gender: Gender.male),
-              TopUsersListBlock(gender: Gender.female),
+              UsersTopBlock(gender: Gender.male),
+              UsersTopBlock(gender: Gender.female),
             ],
           ),
         ),

@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/views/widgets/headers/block_header.dart';
-import 'package:linkyou/core/base/users_block_base.dart';
+import 'package:linkyou/core/base/block_base.dart';
 import 'package:linkyou/views/blocks/users_new/users_new_viewmodel.dart';
+import 'package:linkyou/core/models/user_short.dart';
+import 'package:linkyou/core/base/state_base.dart';
 
-class UsersNewSliderBlock extends BaseUsersBlock {
-  
-
+class UsersNewSliderBlock extends BaseBlock<UsersNewSliderBlock> {
   const UsersNewSliderBlock({super.key});
 
   @override
-  UsersTopSliderBlockState createState() => UsersTopSliderBlockState();
+  UsersNewSliderBlockState createState() => UsersNewSliderBlockState();
 }
 
-class UsersTopSliderBlockState
-    extends BaseUsersBlockState<UsersNewSliderBlock, UsersNewViewModel> {
+class UsersNewSliderBlockState
+    extends BaseBlockState<UsersNewSliderBlock, UsersNewViewModel, UserShort> {
   late PageController _pageController;
 
   @override
   void initializeData() {
-    Provider.of<UsersNewViewModel>(context, listen: false)
-        .loadNewUsers();
+    Provider.of<UsersNewViewModel>(context, listen: false).loadNewUsers();
   }
 
   @override
@@ -31,10 +29,10 @@ class UsersTopSliderBlockState
   }
 
   @override
-  UserState getState() => viewModel.state;
+  BaseState<UserShort> getState() => viewModel.state;
 
   @override
-  Widget buildLoadedState(UserState state) {
+  Widget buildLoadedState(BaseState<UserShort> state) {
     _pageController = PageController(initialPage: viewModel.currentSliderPage);
 
     return Column(
@@ -50,9 +48,11 @@ class UsersTopSliderBlockState
                 onPressed: () => viewModel.onPreviousPage(_pageController),
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
-                  shape: const CircleBorder(side: BorderSide.none), 
-                  padding: const EdgeInsets.all(4), // Устанавливаем размер кнопки
-                  backgroundColor: const Color(0xFFecf4ff), // Синий цвет фона кнопки                
+                  shape: const CircleBorder(side: BorderSide.none),
+                  padding:
+                      const EdgeInsets.all(4), // Устанавливаем размер кнопки
+                  backgroundColor:
+                      const Color(0xFFecf4ff), // Синий цвет фона кнопки
                 ),
                 child: const Icon(
                   Icons.arrow_left,
@@ -64,8 +64,10 @@ class UsersTopSliderBlockState
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   shape: const CircleBorder(side: BorderSide.none),
-                  padding: const EdgeInsets.all(4), // Устанавливаем размер кнопки
-                  backgroundColor: const Color(0xFFecf4ff), // Синий цвет фона кнопки                
+                  padding:
+                      const EdgeInsets.all(4), // Устанавливаем размер кнопки
+                  backgroundColor:
+                      const Color(0xFFecf4ff), // Синий цвет фона кнопки
                 ),
                 child: const Icon(
                   Icons.arrow_right,
@@ -79,11 +81,11 @@ class UsersTopSliderBlockState
           height: 320,
           child: PageView.builder(
             controller: _pageController,
-            itemCount: (state.users.length / 3).ceil(),
+            itemCount: (state.items.length / 3).ceil(),
             itemBuilder: (context, pageIndex) {
               final startIndex = pageIndex * 3;
-              final endIndex = (startIndex + 3).clamp(0, state.users.length);
-              final users = state.users.sublist(startIndex, endIndex);
+              final endIndex = (startIndex + 3).clamp(0, state.items.length);
+              final users = state.items.sublist(startIndex, endIndex);
               return Column(
                 children: users
                     .map((user) => UserShortTile(

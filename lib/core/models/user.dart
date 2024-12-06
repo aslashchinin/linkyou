@@ -23,8 +23,9 @@ import 'book.dart';
 import 'pet.dart';
 import 'music.dart';
 import 'ublog_post.dart';
+import 'package:linkyou/core/base/model_interface_base.dart';
 
-class User {
+class User implements ModelInterfaceBase {
   final BigInt id;
   final Avatar avatar;
   final String name;

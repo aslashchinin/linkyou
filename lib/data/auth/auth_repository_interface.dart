@@ -5,8 +5,9 @@ import 'package:linkyou/core/models/auth_forgot_input.dart';
 import 'package:linkyou/core/models/auth_signin_input.dart';
 import 'package:linkyou/core/models/auth_sign_up_input.dart';
 import 'package:linkyou/core/models/login.dart';
+import 'package:linkyou/core/base/repository_interface_base.dart';
 
-abstract class AuthRepositoryInterface {
+abstract class AuthRepositoryInterface implements RepositoryInterfaceBase {
   Future<RepositoryResponse<void>> changeEmail(AuthChangeEmailInput input);
   Future<RepositoryResponse<void>> changePassword(
       AuthChangePasswordInput input);

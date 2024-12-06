@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:linkyou/core/models/user_short.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/core/enums/user_status_enum.dart';
-import 'package:linkyou/core/base/users_block_base.dart';
-import 'package:linkyou/data/user/user_state.dart';
+import 'package:linkyou/core/base/block_base.dart';
 import 'users_daily_viewmodel.dart';
 import 'package:linkyou/views/widgets/controlls/round_button.dart';
+import 'package:linkyou/core/base/state_base.dart';
 
-class UsersDailyBlock extends BaseUsersBlock {
+
+class UsersDailyBlock extends BaseBlock<UsersDailyBlock> {
   const UsersDailyBlock({super.key});
 
   @override
@@ -15,10 +16,10 @@ class UsersDailyBlock extends BaseUsersBlock {
 }
 
 class UsersDailyBlockState
-    extends BaseUsersBlockState<UsersDailyBlock, UsersDailyViewModel> {
+    extends BaseBlockState<UsersDailyBlock, UsersDailyViewModel, UserShort> {
   @override
   void initializeData() {
-    Provider.of<UsersDailyViewModel>(context, listen: false).loadDailyUsers();
+    viewModel.loadDailyUsers();
   }
 
   @override
@@ -27,16 +28,16 @@ class UsersDailyBlockState
   }
 
   @override
-  UserState getState() => viewModel.state;
+  BaseState<UserShort> getState() => viewModel.state;
 
   @override
-  Widget buildLoadedState(UserState state) {
+  Widget buildLoadedState(BaseState<UserShort> state) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: state.users.length + 1,
+      itemCount: state.items.length + 1,
       itemBuilder: (context, index) {
-        if (index == state.users.length) {
+        if (index == state.items.length) {
           if (state.status == UserStatus.loadingMore) {
             return buildLoadingState();
           }
@@ -53,7 +54,7 @@ class UsersDailyBlockState
             ),
           );
         }
-        final user = state.users[index];
+        final user = state.items[index];
         return UserShortTile(
           user: user,
         );

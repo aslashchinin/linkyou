@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'users_top_viewmodel.dart';
-import 'package:linkyou/data/user/user_state.dart';
 import 'package:linkyou/views/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/views/widgets/headers/block_header.dart';
-import 'package:linkyou/core/base/users_block_base.dart';
+import 'package:linkyou/core/base/block_base.dart';
+import 'package:linkyou/core/models/user_short.dart';
+import 'package:linkyou/core/base/state_base.dart';
 
-class UsersTopSliderBlock extends BaseUsersBlock {
+class UsersTopSliderBlock extends BaseBlock<UsersTopSliderBlock> {
   final Gender gender;
 
   const UsersTopSliderBlock({super.key, this.gender = Gender.female});
@@ -17,7 +18,7 @@ class UsersTopSliderBlock extends BaseUsersBlock {
 }
 
 class UsersTopSliderBlockState
-    extends BaseUsersBlockState<UsersTopSliderBlock, UsersTopViewModel> {
+    extends BaseBlockState<UsersTopSliderBlock, UsersTopViewModel, UserShort> {
   late PageController _pageController;
 
   @override
@@ -32,10 +33,10 @@ class UsersTopSliderBlockState
   }
 
   @override
-  UserState getState() => viewModel.state;
+  BaseState<UserShort> getState() => viewModel.state;
 
   @override
-  Widget buildLoadedState(UserState state) {
+  Widget buildLoadedState(BaseState<UserShort> state) {
     _pageController = PageController(initialPage: viewModel.currentSliderPage);
 
     return Column(
@@ -52,8 +53,10 @@ class UsersTopSliderBlockState
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   shape: const CircleBorder(side: BorderSide.none),
-                  padding: const EdgeInsets.all(4), // Устанавливаем размер кнопки
-                  backgroundColor: const Color(0xFFecf4ff), // Синий цвет фона кнопки                
+                  padding:
+                      const EdgeInsets.all(4), // Устанавливаем размер кнопки
+                  backgroundColor:
+                      const Color(0xFFecf4ff), // Синий цвет фона кнопки
                 ),
                 child: const Icon(
                   Icons.arrow_left,
@@ -65,8 +68,10 @@ class UsersTopSliderBlockState
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   shape: const CircleBorder(side: BorderSide.none),
-                  padding: const EdgeInsets.all(4), // Устанавливаем размер кнопки
-                  backgroundColor: const Color(0xFFecf4ff), // Синий цвет фона кнопки                
+                  padding:
+                      const EdgeInsets.all(4), // Устанавливаем размер кнопки
+                  backgroundColor:
+                      const Color(0xFFecf4ff), // Синий цвет фона кнопки
                 ),
                 child: const Icon(
                   Icons.arrow_right,
@@ -80,11 +85,11 @@ class UsersTopSliderBlockState
           height: 320,
           child: PageView.builder(
             controller: _pageController,
-            itemCount: (state.users.length / 3).ceil(),
+            itemCount: (state.items.length / 3).ceil(),
             itemBuilder: (context, pageIndex) {
               final startIndex = pageIndex * 3;
-              final endIndex = (startIndex + 3).clamp(0, state.users.length);
-              final users = state.users.sublist(startIndex, endIndex);
+              final endIndex = (startIndex + 3).clamp(0, state.items.length);
+              final users = state.items.sublist(startIndex, endIndex);
               return Column(
                 children: users
                     .map((user) => UserShortTile(

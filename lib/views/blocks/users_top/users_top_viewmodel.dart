@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
-import 'package:linkyou/core/base/users_block_viewmodel_base.dart';
+import 'package:linkyou/core/base/block_viewmodel_base.dart';
+import 'package:linkyou/core/models/user_short.dart';
+import 'package:linkyou/data/user/user_repository_interface.dart';
+import 'users_top_block.dart';
 
-class UsersTopViewModel extends BaseUsersViewModel {
+class UsersTopViewModel
+    extends BaseViewModel<UsersTopBlock, UserShort, UserRepositoryInterface> {
   UsersTopViewModel({required super.repository});
 
   int _currentSliderPage = 0;
   int get currentSliderPage => _currentSliderPage;
 
   Future<void> loadTopUsers({Gender? gender}) async {
-    await handleUsersLoading(
+    await handleItemsLoading(
       loadFunction: () => repository.getTopUsers(gender: gender),
     );
   }
 
   Future<void> loadMoreUsers({Gender? gender}) async {
-    await handleUsersLoading(
+    await handleItemsLoading(
       loadFunction: () => repository.getTopUsers(
         gender: gender,
         page: currentListPage + 1,
@@ -25,7 +29,7 @@ class UsersTopViewModel extends BaseUsersViewModel {
   }
 
   void onNextPage(PageController controller) {
-    if (_currentSliderPage < (state.users.length / 3).ceil() - 1) {
+    if (_currentSliderPage < (state.items.length / 3).ceil() - 1) {
       _currentSliderPage++;
       controller.animateToPage(
         _currentSliderPage,

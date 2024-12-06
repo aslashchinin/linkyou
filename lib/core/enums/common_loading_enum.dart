@@ -1,1 +1,1 @@
-enum CommonLoadingStatus { initial, loading, loaded, error }
+enum CommonLoadingStatus { initial, loading, loaded, loadingMore, end, error }

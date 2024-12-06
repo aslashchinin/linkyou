@@ -13,53 +13,25 @@ class PhotoCommentScreen extends ScreenBase {
 }
 
 class PhotoCommentScreenState extends ScreenBaseState<PhotoCommentScreen> {
+  
+  final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
   }
 
   @override
-  Widget buildContent(BuildContext context) {
-    final TextEditingController _controller = TextEditingController();
-
+  Widget buildContent(BuildContext context) {      
     return Column(children: [
       Expanded(
         child: ListView.builder(
+          controller: _scrollController,
           itemCount: 25,
           itemBuilder: (context, index) {
-            return Card(
-              margin: EdgeInsets.only(left: 15, right: 15, bottom: 1, top: 1),
-              color: Colors.white,
-              elevation: 0,
-              child: ListTile(
-                contentPadding: EdgeInsets.symmetric(vertical: 1),
-                leading: Padding(
-                  padding: EdgeInsets.only(top: 1.0),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        'url_к_изображению'), // Замените на вашу ссылку
-                  ),
-                ),
-                title: Text(
-                  'Эдуард',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10), // Отступы внутри контейнера
-                  decoration: BoxDecoration(
-                    color: Color(0xFFf6f8fb), // Серый фон
-                    borderRadius: BorderRadius.circular(30), // Круглые углы
-                  ),
-                  child: Text(
-                    'Платье супер, очень женственно',
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                  ),
-                ),
-                trailing: Text('12:00'),
-              ),
-            );
+            return const SizedBox(
+                height: 10); //CommentTile(comment: Comment());
           },
         ),
       ),

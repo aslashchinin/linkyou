@@ -4,8 +4,9 @@ import 'birthday.dart';
 import 'job_short.dart';
 import 'location_short.dart';
 import 'likes_short.dart';
+import 'package:linkyou/core/base/model_interface_base.dart';
 
-class UserShort {
+class UserShort implements ModelInterfaceBase {
   final BigInt id;
   final AvatarShort avatar;
   final String name;

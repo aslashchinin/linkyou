@@ -5,8 +5,9 @@ import 'package:linkyou/core/models/city_highlighted.dart';
 import 'package:linkyou/core/models/user.dart';
 import 'package:linkyou/core/models/user_gift.dart';
 import 'package:linkyou/core/models/gifts.dart';
+import 'package:linkyou/core/base/repository_interface_base.dart';
 
-abstract class UserRepositoryInterface {
+abstract class UserRepositoryInterface implements RepositoryInterfaceBase {
   Future<RepositoryResponse<List<UserShort>>> getTopUsers({
     Gender? gender,
     int page = 0,
