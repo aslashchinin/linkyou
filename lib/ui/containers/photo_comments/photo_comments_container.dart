@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/models/photo.dart';
 import 'package:linkyou/ui/blocks/photo_comments/photo_comments_block.dart';
-
+import 'package:linkyou/ui/blocks/photo_comments_form/photo_comments_form_block.dart';
 class PhotoCommentsContainer extends StatelessWidget {
   const PhotoCommentsContainer({super.key, required this.photo});
 
@@ -13,6 +13,11 @@ class PhotoCommentsContainer extends StatelessWidget {
       Expanded(
         child: PhotoCommentsBlock(photo: photo),
       ),
+      const Divider(
+        height: 1,
+        color: Color(0xFFE0E0E0),
+      ),
+      PhotoCommentsFormBlock()
     ]);
   }
 }
