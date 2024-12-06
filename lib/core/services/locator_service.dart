@@ -24,6 +24,7 @@ import 'package:linkyou/ui/blocks/form_registration/form_registration_viewmodel.
 import 'package:linkyou/ui/blocks/form_password_recovery/form_password_recovery_viewmodel.dart';
 import 'package:linkyou/pages/welcome/welcome_viewmodel.dart';
 import 'package:linkyou/pages/photo/photo_viewmodel.dart';
+import 'package:linkyou/ui/blocks/photo_comments/photo_comments_viewmodel.dart';
 
 // Services
 import 'package:linkyou/data/user/user_service.dart';

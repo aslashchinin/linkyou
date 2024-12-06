@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:linkyou/core/helpers/pluralizer_helper.dart';
 import 'package:linkyou/models/comment.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:intl/intl.dart';
 
 class CommentTile extends StatelessWidget {
   const CommentTile({required this.comment, super.key});
@@ -19,32 +19,25 @@ class CommentTile extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.only(top: 1.0),
           child: CircleAvatar(
-            backgroundImage: NetworkImage(
-                comment.user.avatar.src.origin), // Замените на вашу ссылку
+            backgroundImage: NetworkImage(comment.user.avatar.src.origin),
           ),
         ),
         title: Text(
           comment.user.name,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          decoration: BoxDecoration(
-            color: const Color(0xFFf6f8fb),
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: HtmlWidget(
-              "<div style='white-space: pre-wrap;'>${comment.comment}</div>",
-              customStylesBuilder: (element) {
-            final String src = element.attributes['src'] ?? '';
+        subtitle: HtmlWidget(
+            "<div style='white-space: pre-wrap; background-color: #ecf4ff !important; padding: 10px; border-radius: 12px;'>${comment.comment}</div>",
+            customStylesBuilder: (element) {
+          final String src = element.attributes['src'] ?? '';
 
-            if (element.localName == 'img' && src.contains('emoji')) {
-              return {'width': '16px', 'height': '16px'};
-            }
-            return null;
-          }),
-        ),
-        trailing: Text(DateFormat('HH:mm').format(comment.datetime)),
+          if (element.localName == 'img' && src.contains('emoji')) {
+            return {'width': '16px', 'height': '16px'};
+          }
+
+          return null;
+        }),
+        trailing: Text(PluralizerHelper.formatDate(comment.datetime)),
       ),
     );
   }

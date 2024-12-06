@@ -1,9 +1,10 @@
-import 'package:linkyou/models/user.dart';
+import 'package:linkyou/models/user_short.dart';
+import 'package:linkyou/core/base/model_interface_base.dart';
 
-class Comment {
+class Comment implements ModelInterfaceBase {
   final int id;
-  final User user; // использование модели User
-  final int postId;
+  final UserShort user;
+  final int? postId;
   final DateTime datetime;
   final String comment;
 
@@ -18,7 +19,7 @@ class Comment {
   factory Comment.fromJson(Map<String, dynamic> json) {
     return Comment(
       id: json['id'],
-      user: User.fromJson(json['user']),
+      user: UserShort.fromJson(json['user']),
       postId: json['post_id'],
       datetime: DateTime.parse(json['datetime']),
       comment: json['comment'],
@@ -28,7 +29,7 @@ class Comment {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'user': user.toJson(), // преобразование объекта User обратно в JSON
+      'user': user.toJson(),
       'post_id': postId,
       'datetime': datetime.toIso8601String(),
       'comment': comment,

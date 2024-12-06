@@ -7,7 +7,7 @@ import 'package:linkyou/pages/search/search_screen.dart';
 import 'package:linkyou/pages/about/about_screen.dart';
 import 'package:linkyou/pages/user/user_screen.dart';
 import 'package:linkyou/pages/likeyou/likeyou_screen.dart';
-import 'package:linkyou/pages/photo_comment/photo_comment_screen.dart';
+import 'package:linkyou/pages/photo_comment/photo_comment_page.dart';
 import 'package:linkyou/models/photo.dart';
 import 'package:linkyou/pages/photo/photo_screen.dart';
 

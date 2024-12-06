@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class PluralizerHelper {
   static String getCount(
       int count, String singularForm, String pluralForm, String genitiveForm) {
@@ -9,5 +11,27 @@ class PluralizerHelper {
     } else {
       return '$count $genitiveForm';
     }
+  }
+
+  static String formatDate(DateTime date) {
+    final now = DateTime.now();
+
+    // Проверка на сегодня
+    if (now.year == date.year &&
+        now.month == date.month &&
+        now.day == date.day) {
+      return 'Сегодня';
+    }
+
+    // Проверка на вчера
+    final yesterday = now.subtract(Duration(days: 1));
+    if (yesterday.year == date.year &&
+        yesterday.month == date.month &&
+        yesterday.day == date.day) {
+      return 'Вчера';
+    }
+
+    // Форматирование даты
+    return DateFormat('d MMM, y').format(date); // Пример: 31 окт, 2024
   }
 }
