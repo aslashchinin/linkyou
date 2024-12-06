@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:linkyou/core/base/repository_interface_base.dart';
 import 'package:linkyou/core/base/state_base.dart';
 import 'package:linkyou/core/enums/common_loading_enum.dart';
-import 'package:linkyou/core/base/block_base.dart';
 import 'package:linkyou/core/base/model_interface_base.dart';
 
-abstract class BaseViewModel<B extends BaseBlock, M extends ModelInterfaceBase,
+abstract class BlockViewModelBase<M extends ModelInterfaceBase,
     R extends RepositoryInterfaceBase> extends ChangeNotifier {
-  BaseViewModel({required R repository}) : _repository = repository;
+  BlockViewModelBase({required R repository}) : _repository = repository;
 
   @protected
   final R _repository;

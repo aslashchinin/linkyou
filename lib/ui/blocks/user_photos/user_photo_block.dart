@@ -1,80 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/models/user.dart';
-import 'package:linkyou/ui/widgets/controlls/circular_progress_blue.dart';
-import 'package:provider/provider.dart';
+import 'package:linkyou/models/photo.dart';
 import 'user_photo_viewmodel.dart';
-import 'package:linkyou/core/helpers/build_helper.dart';
-import 'package:linkyou/core/helpers/pluralizer_helper.dart';
-import 'package:linkyou/pages/photo/photo_screen.dart';
+import 'package:linkyou/core/base/block_base.dart';
+import 'package:linkyou/core/base/state_base.dart';
+import 'package:linkyou/ui/widgets/tiles/user_photo_tile.dart';
 
-class UserPhotoBlock extends StatefulWidget {
+class UserPhotoBlock extends BlockBase<UserPhotoBlock> {
   const UserPhotoBlock({super.key, required this.user});
 
   final User user;
 
   @override
-  State<UserPhotoBlock> createState() => _UserPhotoBlockState();
+  UserPhotoBlockState createState() => UserPhotoBlockState();
 }
 
-class _UserPhotoBlockState extends State<UserPhotoBlock> {
+class UserPhotoBlockState
+    extends BlockBaseState<UserPhotoBlock, UserPhotoViewModel, Photo> {
+  
   @override
-  void initState() {
-    super.initState();
-    Provider.of<UserPhotoViewModel>(context, listen: false)
-        .loadUserPhotos(widget.user.id);
+  void initializeData() {
+    viewModel.clearState();
+    viewModel.loadUserPhotos(widget.user.id);
   }
 
   @override
-  Widget build(BuildContext context) {
-    final viewModel = Provider.of<UserPhotoViewModel>(context);
-    final double width = (MediaQuery.of(context).size.width / 3) - 11;
+  void onRefreshPressed() {
+    viewModel.loadUserPhotos(widget.user.id);
+  }
 
-    return viewModel.photos.isEmpty
-        ? const Center(child: CircularProgressBlue())
-        : Padding(
-            padding:
-                const EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(Icons.photo_camera, color: Colors.grey[700]),
-                    const SizedBox(width: 8),
-                    Text(
-                      PluralizerHelper.getCount(
-                          widget.user.photosCount, 'фото', 'фото', 'фото'),
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: viewModel.photos
-                      .asMap()
-                      .entries
-                      .take(3)
-                      .map((entry) => GestureDetector(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PhotoScreen(
-                                      photos: viewModel.photos,
-                                      initialIndex: entry.key))),
-                          child: entry.key > 1
-                              ? BuildHelper.buildLastImageWithOverlay(
-                                  entry.value.src.small, width,
-                                  remaining: viewModel.photos.length - 3)
-                              : BuildHelper.buildImage(
-                                  entry.value.src.small, width)))
-                      .toList(),
-                ),
-              ],
-            ),
-          );
+  @override
+  BaseState<Photo> getState() => viewModel.state;
+
+  @override
+  Widget buildLoadedState(BaseState<Photo> state) {
+    return ListView.builder(
+      itemCount: state.items.length,
+      itemBuilder: (context, index) {
+        return UserPhotoTile(
+          photo: state.items[index],
+        );
+      },
+    );
   }
 }

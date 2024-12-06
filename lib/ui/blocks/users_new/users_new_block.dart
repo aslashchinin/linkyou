@@ -7,7 +7,7 @@ import 'package:linkyou/core/base/state_base.dart';
 import 'package:linkyou/core/enums/common_loading_enum.dart';
 import 'users_new_viewmodel.dart';
 
-class UsersNewBlock extends BaseBlock<UsersNewBlock> {
+class UsersNewBlock extends BlockBase<UsersNewBlock> {
   const UsersNewBlock({super.key});
 
   @override
@@ -15,7 +15,7 @@ class UsersNewBlock extends BaseBlock<UsersNewBlock> {
 }
 
 class UsersNewBlockState
-    extends BaseBlockState<UsersNewBlock, UsersNewViewModel, UserShort> {
+    extends BlockBaseState<UsersNewBlock, UsersNewViewModel, UserShort> {
   @override
   void initializeData() {
     Provider.of<UsersNewViewModel>(context, listen: false).loadNewUsers();

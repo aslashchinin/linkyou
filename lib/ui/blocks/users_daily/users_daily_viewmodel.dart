@@ -2,10 +2,9 @@ import 'package:linkyou/core/base/block_viewmodel_base.dart';
 import 'package:linkyou/models/user_short.dart';
 import 'package:flutter/material.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
-import 'package:linkyou/ui/blocks/users_daily/users_daily_block.dart';
 
 class UsersDailyViewModel
-    extends BaseViewModel<UsersDailyBlock, UserShort, UserRepositoryInterface> {
+    extends BlockViewModelBase<UserShort, UserRepositoryInterface> {
   UsersDailyViewModel({required super.repository});
 
   int _cityId = 0;

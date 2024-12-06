@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'users_top_viewmodel.dart';
 import 'package:linkyou/ui/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/core/enums/gender_enum.dart';
-import 'package:linkyou/core/enums/user_status_enum.dart';
 import 'package:linkyou/core/base/block_base.dart';
 import 'package:linkyou/ui/widgets/controlls/round_button.dart';
 import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/core/base/state_base.dart';
 import 'package:linkyou/core/enums/common_loading_enum.dart';
 
-class UsersTopBlock extends BaseBlock<UsersTopBlock> {
+class UsersTopBlock extends BlockBase<UsersTopBlock> {
   final Gender gender;
 
   const UsersTopBlock({super.key, this.gender = Gender.female});
@@ -19,7 +18,7 @@ class UsersTopBlock extends BaseBlock<UsersTopBlock> {
 }
 
 class TopUsersListBlockState
-    extends BaseBlockState<UsersTopBlock, UsersTopViewModel, UserShort> {
+    extends BlockBaseState<UsersTopBlock, UsersTopViewModel, UserShort> {
   @override
   void initializeData() {
     viewModel.clearState();
@@ -43,7 +42,7 @@ class TopUsersListBlockState
           if (state.status == CommonLoadingStatus.loadingMore) {
             return buildLoadingState();
           }
-          if (state.status == UserStatus.end) {
+          if (state.status == CommonLoadingStatus.end) {
             return const SizedBox.shrink();
           }
           return Padding(

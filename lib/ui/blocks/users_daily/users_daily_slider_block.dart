@@ -7,7 +7,7 @@ import 'package:linkyou/ui/widgets/tiles/user_short_tile.dart';
 import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/core/base/state_base.dart';
 
-class UsersDailySliderBlock extends BaseBlock {
+class UsersDailySliderBlock extends BlockBase {
   const UsersDailySliderBlock({super.key});
 
   @override
@@ -15,7 +15,7 @@ class UsersDailySliderBlock extends BaseBlock {
 }
 
 class UsersDailySliderBlockState
-    extends BaseBlockState<UsersDailySliderBlock,
+    extends BlockBaseState<UsersDailySliderBlock,
     UsersDailyViewModel, UserShort> {
   late PageController _pageController;
 

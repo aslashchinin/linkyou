@@ -5,11 +5,11 @@ import 'package:linkyou/core/base/state_base.dart';
 import 'package:linkyou/core/enums/common_loading_enum.dart';
 import 'package:linkyou/core/base/model_interface_base.dart';
 
-abstract class BaseBlock<T> extends StatefulWidget {
-  const BaseBlock({super.key});
+abstract class BlockBase<T> extends StatefulWidget {
+  const BlockBase({super.key});
 }
 
-abstract class BaseBlockState<BB extends BaseBlock, VM extends ChangeNotifier,
+abstract class BlockBaseState<BB extends BlockBase, VM extends ChangeNotifier,
     M extends ModelInterfaceBase> extends State<BB> {
   late VM viewModel;
 

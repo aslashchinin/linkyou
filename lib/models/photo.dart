@@ -1,6 +1,7 @@
 import 'package:linkyou/models/src.dart';
+import 'package:linkyou/core/base/model_interface_base.dart';
 
-class Photo {
+class Photo implements ModelInterfaceBase {
   final int id;
   final BigInt userId;
   final String datetime;

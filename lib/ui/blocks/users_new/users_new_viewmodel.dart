@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:linkyou/core/base/block_viewmodel_base.dart';
 import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
-import 'users_new_block.dart';
 
 class UsersNewViewModel
-    extends BaseViewModel<UsersNewBlock, UserShort, UserRepositoryInterface> {
+    extends BlockViewModelBase<UserShort, UserRepositoryInterface> {
   UsersNewViewModel({required super.repository});
 
   int _currentSliderPage = 0;

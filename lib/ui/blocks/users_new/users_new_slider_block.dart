@@ -7,7 +7,7 @@ import 'package:linkyou/ui/blocks/users_new/users_new_viewmodel.dart';
 import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/core/base/state_base.dart';
 
-class UsersNewSliderBlock extends BaseBlock<UsersNewSliderBlock> {
+class UsersNewSliderBlock extends BlockBase<UsersNewSliderBlock> {
   const UsersNewSliderBlock({super.key});
 
   @override
@@ -15,7 +15,7 @@ class UsersNewSliderBlock extends BaseBlock<UsersNewSliderBlock> {
 }
 
 class UsersNewSliderBlockState
-    extends BaseBlockState<UsersNewSliderBlock, UsersNewViewModel, UserShort> {
+    extends BlockBaseState<UsersNewSliderBlock, UsersNewViewModel, UserShort> {
   late PageController _pageController;
 
   @override

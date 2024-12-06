@@ -8,7 +8,7 @@ import 'package:linkyou/core/base/block_base.dart';
 import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/core/base/state_base.dart';
 
-class UsersTopSliderBlock extends BaseBlock<UsersTopSliderBlock> {
+class UsersTopSliderBlock extends BlockBase<UsersTopSliderBlock> {
   final Gender gender;
 
   const UsersTopSliderBlock({super.key, this.gender = Gender.female});
@@ -18,7 +18,7 @@ class UsersTopSliderBlock extends BaseBlock<UsersTopSliderBlock> {
 }
 
 class UsersTopSliderBlockState
-    extends BaseBlockState<UsersTopSliderBlock, UsersTopViewModel, UserShort> {
+    extends BlockBaseState<UsersTopSliderBlock, UsersTopViewModel, UserShort> {
   late PageController _pageController;
 
   @override

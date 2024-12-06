@@ -3,10 +3,9 @@ import 'package:linkyou/core/enums/gender_enum.dart';
 import 'package:linkyou/core/base/block_viewmodel_base.dart';
 import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
-import 'users_top_block.dart';
 
 class UsersTopViewModel
-    extends BaseViewModel<UsersTopBlock, UserShort, UserRepositoryInterface> {
+    extends BlockViewModelBase<UserShort, UserRepositoryInterface> {
   UsersTopViewModel({required super.repository});
 
   int _currentSliderPage = 0;

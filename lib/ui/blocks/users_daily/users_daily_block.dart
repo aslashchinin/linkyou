@@ -8,7 +8,7 @@ import 'package:linkyou/ui/widgets/controlls/round_button.dart';
 import 'package:linkyou/core/base/state_base.dart';
 
 
-class UsersDailyBlock extends BaseBlock<UsersDailyBlock> {
+class UsersDailyBlock extends BlockBase<UsersDailyBlock> {
   const UsersDailyBlock({super.key});
 
   @override
@@ -16,7 +16,7 @@ class UsersDailyBlock extends BaseBlock<UsersDailyBlock> {
 }
 
 class UsersDailyBlockState
-    extends BaseBlockState<UsersDailyBlock, UsersDailyViewModel, UserShort> {
+    extends BlockBaseState<UsersDailyBlock, UsersDailyViewModel, UserShort> {
   @override
   void initializeData() {
     viewModel.loadDailyUsers();
