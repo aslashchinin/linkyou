@@ -13,17 +13,17 @@ import 'package:linkyou/views/blocks/users_new/users_new_viewmodel.dart';
 import 'package:linkyou/views/blocks/users_daily/users_daily_viewmodel.dart';
 import 'package:linkyou/views/blocks/users_daily_cities/users_daily_cities_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_login/form_login_viewmodel.dart';
-import 'package:linkyou/views/screens/user/user_viewmodel.dart';
+import 'package:linkyou/screens/user/user_viewmodel.dart';
 import 'package:linkyou/views/blocks/user_photos/user_photo_viewmodel.dart';
 import 'package:linkyou/views/blocks/gifts_slider/gifts_slider_viewmodel.dart';
-import 'package:linkyou/views/screens/splash/splash_viewmodel.dart';
+import 'package:linkyou/screens/splash/splash_viewmodel.dart';
 import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_viewmodel.dart';
 import 'package:linkyou/views/blocks/layout_menu/layout_menu_viewmodel.dart';
-import 'package:linkyou/views/screens/auth/auth_viewmodel.dart';
+import 'package:linkyou/screens/auth/auth_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_registration/form_registration_viewmodel.dart';
 import 'package:linkyou/views/blocks/form_password_recovery/form_password_recovery_viewmodel.dart';
-import 'package:linkyou/views/screens/welcome/welcome_viewmodel.dart';
-import 'package:linkyou/views/screens/photo/photo_viewmodel.dart';
+import 'package:linkyou/screens/welcome/welcome_viewmodel.dart';
+import 'package:linkyou/screens/photo/photo_viewmodel.dart';
 
 // Services
 import 'package:linkyou/data/user/user_service.dart';

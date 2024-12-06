@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:linkyou/views/blocks/users_daily/users_daily_slider_block.dart';
 import 'package:provider/provider.dart';
 import 'package:linkyou/core/base/screen_base.dart';
-import 'package:linkyou/views/screens/user/user_viewmodel.dart';
+import 'package:linkyou/screens/user/user_viewmodel.dart';
 import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
 import 'package:linkyou/views/widgets/user/user_avatar.dart';
 import 'package:linkyou/views/widgets/user/user_action_buttons.dart';

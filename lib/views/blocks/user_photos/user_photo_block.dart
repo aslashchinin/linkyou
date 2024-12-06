@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'user_photo_viewmodel.dart';
 import 'package:linkyou/core/helpers/build_helper.dart';
 import 'package:linkyou/core/helpers/pluralizer_helper.dart';
-import 'package:linkyou/views/screens/photo/photo_screen.dart';
+import 'package:linkyou/screens/photo/photo_screen.dart';
 
 class UserPhotoBlock extends StatefulWidget {
   const UserPhotoBlock({super.key, required this.user});

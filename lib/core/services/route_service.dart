@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/views/screens/welcome/welcome_screen.dart';
-import 'package:linkyou/views/screens/home/home_screen.dart';
-import 'package:linkyou/views/screens/auth/auth_screen.dart';
-import 'package:linkyou/views/screens/top/top_screen.dart';
-import 'package:linkyou/views/screens/search/search_screen.dart';
-import 'package:linkyou/views/screens/about/about_screen.dart';
-import 'package:linkyou/views/screens/user/user_screen.dart';
-import 'package:linkyou/views/screens/likeyou/likeyou_screen.dart';
-import 'package:linkyou/views/screens/photo_comment/photo_comment_screen.dart';
+import 'package:linkyou/screens/welcome/welcome_screen.dart';
+import 'package:linkyou/screens/home/home_screen.dart';
+import 'package:linkyou/screens/auth/auth_screen.dart';
+import 'package:linkyou/screens/top/top_screen.dart';
+import 'package:linkyou/screens/search/search_screen.dart';
+import 'package:linkyou/screens/about/about_screen.dart';
+import 'package:linkyou/screens/user/user_screen.dart';
+import 'package:linkyou/screens/likeyou/likeyou_screen.dart';
+import 'package:linkyou/screens/photo_comment/photo_comment_screen.dart';
 import 'package:linkyou/core/models/photo.dart';
 
 class RouteService {

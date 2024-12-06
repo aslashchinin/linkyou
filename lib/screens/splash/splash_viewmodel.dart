@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/views/screens/welcome/welcome_screen.dart';
-import 'package:linkyou/views/screens/home/home_screen.dart';
+import 'package:linkyou/screens/welcome/welcome_screen.dart';
+import 'package:linkyou/screens/home/home_screen.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
 import 'package:linkyou/core/models/user.dart';
 import 'package:linkyou/core/enums/common_loading_enum.dart';

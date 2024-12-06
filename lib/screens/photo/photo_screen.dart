@@ -4,7 +4,7 @@ import 'package:linkyou/core/models/photo.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:linkyou/views/blocks/layout_appbar/layout_appbar_block.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:linkyou/views/screens/photo/photo_viewmodel.dart';
+import 'package:linkyou/screens/photo/photo_viewmodel.dart';
 import 'package:linkyou/core/services/locator_service.dart';
 
 class PhotoScreen extends ScreenBase {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/views/blocks/form_password_recovery/form_password_recovery_block.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
-import 'package:linkyou/views/screens/home/home_screen.dart';
+import 'package:linkyou/screens/home/home_screen.dart';
 import 'package:linkyou/core/services/locator_service.dart';
 import 'package:linkyou/data/auth/auth_repository_interface.dart';
 import 'package:linkyou/core/models/auth_signin_input.dart';
