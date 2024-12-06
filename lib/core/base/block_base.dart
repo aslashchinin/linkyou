@@ -21,7 +21,7 @@ abstract class BlockBaseState<BB extends BlockBase, VM extends ChangeNotifier,
     });
   }
 
-  BaseState<M> getState();
+  StateBase<M> getState();
 
   void initializeData();
 
@@ -48,7 +48,7 @@ abstract class BlockBaseState<BB extends BlockBase, VM extends ChangeNotifier,
     );
   }
 
-  Widget buildLoadedState(BaseState<M> state);
+  Widget buildLoadedState(StateBase<M> state);
   void onRefreshPressed();
 
   @override

@@ -2,7 +2,7 @@ import 'package:linkyou/models/pagination_info.dart';
 
 class RepositoryResponse<T> {
   final T data;
-  final PaginationInfo? pagination;
+  final PaginationInfo pagination;
 
-  RepositoryResponse({required this.data, this.pagination});
+  RepositoryResponse({required this.data, required this.pagination});
 }

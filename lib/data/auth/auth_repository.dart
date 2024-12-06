@@ -20,7 +20,7 @@ class AuthRepository implements AuthRepositoryInterface {
       AuthChangeEmailInput input) async {
     try {
       await _authService.changeEmail(input);
-      return RepositoryResponse(data: null);
+      return RepositoryResponse(data: null, pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -31,7 +31,7 @@ class AuthRepository implements AuthRepositoryInterface {
       AuthChangePasswordInput input) async {
     try {
       await _authService.changePassword(input);
-      return RepositoryResponse(data: null);
+      return RepositoryResponse(data: null, pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -41,7 +41,7 @@ class AuthRepository implements AuthRepositoryInterface {
   Future<RepositoryResponse<void>> forgotPassword(AuthForgotInput input) async {
     try {
       await _authService.forgotPassword(input);
-      return RepositoryResponse(data: null);
+      return RepositoryResponse(data: null, pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -66,7 +66,7 @@ class AuthRepository implements AuthRepositoryInterface {
   Future<RepositoryResponse<void>> signUp(AuthSignUpInput input) async {
     try {
       await _authService.signUp(input);
-      return RepositoryResponse(data: null);
+      return RepositoryResponse(data: null, pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }

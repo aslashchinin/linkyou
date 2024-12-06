@@ -29,10 +29,10 @@ class UsersNewSliderBlockState
   }
 
   @override
-  BaseState<UserShort> getState() => viewModel.state;
+  StateBase<UserShort> getState() => viewModel.state;
 
   @override
-  Widget buildLoadedState(BaseState<UserShort> state) {
+  Widget buildLoadedState(StateBase<UserShort> state) {
     _pageController = PageController(initialPage: viewModel.currentSliderPage);
 
     return Column(

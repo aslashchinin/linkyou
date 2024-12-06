@@ -31,10 +31,10 @@ class TopUsersListBlockState
   }
 
   @override
-  BaseState<UserShort> getState() => viewModel.state;
+  StateBase<UserShort> getState() => viewModel.state;
 
   @override
-  Widget buildLoadedState(BaseState<UserShort> state) {
+  Widget buildLoadedState(StateBase<UserShort> state) {
     return ListView.builder(
       itemCount: state.items.length + 1,
       itemBuilder: (context, index) {

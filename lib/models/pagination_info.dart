@@ -5,10 +5,10 @@ class PaginationInfo {
   final int total;
 
   PaginationInfo({
-    required this.currentPage,
-    required this.isEnd,
-    required this.limit,
-    required this.total,
+    this.currentPage = 1,
+    this.isEnd = false,
+    this.limit = 24,
+    this.total = 0,
   });
 
   factory PaginationInfo.fromHeaders(Map<String, List<String>> headers) {

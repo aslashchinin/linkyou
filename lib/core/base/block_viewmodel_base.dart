@@ -13,8 +13,8 @@ abstract class BlockViewModelBase<M extends ModelInterfaceBase,
 
   R get repository => _repository;
 
-  BaseState<M> _state = BaseState<M>();
-  BaseState<M> get state => _state;
+  StateBase<M> _state = StateBase<M>();
+  StateBase<M> get state => _state;
 
   int _currentListPage = 0;
   int get currentListPage => _currentListPage;
@@ -25,7 +25,7 @@ abstract class BlockViewModelBase<M extends ModelInterfaceBase,
   }
 
   @protected
-  void setState(BaseState<M> newState) {
+  void setState(StateBase<M> newState) {
     _state = newState;
     notifyListeners();
   }
@@ -63,12 +63,12 @@ abstract class BlockViewModelBase<M extends ModelInterfaceBase,
     } catch (e, stackTrace) {
       setState(_state.copyWith(
         status: CommonLoadingStatus.error,
-        errorMessage: stackTrace.toString(),
+        errorMessage: e.toString() + '\n' + stackTrace.toString(),
       ));
     }
   }
 
   void clearState() {
-    setState(BaseState<M>());
+    setState(StateBase<M>());
   }
 }

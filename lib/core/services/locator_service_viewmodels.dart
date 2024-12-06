@@ -60,6 +60,7 @@ void _setupViewModels() {
         PhotoViewModel(repository: serviceLocator<PhotoRepositoryInterface>()),
   );
 
+
   // Layout and Additional ViewModels
   serviceLocator.registerFactory(() => LayoutAppBarViewModel());
   serviceLocator.registerFactory(() => LayoutMenuViewModel());

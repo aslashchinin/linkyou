@@ -23,7 +23,8 @@ class PhotoRepository implements PhotoRepositoryInterface {
       final serviceResponse = await _photoService.getPhotosList(userId);
       final photos =
           serviceResponse.data.map((json) => Photo.fromJson(json)).toList();
-      return RepositoryResponse(data: photos);
+      final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
+      return RepositoryResponse(data: photos, pagination: pagination);
     } catch (e) {
       rethrow;
     }
@@ -33,7 +34,9 @@ class PhotoRepository implements PhotoRepositoryInterface {
   Future<RepositoryResponse<Photo>> addPhoto(PhotoInput input) async {
     try {
       final serviceResponse = await _photoService.addPhoto(input);
-      return RepositoryResponse(data: Photo.fromJson(serviceResponse.data));
+      return RepositoryResponse(
+          data: Photo.fromJson(serviceResponse.data),
+          pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -43,7 +46,9 @@ class PhotoRepository implements PhotoRepositoryInterface {
   Future<RepositoryResponse<Photo>> getPhoto(int photoId) async {
     try {
       final serviceResponse = await _photoService.getPhoto(photoId);
-      return RepositoryResponse(data: Photo.fromJson(serviceResponse.data));
+      return RepositoryResponse(
+          data: Photo.fromJson(serviceResponse.data),
+          pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -54,7 +59,7 @@ class PhotoRepository implements PhotoRepositoryInterface {
       int photoId, PhotoEditInput input) async {
     try {
       await _photoService.editPhoto(photoId, input);
-      return RepositoryResponse(data: null);
+      return RepositoryResponse(data: null, pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -64,7 +69,9 @@ class PhotoRepository implements PhotoRepositoryInterface {
   Future<RepositoryResponse<Result>> deletePhoto(int photoId) async {
     try {
       final serviceResponse = await _photoService.deletePhoto(photoId);
-      return RepositoryResponse(data: Result.fromJson(serviceResponse.data));
+      return RepositoryResponse(
+          data: Result.fromJson(serviceResponse.data),
+          pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -74,7 +81,7 @@ class PhotoRepository implements PhotoRepositoryInterface {
   Future<RepositoryResponse<void>> recoveryPhoto(int photoId) async {
     try {
       await _photoService.recoveryPhoto(photoId);
-      return RepositoryResponse(data: null);
+      return RepositoryResponse(data: null, pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -101,7 +108,8 @@ class PhotoRepository implements PhotoRepositoryInterface {
       final serviceResponse =
           await _photoService.addPhotoComment(photoId, input);
       return RepositoryResponse(
-          data: PhotoCommentAddResult.fromJson(serviceResponse.data));
+          data: PhotoCommentAddResult.fromJson(serviceResponse.data),
+          pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -113,7 +121,9 @@ class PhotoRepository implements PhotoRepositoryInterface {
     try {
       final serviceResponse =
           await _photoService.deletePhotoComment(photoId, commentId);
-      return RepositoryResponse(data: Result.fromJson(serviceResponse.data));
+      return RepositoryResponse(
+          data: Result.fromJson(serviceResponse.data),
+          pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -123,7 +133,9 @@ class PhotoRepository implements PhotoRepositoryInterface {
   Future<RepositoryResponse<List<String>>> getLikes(int photoId) async {
     try {
       final serviceResponse = await _photoService.getLikes(photoId);
-      return RepositoryResponse(data: List<String>.from(serviceResponse.data));
+      return RepositoryResponse(
+          data: List<String>.from(serviceResponse.data),
+          pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
@@ -133,7 +145,9 @@ class PhotoRepository implements PhotoRepositoryInterface {
   Future<RepositoryResponse<Like>> likePhoto(int photoId) async {
     try {
       final serviceResponse = await _photoService.likePhoto(photoId);
-      return RepositoryResponse(data: Like.fromJson(serviceResponse.data));
+      return RepositoryResponse(
+          data: Like.fromJson(serviceResponse.data),
+          pagination: PaginationInfo());
     } catch (e) {
       rethrow;
     }
