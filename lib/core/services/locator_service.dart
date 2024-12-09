@@ -25,24 +25,28 @@ import 'package:linkyou/ui/blocks/form_password_recovery/form_password_recovery_
 import 'package:linkyou/pages/welcome/welcome_viewmodel.dart';
 import 'package:linkyou/pages/photo/photo_viewmodel.dart';
 import 'package:linkyou/ui/blocks/photo_comments/photo_comments_viewmodel.dart';
+import 'package:linkyou/ui/blocks/dialog/dialog_viewmodel.dart';
 
 // Services
 import 'package:linkyou/data/user/user_service.dart';
 import 'package:linkyou/data/ublog/ublog_service.dart';
 import 'package:linkyou/data/auth/auth_service.dart';
 import 'package:linkyou/data/photo/photo_service.dart';
+import 'package:linkyou/data/dialog/dialog_service.dart';
 
 // Repositories
 import 'package:linkyou/data/user/user_repository.dart';
 import 'package:linkyou/data/ublog/ublog_repository.dart';
 import 'package:linkyou/data/auth/auth_repository.dart';
 import 'package:linkyou/data/photo/photo_repository.dart';
+import 'package:linkyou/data/dialog/dialog_repository.dart';
 
 // Repository Interfaces
 import 'package:linkyou/data/user/user_repository_interface.dart';
 import 'package:linkyou/data/ublog/ublog_repository_interface.dart';
 import 'package:linkyou/data/auth/auth_repository_interface.dart';
 import 'package:linkyou/data/photo/photo_repository_interface.dart';
+import 'package:linkyou/data/dialog/dialog_repository_interface.dart';
 
 part 'locator_service_providers.dart';
 part 'locator_service_services.dart';

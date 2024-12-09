@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/models/photo.dart';
 import 'package:linkyou/core/base/block_base.dart';
 import 'package:linkyou/core/base/state_base.dart';
-import 'package:linkyou/models/comment.dart';
-import 'package:linkyou/ui/widgets/tiles/comment_tile.dart';
-import 'photo_comments_viewmodel.dart';
+import 'package:linkyou/models/dialog.dart' as dialog;
+import 'package:linkyou/ui/blocks/dialog/dialog_viewmodel.dart';
+import 'package:linkyou/ui/widgets/tiles/dialog_tile.dart';
 
-class PhotoCommentsBlock extends BlockBase<PhotoCommentsBlock> {
-  const PhotoCommentsBlock({super.key, required this.photo});
-
-  final Photo photo;
+class DialogBlock extends BlockBase<DialogBlock> {
+  DialogBlock({super.key});
 
   @override
-  PhotoCommentsBlockState createState() => PhotoCommentsBlockState();
+  DialogBlockState createState() => DialogBlockState();
 }
 
-class PhotoCommentsBlockState extends BlockBaseState<PhotoCommentsBlock,
-    PhotoCommentsViewModel, Comment> {
+class DialogBlockState
+    extends BlockBaseState<DialogBlock, DialogViewModel, dialog.Dialog> {
   @override
   void initializeData() {
-    viewModel.loadPhotoComments(widget.photo.id);
+    viewModel.loadDialogs();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
@@ -34,26 +31,26 @@ class PhotoCommentsBlockState extends BlockBaseState<PhotoCommentsBlock,
 
   @override
   void onRefreshPressed() {
-    viewModel.loadPhotoComments(widget.photo.id);
+    viewModel.loadDialogs();
   }
 
   @override
-  StateBase<Comment> getState() => viewModel.state;
+  StateBase<dialog.Dialog> getState() => viewModel.state;
 
   final ScrollController _scrollController = ScrollController();
 
   @override
-  Widget buildLoadedState(StateBase<Comment> state) {
+  Widget buildLoadedState(StateBase<dialog.Dialog> state) {
     return state.items.isEmpty
         ? const Center(
-            child: Text('Пока нет комментариев'),
+            child: Text('Пока нет диалогов'),
           )
         : ListView.builder(
             controller: _scrollController,
             reverse: true,
             itemCount: state.items.length,
             itemBuilder: (context, index) =>
-                CommentTile(comment: state.items[index]),
+                DialogTile(dialog: state.items[index]),
           );
   }
 

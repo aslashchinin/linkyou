@@ -66,6 +66,12 @@ void _setupViewModels() {
         repository: serviceLocator<PhotoRepositoryInterface>()),
   );
 
+  // Dialog
+  serviceLocator.registerFactory(
+    () => DialogViewModel(
+        repository: serviceLocator<DialogRepositoryInterface>()),
+  );
+
   // Layout and Additional ViewModels
   serviceLocator.registerFactory(() => LayoutAppBarViewModel());
   serviceLocator.registerFactory(() => LayoutMenuViewModel());

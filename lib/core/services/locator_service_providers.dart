@@ -25,6 +25,7 @@ List<ChangeNotifierProvider> _getProvidersList() {
     _buildProvider<GiftsSliderViewModel>(),
     _buildProvider<PhotoViewModel>(),
     _buildProvider<PhotoCommentsViewModel>(),
+    _buildProvider<DialogViewModel>(),
   ];
 }
 

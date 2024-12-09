@@ -16,6 +16,10 @@ void _setupServices() {
   _registerServiceIfNotExists<PhotoService>(
     () => PhotoService(authProvider: serviceLocator<AuthProvider>()),
   );
+
+  _registerServiceIfNotExists<DialogService>(
+    () => DialogService(authProvider: serviceLocator<AuthProvider>()),
+  );
 }
 
 void _registerServiceIfNotExists<T extends Object>(

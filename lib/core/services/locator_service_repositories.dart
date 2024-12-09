@@ -16,4 +16,8 @@ void _setupRepositories() {
   serviceLocator.registerLazySingleton<PhotoRepositoryInterface>(
     () => PhotoRepository(photoService: serviceLocator<PhotoService>()),
   );
+
+  serviceLocator.registerLazySingleton<DialogRepositoryInterface>(
+    () => DialogRepository(dialogService: serviceLocator<DialogService>()),
+  );
 }

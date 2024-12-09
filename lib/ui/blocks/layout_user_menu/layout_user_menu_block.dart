@@ -41,7 +41,7 @@ class LayoutUserMenuBlock extends StatelessWidget {
           title: 'Мои сообщения',
           leading: const Icon(Icons.message, size: 20),
           onTap: () {
-            // Handle navigation
+            layoutMenuViewModel.dialog(context);
           },
         ),
         MenuItemTile(
