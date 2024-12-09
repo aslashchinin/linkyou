@@ -8,6 +8,19 @@ class DialogTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(dialog.id.toString());
+    return Card(
+      color: Colors.white,
+      elevation: 0,
+      child: ListTile(
+        leading: Padding(
+          padding: const EdgeInsets.only(top: 1.0),
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(dialog.fromUser.avatar.src.origin),
+          ),
+        ),
+        title: Text(dialog.fromUser.name),
+        subtitle: Text(dialog.lastMessage.comment),
+      ),
+    );
   }
 }
