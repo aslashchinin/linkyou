@@ -66,7 +66,7 @@ abstract class BlockViewModelBase<M extends ModelInterfaceBase,
     } catch (e, stackTrace) {
       setState(_state.copyWith(
         status: CommonLoadingStatus.error,
-        errorMessage: e.toString() + '\n' + stackTrace.toString(),
+        errorMessage: '$e\n$stackTrace',
       ));
     }
   }

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:linkyou/core/enums/common_loading_enum.dart';
 import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/ui/widgets/tiles/user_short_tile.dart';
-import 'package:linkyou/core/enums/user_status_enum.dart';
 import 'package:linkyou/core/base/block_base.dart';
 import 'users_daily_viewmodel.dart';
 import 'package:linkyou/ui/widgets/controlls/round_button.dart';
 import 'package:linkyou/core/base/state_base.dart';
-
 
 class UsersDailyBlock extends BlockBase<UsersDailyBlock> {
   const UsersDailyBlock({super.key});
@@ -38,10 +37,10 @@ class UsersDailyBlockState
       itemCount: state.items.length + 1,
       itemBuilder: (context, index) {
         if (index == state.items.length) {
-          if (state.status == UserStatus.loadingMore) {
+          if (state.status == CommonLoadingStatus.loadingMore) {
             return buildLoadingState();
           }
-          if (state.status == UserStatus.end) {
+          if (state.status == CommonLoadingStatus.end) {
             return const SizedBox.shrink();
           }
           return Padding(

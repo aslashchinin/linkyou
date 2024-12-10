@@ -8,7 +8,7 @@ import 'package:linkyou/core/enums/common_loading_enum.dart';
 import 'package:linkyou/ui/widgets/controlls/round_button.dart';
 
 class DialogBlock extends BlockBase<DialogBlock> {
-  DialogBlock({super.key});
+  const DialogBlock({super.key});
 
   @override
   DialogBlockState createState() => DialogBlockState();

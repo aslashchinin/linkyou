@@ -24,7 +24,7 @@ class PluralizerHelper {
     }
 
     // Проверка на вчера
-    final yesterday = now.subtract(Duration(days: 1));
+    final yesterday = now.subtract(const Duration(days: 1));
     if (yesterday.year == date.year &&
         yesterday.month == date.month &&
         yesterday.day == date.day) {

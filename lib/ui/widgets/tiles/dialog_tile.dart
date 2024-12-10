@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:linkyou/models/dialog.dart' as dialogLibrary;
+import 'package:linkyou/models/dialog.dart' as dialog_library;
 
 class DialogTile extends StatelessWidget {
   const DialogTile({required this.dialog, super.key});
 
-  final dialogLibrary.Dialog dialog;
+  final dialog_library.Dialog dialog;
 
   @override
   Widget build(BuildContext context) {
