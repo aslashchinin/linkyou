@@ -65,11 +65,11 @@ class DialogService extends ApiBase {
   }
 
   Future<ServiceResponse<Map<String, dynamic>>> getMessage(
-      int messageId) async {
+      BigInt messageId) async {
     try {
       final response = await get('/message/$messageId');
       return ServiceResponse(
-        data: json.decode(response.data),
+        data: response.data,
         headers: response.headers.map,
       );
     } catch (e) {
@@ -95,10 +95,11 @@ class DialogService extends ApiBase {
     }
   }
 
-  Future<ServiceResponse<Map<String, dynamic>>> deleteMessage(int id) async {
+  Future<ServiceResponse<Map<String, dynamic>>> deleteMessage(
+      BigInt messageId) async {
     try {
       String url = '/message/delete';
-      final response = await post(url, body: {'id': id});
+      final response = await post(url, body: {'id': messageId});
       return ServiceResponse(
         data: response.data,
         headers: response.headers.map,

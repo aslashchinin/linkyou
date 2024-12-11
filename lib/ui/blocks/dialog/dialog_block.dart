@@ -19,6 +19,7 @@ class DialogBlockState
   @override
   void initializeData() {
     viewModel.loadDialogs();
+    viewModel.attachSocketListener();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
@@ -97,6 +98,7 @@ class DialogBlockState
   @override
   void dispose() {
     _scrollController.dispose();
+    viewModel.detachSocketListener();
     super.dispose();
   }
 

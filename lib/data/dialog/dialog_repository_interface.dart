@@ -12,8 +12,8 @@ abstract class DialogRepositoryInterface implements RepositoryInterfaceBase {
   Future<RepositoryResponse<void>> deleteDialog(BigInt dialogId);
   Future<RepositoryResponse<DialogMessages>> getMessagesList(BigInt dialogId,
       {int limit = 24, int page = 1});
-  Future<RepositoryResponse<Message>> getMessage(int messageId);
+  Future<RepositoryResponse<Message>> getMessage(BigInt messageId);
   Future<RepositoryResponse<Result>> addMessage(
       BigInt userId, String content, List<String> pictures);
-  Future<RepositoryResponse<void>> deleteMessage(int id);
+  Future<RepositoryResponse<void>> deleteMessage(BigInt messageId);
 }

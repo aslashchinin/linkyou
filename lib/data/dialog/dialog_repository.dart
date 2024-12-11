@@ -62,7 +62,7 @@ class DialogRepository implements DialogRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<Message>> getMessage(int messageId) async {
+  Future<RepositoryResponse<Message>> getMessage(BigInt messageId) async {
     try {
       final serviceResponse = await _dialogService.getMessage(messageId);
       return RepositoryResponse(
@@ -88,9 +88,9 @@ class DialogRepository implements DialogRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<Result>> deleteMessage(int id) async {
+  Future<RepositoryResponse<Result>> deleteMessage(BigInt messageId) async {
     try {
-      final serviceResponse = await _dialogService.deleteMessage(id);
+      final serviceResponse = await _dialogService.deleteMessage(messageId);
       return RepositoryResponse(
           data: Result.fromJson(serviceResponse.data),
           pagination: PaginationInfo());

@@ -5,6 +5,7 @@ import 'package:linkyou/models/message.dart';
 import 'dialog_messages_viewmodel.dart';
 import 'package:linkyou/ui/widgets/tiles/message_tile.dart';
 
+
 class DialogMessagesBlock extends BlockBase<DialogMessagesBlock> {
   const DialogMessagesBlock({super.key, required this.dialogId});
 
@@ -19,6 +20,7 @@ class DialogMessagesBlockState extends BlockBaseState<DialogMessagesBlock,
   @override
   void initializeData() {
     viewModel.loadDialogMessages(widget.dialogId);
+    viewModel.attachSocketListener(widget.dialogId);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
@@ -59,6 +61,7 @@ class DialogMessagesBlockState extends BlockBaseState<DialogMessagesBlock,
   @override
   void dispose() {
     _scrollController.dispose();
+    viewModel.detachSocketListener(widget.dialogId);
     super.dispose();
   }
 }

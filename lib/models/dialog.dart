@@ -7,7 +7,7 @@ class Dialog implements ModelInterfaceBase {
   final UserShort fromUser; // Отправитель
   final int unreadMessagesCount; // Количество непрочитанных сообщений
   final String lastUpdate; // Дата последнего обновления
-  final Message lastMessage; // Последнее сообщение
+  Message lastMessage; // Последнее сообщение
 
   // Конструктор модели
   Dialog({

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/models/dialog.dart' as dialog_library;
+import 'package:linkyou/ui/widgets/controlls/html_text.dart';
+import 'package:linkyou/core/helpers/pluralizer_helper.dart';
 
 class DialogTile extends StatelessWidget {
   const DialogTile({required this.dialog, super.key});
@@ -19,7 +21,9 @@ class DialogTile extends StatelessWidget {
           ),
         ),
         title: Text(dialog.fromUser.name),
-        subtitle: Text(dialog.lastMessage.comment),
+        subtitle: HtmlText(text: dialog.lastMessage.comment),
+        trailing: Text(PluralizerHelper.formatTime(
+            DateTime.parse(dialog.lastMessage.datetime).toLocal())),
       ),
     );
   }
