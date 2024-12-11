@@ -17,6 +17,6 @@ class DialogScreenState extends ScreenBaseState<DialogScreen> {
 
   @override
   Widget buildContent(BuildContext context) {
-    return DialogBlock();
+    return const DialogBlock();
   }
 }

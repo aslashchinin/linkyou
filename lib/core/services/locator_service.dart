@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 // Providers
 import 'package:linkyou/core/providers/auth_provider.dart';
+import 'package:linkyou/core/providers/socket_provider.dart';
 
 // ViewModels
 import 'package:linkyou/ui/blocks/users_top/users_top_viewmodel.dart';
@@ -26,6 +27,7 @@ import 'package:linkyou/pages/welcome/welcome_viewmodel.dart';
 import 'package:linkyou/pages/photo/photo_viewmodel.dart';
 import 'package:linkyou/ui/blocks/photo_comments/photo_comments_viewmodel.dart';
 import 'package:linkyou/ui/blocks/dialog/dialog_viewmodel.dart';
+import 'package:linkyou/ui/blocks/dialog_messages/dialog_messages_viewmodel.dart';
 
 // Services
 import 'package:linkyou/data/user/user_service.dart';

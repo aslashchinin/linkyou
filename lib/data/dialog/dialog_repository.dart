@@ -5,6 +5,7 @@ import 'package:linkyou/models/dialog.dart';
 import 'package:linkyou/models/message.dart';
 import 'package:linkyou/models/result.dart';
 import 'package:linkyou/models/pagination_info.dart';
+import 'package:linkyou/models/dialog_messages.dart';
 
 class DialogRepository implements DialogRepositoryInterface {
   final DialogService _dialogService;
@@ -47,14 +48,14 @@ class DialogRepository implements DialogRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<List<Message>>> getMessagesList(
-      BigInt dialogId) async {
+  Future<RepositoryResponse<DialogMessages>> getMessagesList(BigInt dialogId,
+      {int limit = 24, int page = 1}) async {
     try {
-      final serviceResponse = await _dialogService.getMessagesList(dialogId);
-      final messages =
-          serviceResponse.data.map((json) => Message.fromJson(json)).toList();
+      final serviceResponse =
+          await _dialogService.getMessagesList(dialogId, limit, page);
+      final dialogMessages = DialogMessages.fromJson(serviceResponse.data);
       final pagination = PaginationInfo.fromHeaders(serviceResponse.headers);
-      return RepositoryResponse(data: messages, pagination: pagination);
+      return RepositoryResponse(data: dialogMessages, pagination: pagination);
     } catch (e) {
       rethrow;
     }

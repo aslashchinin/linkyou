@@ -49,12 +49,14 @@ class DialogService extends ApiBase {
     }
   }
 
-  Future<ServiceResponse<List<Map<String, dynamic>>>> getMessagesList(
-      BigInt dialogId) async {
+  Future<ServiceResponse<Map<String, dynamic>>> getMessagesList(
+      BigInt dialogId, int limit, int page) async {
     try {
-      final response = await get('/dialog/$dialogId');
+      // Формирование URL запроса
+      final response = await get('/dialog/$dialogId?limit=$limit&page=$page');
+
       return ServiceResponse(
-        data: List<Map<String, dynamic>>.from(json.decode(response.data)),
+        data: response.data,
         headers: response.headers.map,
       );
     } catch (e) {

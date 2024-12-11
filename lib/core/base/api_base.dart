@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:linkyou/core/providers/auth_provider.dart';
 
 class ApiBase {
@@ -7,6 +6,8 @@ class ApiBase {
 
   final Dio dio;
   final AuthProvider authProvider;
+  
+  bool isDebug = false;
 
   ApiBase({required this.authProvider})
       : dio = Dio(BaseOptions(
@@ -42,7 +43,7 @@ class ApiBase {
   }
 
   void _logRequest(RequestOptions options) {
-    if (kDebugMode) {
+    if (isDebug) {
       print("Запрос: ${options.method} ${options.path}");
       print("Параметры: ${options.queryParameters}");
       print("Данные: ${options.data}");
@@ -51,13 +52,13 @@ class ApiBase {
   }
 
   void _logResponse(Response response) {
-    if (kDebugMode) {
+    if (isDebug) {
       print("Ответ: ${response.statusCode} ${response.data}");
     }
   }
 
   void _logError(DioException e) {
-    if (kDebugMode) {
+    if (isDebug) {
       print("Ошибка: ${e.message}");
     }
   }

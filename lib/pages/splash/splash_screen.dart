@@ -29,13 +29,13 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   void initializeData() {
-    viewModel.fetchCurrentUser();
+    viewModel.fetchCurrentUser();    
 
     viewModel.addListener(() {
       if (viewModel.currentUserStatus == CommonLoadingStatus.loaded) {
         authProvider.user = viewModel.currentUser;
         authProvider.isAuthenticated = true;
-        
+        viewModel.socketInit(authProvider.token);
         viewModel.navigateToHome(context);
       } else if (viewModel.currentUserStatus == CommonLoadingStatus.error) {
         authProvider.isAuthenticated = false;

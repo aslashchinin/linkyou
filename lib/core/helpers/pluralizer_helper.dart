@@ -13,6 +13,16 @@ class PluralizerHelper {
     }
   }
 
+  static String formatTime(DateTime date) {
+    try {
+      String timeString =
+          '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+      return timeString;
+    } catch (e) {
+      return '';
+    }
+  }
+
   static String formatDate(DateTime date) {
     final now = DateTime.now();
 

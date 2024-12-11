@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/pages/welcome/welcome_screen.dart';
 import 'package:linkyou/pages/home/home_screen.dart';
+import 'package:linkyou/core/services/locator_service.dart';
+import 'package:linkyou/core/providers/socket_provider.dart';
 import 'package:linkyou/data/user/user_repository_interface.dart';
 import 'package:linkyou/models/user.dart';
 import 'package:linkyou/core/enums/common_loading_enum.dart';
@@ -28,6 +30,10 @@ class SplashViewModel extends ChangeNotifier {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => const HomeScreen()),
     );
+  }
+
+  void socketInit(String? token) {
+    serviceLocator<SocketProvider>().init(token);
   }
 
   Future<void> fetchCurrentUser() async {

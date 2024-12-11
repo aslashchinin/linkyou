@@ -4,6 +4,7 @@ import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/core/services/locator_service.dart';
 import 'package:linkyou/core/services/route_service.dart';
 import 'package:linkyou/pages/splash/splash_screen.dart';
+import 'package:linkyou/core/providers/socket_provider.dart';
 import 'package:linkyou/ui/widgets/controlls/circular_progress_blue.dart';
 
 class LinkYouApp extends StatelessWidget {
@@ -32,5 +33,9 @@ class LinkYouApp extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void dispose() {
+    serviceLocator<SocketProvider>().closeSocket();
   }
 }

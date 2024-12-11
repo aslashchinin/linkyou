@@ -4,11 +4,15 @@ void _setupProviders() {
   if (!serviceLocator.isRegistered<AuthProvider>()) {
     serviceLocator.registerLazySingleton(() => AuthProvider());
   }
+  if (!serviceLocator.isRegistered<SocketProvider>()) {
+    serviceLocator.registerLazySingleton(() => SocketProvider());
+  }
 }
 
 List<ChangeNotifierProvider> _getProvidersList() {
   return [
     _buildProvider<AuthProvider>(),
+    _buildProvider<SocketProvider>(),
     _buildProvider<UsersTopViewModel>(),
     _buildProvider<WelcomeViewModel>(),
     _buildProvider<AuthViewModel>(),
@@ -26,6 +30,7 @@ List<ChangeNotifierProvider> _getProvidersList() {
     _buildProvider<PhotoViewModel>(),
     _buildProvider<PhotoCommentsViewModel>(),
     _buildProvider<DialogViewModel>(),
+    _buildProvider<DialogMessagesViewModel>(),
   ];
 }
 
