@@ -48,9 +48,9 @@ class DialogViewModel extends BlockViewModelBase<dialog_library.Dialog,
     });
   }
 
-  void gotoDialog(BigInt dialogId, BuildContext context) {
+  void gotoDialog(BigInt dialogId, BigInt userId, BuildContext context) {
     Navigator.pushNamed(context, RouteService.dialogMessage,
-        arguments: dialogId);
+        arguments: [dialogId, userId]);
   }
 
   Future<void> deleteDialog(BigInt dialogId) async {

@@ -87,7 +87,8 @@ class DialogBlockState
                   ),
                 ),
                 child: GestureDetector(
-                  onTap: () => viewModel.gotoDialog(dialog.id, context),
+                  onTap: () => viewModel.gotoDialog(
+                      dialog.id, dialog.fromUser.id, context),
                   child: DialogTile(dialog: dialog),
                 ),
               );

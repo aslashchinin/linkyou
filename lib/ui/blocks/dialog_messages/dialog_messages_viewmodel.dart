@@ -55,7 +55,7 @@ class DialogMessagesViewModel
 
   Future<void> sendMessage(BigInt dialogId, String message) async {
     await handleItemsLoading(
-        loadFunction: () => repository.addMessage(dialogId, message, []),
+        loadFunction: () => repository.sendMessage(dialogId, message, []),
         isLoadMore: true,
         isReverse: true);
   }

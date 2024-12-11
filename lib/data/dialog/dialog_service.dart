@@ -77,12 +77,12 @@ class DialogService extends ApiBase {
     }
   }
 
-  Future<ServiceResponse<Map<String, dynamic>>> addMessage(
+  Future<ServiceResponse<Map<String, dynamic>>> sendMessage(
       BigInt userId, String content, List<String> pictures) async {
     final body = {
       'user_id': userId,
       'content': content,
-      'pictures': pictures.join(',') // Преобразуйте список в строку, если нужно
+      'pictures': pictures.join(',')
     };
     try {
       final response = await post('/message/send', body: body);

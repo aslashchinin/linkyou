@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class PhotoCommentsFormBlock extends StatefulWidget {
-  const PhotoCommentsFormBlock({super.key, required this.onSendPressed});
+class DialogMessagesFormBlock extends StatefulWidget {
+  const DialogMessagesFormBlock({super.key, required this.onSendPressed});
 
   final Function(String) onSendPressed;
 
   @override
-  State<PhotoCommentsFormBlock> createState() => _PhotoCommentsFormBlockState();
+  State<DialogMessagesFormBlock> createState() =>
+      _DialogMessagesFormBlockState();
 }
 
-class _PhotoCommentsFormBlockState extends State<PhotoCommentsFormBlock> {
+class _DialogMessagesFormBlockState extends State<DialogMessagesFormBlock> {
   final TextEditingController _controller = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,8 @@ class _PhotoCommentsFormBlockState extends State<PhotoCommentsFormBlock> {
                 minLines: 1,
                 maxLines: 5,
                 decoration: const InputDecoration(
-                  hintText: 'Напишите комментарий...',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12),
+                  hintText: 'Напишите сообщение...',
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(horizontal: 20),
                 ),
@@ -47,7 +47,7 @@ class _PhotoCommentsFormBlockState extends State<PhotoCommentsFormBlock> {
             ),
             child: IconButton(
               icon: const Icon(
-                Icons.comment,
+                Icons.send,
                 color: Colors.white,
               ),
               onPressed: () {

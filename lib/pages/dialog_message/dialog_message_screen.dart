@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/core/base/screen_base.dart';
 import 'package:linkyou/ui/blocks/layout_appbar/layout_appbar_block.dart';
-import 'package:linkyou/ui/blocks/dialog_messages/dialog_messages_block.dart';
+import 'package:linkyou/ui/containers/dialog_messages/dialog_messages_container.dart';
 
 class DialogMessageScreen extends ScreenBase {
-  const DialogMessageScreen({super.key, required this.dialogId});
+  const DialogMessageScreen(
+      {super.key, required this.dialogId, required this.userId});
 
   final BigInt dialogId;
+  final BigInt userId;
 
   @override
   DialogMessageScreenState createState() => DialogMessageScreenState();
@@ -20,7 +22,8 @@ class DialogMessageScreenState extends ScreenBaseState<DialogMessageScreen> {
 
   @override
   Widget buildContent(BuildContext context) {
-    return DialogMessagesBlock(dialogId: widget.dialogId);
+    return DialogMessagesContainer(
+        dialogId: widget.dialogId, userId: widget.userId);
   }
 
   @override

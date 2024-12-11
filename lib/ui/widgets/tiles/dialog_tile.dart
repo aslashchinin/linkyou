@@ -20,7 +20,8 @@ class DialogTile extends StatelessWidget {
             backgroundImage: NetworkImage(dialog.fromUser.avatar.src.origin),
           ),
         ),
-        title: Text(dialog.fromUser.name),
+        title: Text(dialog.fromUser.name,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         subtitle: HtmlText(text: dialog.lastMessage.comment),
         trailing: Text(PluralizerHelper.formatTime(
             DateTime.parse(dialog.lastMessage.datetime).toLocal())),

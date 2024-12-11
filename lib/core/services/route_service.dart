@@ -13,11 +13,9 @@ import 'package:linkyou/pages/photo/photo_screen.dart';
 import 'package:linkyou/pages/dialog/dialog_screen.dart';
 import 'package:linkyou/pages/dialog_message/dialog_message_screen.dart';
 
-
 class RouteService {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
-
   static const String welcome = '/welcome';
   static const String registration = '/registration';
   static const String login = '/login';
@@ -47,12 +45,16 @@ class RouteService {
       likeYou: (context) => const LikeYouScreen(),
       photoComment: (context) => PhotoCommentScreen(
           photo: ModalRoute.of(context)!.settings.arguments as Photo),
-      photo: (context) => PhotoScreen(
-          photos: ModalRoute.of(context)!.settings.arguments as List<Photo>,
-          initialIndex: ModalRoute.of(context)!.settings.arguments as int),
+      photo: (context) {
+        final args = ModalRoute.of(context)!.settings.arguments as List<Photo>;
+        return PhotoScreen(
+            photos: args, initialIndex: 0); // добавьте свой индекс
+      },
       dialog: (context) => const DialogScreen(),
-      dialogMessage: (context) => DialogMessageScreen(
-          dialogId: ModalRoute.of(context)!.settings.arguments as BigInt),
+      dialogMessage: (context) {
+        final args = ModalRoute.of(context)!.settings.arguments as List<BigInt>;
+        return DialogMessageScreen(dialogId: args[0], userId: args[1]);
+      },
     };
   }
 }

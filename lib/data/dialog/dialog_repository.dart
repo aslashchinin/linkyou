@@ -74,13 +74,13 @@ class DialogRepository implements DialogRepositoryInterface {
   }
 
   @override
-  Future<RepositoryResponse<Result>> addMessage(
+  Future<RepositoryResponse<Message>> sendMessage(
       BigInt userId, String content, List<String> pictures) async {
     try {
       final serviceResponse =
-          await _dialogService.addMessage(userId, content, pictures);
+          await _dialogService.sendMessage(userId, content, pictures);
       return RepositoryResponse(
-          data: Result.fromJson(serviceResponse.data),
+          data: Message.fromJson(serviceResponse.data),
           pagination: PaginationInfo());
     } catch (e) {
       rethrow;
