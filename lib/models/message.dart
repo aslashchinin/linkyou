@@ -1,5 +1,6 @@
-import 'package:linkyou/models/user_short.dart'; // Импортируем модель UserShort
+import 'package:linkyou/models/user_short.dart'; 
 import 'package:linkyou/core/base/model_interface_base.dart';
+import 'dart:io';
 
 class Message implements ModelInterfaceBase {
   final int id;
@@ -22,6 +23,10 @@ class Message implements ModelInterfaceBase {
     required this.read,
     required this.datetime,
   });
+
+  getMessage() {
+    return Platform.isIOS ? commentIOS : comment;
+  }
 
   // Функция, преобразующая JSON в объект модели
   factory Message.fromJson(Map<String, dynamic> json) {

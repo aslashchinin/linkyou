@@ -53,9 +53,13 @@ class DialogMessagesViewModel
     });
   }
 
-  Future<void> sendMessage(BigInt dialogId, String message) async {
+  Future<void> sendMessage(BigInt userId, String message) async {
     await handleItemsLoading(
-        loadFunction: () => repository.sendMessage(dialogId, message, []),
+        loadFunction: () async {
+          final response = await repository.sendMessage(userId, message, []);
+          return RepositoryResponse(
+              data: [response.data], pagination: response.pagination);
+        },
         isLoadMore: true,
         isReverse: true);
   }

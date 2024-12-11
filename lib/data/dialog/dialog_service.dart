@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:linkyou/core/base/api_base.dart';
 import 'package:linkyou/core/responses/service_response.dart';
 
@@ -87,7 +86,7 @@ class DialogService extends ApiBase {
     try {
       final response = await post('/message/send', body: body);
       return ServiceResponse(
-        data: json.decode(response.data),
+        data: response.data,
         headers: response.headers.map,
       );
     } catch (e) {

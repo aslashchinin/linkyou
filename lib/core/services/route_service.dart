@@ -9,6 +9,7 @@ import 'package:linkyou/pages/user/user_screen.dart';
 import 'package:linkyou/pages/likeyou/likeyou_screen.dart';
 import 'package:linkyou/pages/photo_comment/photo_comment_page.dart';
 import 'package:linkyou/models/photo.dart';
+import 'package:linkyou/models/dialog.dart' as dialog_library;
 import 'package:linkyou/pages/photo/photo_screen.dart';
 import 'package:linkyou/pages/dialog/dialog_screen.dart';
 import 'package:linkyou/pages/dialog_message/dialog_message_screen.dart';
@@ -52,8 +53,9 @@ class RouteService {
       },
       dialog: (context) => const DialogScreen(),
       dialogMessage: (context) {
-        final args = ModalRoute.of(context)!.settings.arguments as List<BigInt>;
-        return DialogMessageScreen(dialogId: args[0], userId: args[1]);
+        final args = ModalRoute.of(context)!.settings.arguments
+            as List<dialog_library.Dialog>;
+        return DialogMessageScreen(dialog: args[0]);
       },
     };
   }
