@@ -49,7 +49,7 @@ class RouteService {
       photo: (context) {
         final args = ModalRoute.of(context)!.settings.arguments as List<Photo>;
         return PhotoScreen(
-            photos: args, initialIndex: 0); // добавьте свой индекс
+            photos: args, initialIndex: 0); 
       },
       dialog: (context) => const DialogScreen(),
       dialogMessage: (context) {

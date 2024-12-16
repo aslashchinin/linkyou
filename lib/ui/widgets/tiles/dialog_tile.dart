@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/models/dialog.dart' as dialog_library;
 import 'package:linkyou/ui/widgets/controlls/html_text.dart';
+import 'package:linkyou/ui/widgets/pictures/user_avatar.dart';
 import 'package:linkyou/core/helpers/pluralizer_helper.dart';
 
 class DialogTile extends StatelessWidget {
@@ -18,9 +19,10 @@ class DialogTile extends StatelessWidget {
           ListTile(
             leading: Padding(
               padding: const EdgeInsets.only(top: 1.0),
-              child: CircleAvatar(
-                backgroundImage:
-                    NetworkImage(dialog.fromUser.avatar.src.origin),
+              child: UserAvatarWithStatus(
+                userId: dialog.fromUser.id,
+                avatarUrl: dialog.fromUser.avatar.src.origin,
+                isOnline: dialog.fromUser.isOnline,
               ),
             ),
             title: Text(dialog.fromUser.name,

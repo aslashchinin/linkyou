@@ -1,4 +1,4 @@
-part of 'locator_service.dart';
+part of '../locator_service.dart';
 
 void _setupRepositories() {
   serviceLocator.registerLazySingleton<UserRepositoryInterface>(

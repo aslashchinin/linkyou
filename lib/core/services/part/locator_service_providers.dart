@@ -1,4 +1,4 @@
-part of 'locator_service.dart';
+part of '../locator_service.dart';
 
 void _setupProviders() {
   if (!serviceLocator.isRegistered<AuthProvider>()) {
@@ -6,6 +6,11 @@ void _setupProviders() {
   }
   if (!serviceLocator.isRegistered<SocketProvider>()) {
     serviceLocator.registerLazySingleton(() => SocketProvider());
+  }
+
+  if (!serviceLocator.isRegistered<UserStatusProvider>()) {
+    serviceLocator.registerLazySingleton(
+        () => UserStatusProvider(serviceLocator<UserStatusService>()));
   }
 }
 
@@ -31,6 +36,7 @@ List<ChangeNotifierProvider> _getProvidersList() {
     _buildProvider<PhotoCommentsViewModel>(),
     _buildProvider<DialogViewModel>(),
     _buildProvider<DialogMessagesViewModel>(),
+    _buildProvider<UserStatusProvider>(),
   ];
 }
 

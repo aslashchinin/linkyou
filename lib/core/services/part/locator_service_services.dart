@@ -1,4 +1,4 @@
-part of 'locator_service.dart';
+part of '../locator_service.dart';
 
 void _setupServices() {
   _registerServiceIfNotExists<UserService>(
@@ -19,6 +19,10 @@ void _setupServices() {
 
   _registerServiceIfNotExists<DialogService>(
     () => DialogService(authProvider: serviceLocator<AuthProvider>()),
+  );
+
+  _registerServiceIfNotExists<UserStatusService>(
+    () => UserStatusService(),
   );
 }
 

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 // Providers
 import 'package:linkyou/core/providers/auth_provider.dart';
 import 'package:linkyou/core/providers/socket_provider.dart';
+import 'package:linkyou/core/providers/user_status_provider.dart';
 
 // ViewModels
 import 'package:linkyou/ui/blocks/users_top/users_top_viewmodel.dart';
@@ -35,6 +36,7 @@ import 'package:linkyou/data/ublog/ublog_service.dart';
 import 'package:linkyou/data/auth/auth_service.dart';
 import 'package:linkyou/data/photo/photo_service.dart';
 import 'package:linkyou/data/dialog/dialog_service.dart';
+import 'package:linkyou/core/services/user_status_service.dart';
 
 // Repositories
 import 'package:linkyou/data/user/user_repository.dart';
@@ -50,10 +52,10 @@ import 'package:linkyou/data/auth/auth_repository_interface.dart';
 import 'package:linkyou/data/photo/photo_repository_interface.dart';
 import 'package:linkyou/data/dialog/dialog_repository_interface.dart';
 
-part 'locator_service_providers.dart';
-part 'locator_service_services.dart';
-part 'locator_service_repositories.dart';
-part 'locator_service_viewmodels.dart';
+part 'part/locator_service_providers.dart';
+part 'part/locator_service_services.dart';
+part 'part/locator_service_repositories.dart';
+part 'part/locator_service_viewmodels.dart';
 
 final serviceLocator = GetIt.instance;
 

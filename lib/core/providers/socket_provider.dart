@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:linkyou/models/socket_data.dart';
 import 'package:linkyou/core/enums/socket_packet_enum.dart';
 import 'package:linkyou/models/socket_new_message.dart';
+import 'package:linkyou/core/services/locator_service.dart';
+import 'package:linkyou/core/providers/user_status_provider.dart';
 
 class SocketProvider with ChangeNotifier {
   late IO.Socket socket;
@@ -93,6 +95,11 @@ class SocketProvider with ChangeNotifier {
     } catch (e) {
       print(e);
     }
+
+    subscribeToUserOnline((SocketData data) {
+      serviceLocator<UserStatusProvider>()
+          .updateUserStatus(BigInt.from(data.data['userId']), true);
+    });
   }
 
   void subscribeToUserOnline(void Function(SocketData) callback) {

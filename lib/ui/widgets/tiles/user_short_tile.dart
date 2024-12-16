@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linkyou/models/user_short.dart';
 import 'package:linkyou/core/services/route_service.dart';
+import 'package:linkyou/ui/widgets/pictures/user_avatar.dart';
 
 class UserShortTile extends StatelessWidget {
   const UserShortTile({required this.user, super.key});
@@ -31,14 +32,10 @@ class UserShortTile extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 5, top: 5),
             child: Row(
               children: [
-                GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, RouteService.user,
-                      arguments: user.id),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(user.avatar.src.small),
-                    radius: 40,
-                  ),
-                ),
+                UserAvatarWithStatus(
+                    userId: user.id,
+                    avatarUrl: user.avatar.src.small,
+                    isOnline: user.isOnline),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(
